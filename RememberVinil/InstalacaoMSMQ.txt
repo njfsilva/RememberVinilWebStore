@@ -1,0 +1,12 @@
+Para instalarem a msmq:
+
+http://technet.microsoft.com/en-us/library/cc730960.aspx
+
+
+Vou deixar no codigo a criacao para voces verem como funciona mas se quiserem ver as mensagens na queue manualmente (pode ser util para confirmarem que foi enviada ou que foi consumida quando a processam) facam o seguinte:
+
+ctrl+r -> mmc -> file -> add snap in -> computer management -> finish e ok
+
+depois do lado esquerdo abrem o computer management -> services and applications -> message queueing -> private queues.
+
+A partir dai, se ja tiverem criado alguma queue no codigo, devem ser o nome das queues criadas, se abrirem  alguma delas tem acesso as mensagens que estao em espera, triggers etc.

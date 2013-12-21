@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CDFactory
 {
@@ -9,7 +6,14 @@ namespace CDFactory
     {
         static void Main(string[] args)
         {
+            const string queuePath = ".\\Private$\\CDFactory";
+
+            MessageQueueHelper.CreateQueue(queuePath);
+
+            MessageQueueHelper.SendMessage(queuePath, "teste", "teste");
+
             Console.ReadLine();
+
         }
     }
 }
