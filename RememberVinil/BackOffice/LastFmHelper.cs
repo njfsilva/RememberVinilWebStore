@@ -14,7 +14,7 @@ namespace BackOffice
         {
             string topAlbums = "?method=artist.gettopalbums&artist="+artistName+"&api_key=3de031038c2c688d3e3da6ec730628ae&format=json";
 
-            var topalbums = JObject.Parse(CallApi(topAlbums));
+            var topalbums = JObject.Parse(CallLastFmApi(topAlbums));
 
             var albumNames =
                 from album in topalbums["topalbums"]["album"]
@@ -26,9 +26,9 @@ namespace BackOffice
             }
         }
 
-        private static string CallApi(string whatToCall)
+        private static string CallLastFmApi(string whatToGet)
         {
-            var request = new RestRequest(whatToCall);
+            var request = new RestRequest(whatToGet);
 
             var response = Client.Execute(request);
 
