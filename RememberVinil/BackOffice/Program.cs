@@ -9,6 +9,9 @@ namespace BackOffice
     {
         static void Main(string[] args)
         {
+            LastFmHelper.GetArtistTopAlbums("Eminem");
+
+
             Console.ReadLine();
             // Filipe
         }
