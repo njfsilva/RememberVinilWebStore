@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.ExceptionServices;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -8,7 +7,7 @@ namespace BackOffice
     static class GeocodingHelper
     {
         private static readonly RestClient Client = new RestClient(GoogleDistanceMatrixApi);
-        private const string GoogleGeocodingApi = "http://maps.googleapis.com/maps/api/geocode/json?address=";
+        //private const string GoogleGeocodingApi = "http://maps.googleapis.com/maps/api/geocode/json?address=";
         private const string GoogleDistanceMatrixApi = "http://maps.googleapis.com/maps/api/distancematrix/";
 
         public static string GetGeolocation(string adressToGeolocate)

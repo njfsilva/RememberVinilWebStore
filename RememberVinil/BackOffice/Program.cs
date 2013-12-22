@@ -4,7 +4,7 @@ namespace BackOffice
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var outputs = LastFmHelper.GetArtistTopTracks("Eminem");
 
