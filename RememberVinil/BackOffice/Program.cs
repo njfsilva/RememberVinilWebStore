@@ -6,6 +6,7 @@ namespace BackOffice
     {
         static void Main()
         {
+            //teste web services
             var outputs = LastFmHelper.GetArtistTopTracks("Eminem");
 
             foreach (var output in outputs)
@@ -16,7 +17,6 @@ namespace BackOffice
             Console.WriteLine(GeocodingHelper.GetDistanceBetweenPlaces("rua jose cardoso pires 22 rio tinto PT", "travessa da boavista 22 rio tinto PT"));
 
             Console.ReadLine();
-            // Filipe
         }
     }
 }
