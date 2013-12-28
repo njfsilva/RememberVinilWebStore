@@ -8,10 +8,10 @@ namespace Transportadora
 {
     class Program
     {
-        //static void Main(string[] args)
-        //{
-        //    Console.ReadLine();
-        //}
+        static void Main(string[] args)
+        {
+            Console.ReadLine();
+        }
     }
 
     public class Coordinates
