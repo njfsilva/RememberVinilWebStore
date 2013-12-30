@@ -36,6 +36,20 @@ namespace BackOffice
             return trackNames.ToList();
         }
 
+        public static List<string> GetAlbumTracksByMbId(string mbID)
+        {
+            var albumTacksByAlbumMbId = "?method=album.getinfo&api_key=3de031038c2c688d3e3da6ec730628ae&mbid=" + mbID +"&format=json";
+
+            var albumTracks = JObject.Parse(CallApi(albumTacksByAlbumMbId));
+
+            var trackNames =
+                from track in albumTracks["album"]["tracks"]["track"]
+                select (string) track["name"];
+
+            return trackNames.ToList();
+
+        }
+
         private static string CallApi(string whatToGet)
         {
             var request = new RestRequest(whatToGet);

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.ServiceModel;
-using System.Threading;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Transportadora
 {

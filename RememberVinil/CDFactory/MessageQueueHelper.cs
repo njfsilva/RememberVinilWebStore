@@ -75,8 +75,6 @@ namespace CDFactory
                 Formatter = new BinaryMessageFormatter()
             };
 
-
-
             try
             {
                 myQueue.ReceiveById(messageId);

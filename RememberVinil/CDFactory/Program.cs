@@ -1,28 +1,44 @@
 ﻿using System;
+using System.Messaging;
+using System.Timers;
 
 namespace CDFactory
 {
     class Program
     {
+        const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
+        const string OutboxQueuePath = ".\\Private$\\CDFactoryOutBox";
+
         static void Main(string[] args)
         {
-            //teste MSMQ
-            const string queuePath = ".\\Private$\\CDFactory";
+            //Creates Queues
+            MessageQueueHelper.CreateQueue(InboxQueuePath);
+            MessageQueueHelper.CreateQueue(OutboxQueuePath);
 
-            MessageQueueHelper.CreateQueue(queuePath);
+            // Create a timer to look for work
+            var myTimer = new System.Timers.Timer();
+            myTimer.Elapsed += new ElapsedEventHandler(LookForWork);
+            myTimer.Interval = 5000;
+            myTimer.Enabled = true;
+            
+            Console.ReadLine();
+        }
 
-            MessageQueueHelper.SendMessage(queuePath, "teste", "teste");
-
+        public static void LookForWork(object source, ElapsedEventArgs e)
+        {
             string errorMessage = string.Empty;
 
-            var message = MessageQueueHelper.ReceiveMessage(queuePath, 20,  out errorMessage);
+            var message = MessageQueueHelper.ReceiveMessage(InboxQueuePath, 20, out errorMessage);
 
             if (message != null)
             {
-                Console.WriteLine(message.Body);
+                DoWork(message);
             }
+        }
 
-            Console.ReadLine();
+        public static void DoWork(Message messageToProcess)
+        {
+            Console.WriteLine(messageToProcess.Body);
         }
     }
 }
