@@ -1,42 +1,48 @@
 ﻿using System;
 using System.ServiceModel.Web;
 using System.Timers;
+using BackOffice.TransportadoraServiceReference;
 using CDFactory;
 
 namespace BackOffice
 {
     class Program
     {
-        const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
+        //const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
         const string OutboxQueuePath = ".\\Private$\\CDFactoryOutBox";
 
         static void Main()
         {
+            //Start BackOfficeCallBackService
+            //TODO!!!
+
             //Create timer to check messageQueue Outbox
             var myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
             myTimer.Interval = 5000;
             myTimer.Enabled = true;
+            
 
             //Start WebSiteService
             var iservice = new WebSiteService();
-            var server = new WebServiceHost(iservice, new Uri("http://localhost:9001/WebSiteService"));
+            var webSiteServer = new WebServiceHost(iservice, new Uri("http://localhost:9001/WebSiteService"));
+            webSiteServer.Open();
 
-            server.Open();
 
-            //teste web services
-            //var outputs = LastFmHelper.GetArtistTopTracks("Eminem");
+            //Start Transportadora Service
+            var transportadoraService = new TransportadoraServiceClient();
+            var request = new TransportJobRequest {DeliveryAdress = "Cenas", Status = "Encomenda feita"};
 
-            //foreach (var output in outputs)
-            //{
-            //    Console.WriteLine(output);
-            //}
+            var transportJobResponse = transportadoraService.TransportJob(request);
 
-            //Console.WriteLine(GeocodingHelper.GetDistanceBetweenPlaces("rua jose cardoso pires 22 rio tinto PT", "travessa da boavista 22 rio tinto PT"));
+            Console.WriteLine(transportJobResponse.Sucess.ToString());
 
+            
+            
             Console.ReadLine();
 
-            server.Close();
+            webSiteServer.Close();
+            transportadoraService.Close();
         }
 
         public static void LookForDownloadReady(object source, ElapsedEventArgs e)
