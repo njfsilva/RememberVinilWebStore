@@ -23,7 +23,7 @@ namespace BackOffice
             myTimer.Enabled = true;
             
 
-            //Start WebSiteService
+            //Start REST WebSiteService 
             var iservice = new WebSiteService();
             var webSiteServer = new WebServiceHost(iservice, new Uri("http://localhost:9001/WebSiteService"));
             webSiteServer.Open();
