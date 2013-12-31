@@ -55,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackOfficeCallBackService.cs" />
     <Compile Include="GeocodingHelper.cs" />
+    <Compile Include="IBackOfficeCallBackService.cs" />
     <Compile Include="IWebSiteService.cs" />
     <Compile Include="LastFmHelper.cs" />
     <Compile Include="Program.cs" />

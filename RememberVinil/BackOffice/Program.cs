@@ -31,11 +31,11 @@ namespace BackOffice
 
             //Start Transportadora Service
             var transportadoraService = new TransportadoraServiceClient();
-            var request = new TransportJobRequest {DeliveryAdress = "Cenas", Status = "Encomenda feita"};
+            //var request = new TransportJobRequest {DeliveryAdress = "Cenas", Status = "Encomenda feita"};
 
-            var transportJobResponse = transportadoraService.TransportJob(request);
+            //var transportJobResponse = transportadoraService.TransportJob(request);
 
-            Console.WriteLine(transportJobResponse.Sucess.ToString());
+            //Console.WriteLine(transportJobResponse.Sucess.ToString());
 
             
             
