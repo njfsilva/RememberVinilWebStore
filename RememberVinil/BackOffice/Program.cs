@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Timers;
 using BackOffice.TransportadoraServiceReference;
@@ -13,36 +14,34 @@ namespace BackOffice
 
         static void Main()
         {
-            //Start BackOfficeCallBackService
-            //TODO!!!
+            //Start BackOfficeService
+            var backOfficeCallBackServiceHost = new WebServiceHost(typeof(BackOfficeCallBackService));
+            backOfficeCallBackServiceHost.Open();
+
+            //Start REST WebSiteService 
+            var webSiteServer = new WebServiceHost(typeof(WebSiteService));
+            webSiteServer.Open();
 
             //Create timer to check messageQueue Outbox
             var myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
             myTimer.Interval = 5000;
             myTimer.Enabled = true;
-            
-
-            //Start REST WebSiteService 
-            var iservice = new WebSiteService();
-            var webSiteServer = new WebServiceHost(iservice, new Uri("http://localhost:9001/WebSiteService"));
-            webSiteServer.Open();
 
 
-            //Start Transportadora Service
-            var transportadoraService = new TransportadoraServiceClient();
-            //var request = new TransportJobRequest {DeliveryAdress = "Cenas", Status = "Encomenda feita"};
+            ////Transp Service test
+            //var transp = new TransportadoraServiceClient();
+            //var req = new TransportJobRequest();
+            //req.DeliveryAdress = "address";
+            //req.Status = "ordered";
 
-            //var transportJobResponse = transportadoraService.TransportJob(request);
+            //TransportJobResponse resp = transp.TransportJob(req);
 
-            //Console.WriteLine(transportJobResponse.Sucess.ToString());
+            //Console.WriteLine(resp.Sucess.ToString());
 
-            
-            
             Console.ReadLine();
 
-            webSiteServer.Close();
-            transportadoraService.Close();
+            //Meter aqui os closes dos servicos nos fim
         }
 
         public static void LookForDownloadReady(object source, ElapsedEventArgs e)
