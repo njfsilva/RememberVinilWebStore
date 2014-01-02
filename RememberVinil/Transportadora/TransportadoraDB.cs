@@ -12,6 +12,7 @@ namespace Transportadora
 
         public static bool AddNewTransportJob(TransportJobRequest request)
         {
+            request.id = DbTranposrtadora.Count + 1;
             DbTranposrtadora.Add(request);
 
             return true;
@@ -23,6 +24,29 @@ namespace Transportadora
             return DbTranposrtadora;
         }
 
+        public static TransportJobRequest getRequest(int pos)
+        {
+            try
+            {
+                return DbTranposrtadora[pos];
+            }catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static Boolean UpdateStatus(int pos, string Status)
+        {
+            try
+            {
+                DbTranposrtadora[pos].Status = Status;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
     }
 }
