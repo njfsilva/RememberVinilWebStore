@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumsDTO.cs" />
     <Compile Include="BackOfficeCallBackService.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientDB.cs" />

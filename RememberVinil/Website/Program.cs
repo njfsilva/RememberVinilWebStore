@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Website
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            Console.ReadLine();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new WebsiteMain());
         }
     }
 }

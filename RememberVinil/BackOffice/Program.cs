@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Timers;
-using BackOffice.TransportadoraServiceReference;
 using CDFactory;
 
 namespace BackOffice

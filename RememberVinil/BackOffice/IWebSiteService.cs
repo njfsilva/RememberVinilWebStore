@@ -17,7 +17,7 @@ namespace BackOffice
 
         [WebGet(UriTemplate = "/Albums/{artist}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        string GetAlbumsByArtist(string artist);
+        AlbumsDto GetAlbumsByArtist(string artist);
 
         [WebGet(UriTemplate = "/RequestOrder/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]

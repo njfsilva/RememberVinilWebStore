@@ -25,17 +25,14 @@ namespace BackOffice
             return sb.ToString();
         }
 
-        public string GetAlbumsByArtist(string artist)
+        public AlbumsDto GetAlbumsByArtist(string artist)
         {
-            var outputs = LastFmHelper.GetArtistTopAlbums(artist);
-            var sb = new StringBuilder();
 
-            foreach (var output in outputs)
-            {
-                sb.Append(output);
-            }
+            var outputs = new AlbumsDto();
+            
+            outputs.AlbumsList = LastFmHelper.GetArtistTopAlbums(artist);
 
-            return sb.ToString();
+            return outputs;
         }
 
         public int RequestOrder()
