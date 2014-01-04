@@ -10,12 +10,12 @@ namespace Transportadora
         static List<TransportJobRequest> DbTranposrtadora = new List<TransportJobRequest>();
 
 
-        public static bool AddNewTransportJob(TransportJobRequest request)
+        public static int AddNewTransportJob(TransportJobRequest request)
         {
             request.id = DbTranposrtadora.Count + 1;
             DbTranposrtadora.Add(request);
 
-            return true;
+            return request.id;
         }
 
 

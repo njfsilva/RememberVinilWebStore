@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using BackOffice.TransportadoraServiceReference;
 
 namespace BackOffice
 {
@@ -11,7 +12,8 @@ namespace BackOffice
     [ServiceContract]
     public interface IBackOfficeCallBackService
     {
+
         [OperationContract]
-        void DoWork();
+        string getStatus(TransportJobResponse response);
     }
 }

@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackOfficeCallBackService.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientDB.cs" />
     <Compile Include="GeocodingHelper.cs" />
     <Compile Include="IBackOfficeCallBackService.cs" />
     <Compile Include="IWebSiteService.cs" />

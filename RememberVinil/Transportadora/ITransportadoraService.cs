@@ -12,6 +12,6 @@ namespace Transportadora
     public interface ITransportadoraService
     {
         [OperationContract]
-        TransportJobResponse TransportJob(TransportJobRequest request);
+        string TransportJob(TransportJobRequest request);
     }
 }

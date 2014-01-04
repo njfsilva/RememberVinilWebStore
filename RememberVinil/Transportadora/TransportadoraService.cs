@@ -10,13 +10,13 @@ namespace Transportadora
     public class TransportadoraService : ITransportadoraService
     {
 
-        public TransportJobResponse TransportJob(TransportJobRequest request)
+        public string TransportJob(TransportJobRequest request)
         {
             var response = new TransportJobResponse();
-
+            int id = 0;
             try
             {
-                TransportadoraDB.AddNewTransportJob(request);
+                id=TransportadoraDB.AddNewTransportJob(request);
                 response.Sucess = true;
             }
             catch (Exception)
@@ -25,7 +25,7 @@ namespace Transportadora
             }
 
 
-            return response;
+            return id.ToString();
         }
     }
 }
