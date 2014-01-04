@@ -13,11 +13,15 @@ namespace BackOffice
 
         [WebGet(UriTemplate = "/TopTracks/{artist}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        string GetArtistTopTracks(string artist);
+        TracksDto GetArtistTopTracks(string artist);
 
         [WebGet(UriTemplate = "/Albums/{artist}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         AlbumsDto GetAlbumsByArtist(string artist);
+
+        [WebGet(UriTemplate = "/Artists/{artist}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        ArtistsDto SearchForArtists(string artist);
 
         [WebGet(UriTemplate = "/RequestOrder/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]

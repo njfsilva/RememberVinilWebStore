@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Resources;
+using System.ServiceModel;
 using System.Text;
 
 namespace BackOffice
@@ -12,25 +13,36 @@ namespace BackOffice
             return loginName;
         }
 
-        public string GetArtistTopTracks(string artist)
+        public TracksDto GetArtistTopTracks(string artist)
         {
-            var outputs = LastFmHelper.GetArtistTopTracks(artist);
-            var sb = new StringBuilder();
+            var outputs = new TracksDto();
 
-            foreach (var output in outputs)
-            {
-                sb.Append(output);
-            }
+            outputs.ArtistName = artist;
 
-            return sb.ToString();
+            outputs.TracksList = LastFmHelper.GetArtistTopTracks(artist);
+
+            return outputs;
         }
 
         public AlbumsDto GetAlbumsByArtist(string artist)
         {
 
             var outputs = new AlbumsDto();
+
+            outputs.ArtistName = artist;
             
             outputs.AlbumsList = LastFmHelper.GetArtistTopAlbums(artist);
+
+            return outputs;
+        }
+
+        public ArtistsDto SearchForArtists(string artist)
+        {
+            var outputs = new ArtistsDto();
+
+            outputs.ArtistName = artist;
+
+            outputs.ArtistsList = LastFmHelper.SearchArtistByName(artist);
 
             return outputs;
         }

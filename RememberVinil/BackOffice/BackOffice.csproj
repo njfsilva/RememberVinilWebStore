@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlbumsDTO.cs" />
+    <Compile Include="ArtistsDto.cs" />
     <Compile Include="BackOfficeCallBackService.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientDB.cs" />
@@ -70,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="TracksDto.cs" />
     <Compile Include="WebSiteService.cs" />
   </ItemGroup>
   <ItemGroup>
