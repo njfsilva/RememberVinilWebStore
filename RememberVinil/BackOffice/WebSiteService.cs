@@ -19,7 +19,7 @@ namespace BackOffice
 
             outputs.ArtistName = artist;
 
-            outputs.TracksList = LastFmHelper.GetArtistTopTracks(artist);
+            outputs.TracksList = LastFmHelper.GetArtistTopTracks(InputHandler(artist));
 
             return outputs;
         }
@@ -27,22 +27,22 @@ namespace BackOffice
         public AlbumsDto GetAlbumsByArtist(string artist)
         {
 
-            var outputs = new AlbumsDto();
-
-            outputs.ArtistName = artist;
-            
-            outputs.AlbumsList = LastFmHelper.GetArtistTopAlbums(artist);
+            var outputs = new AlbumsDto
+            {
+                ArtistName = artist,
+                AlbumsList = LastFmHelper.GetArtistTopAlbums(InputHandler(artist))
+            };
 
             return outputs;
         }
 
         public ArtistsDto SearchForArtists(string artist)
         {
-            var outputs = new ArtistsDto();
-
-            outputs.ArtistName = artist;
-
-            outputs.ArtistsList = LastFmHelper.SearchArtistByName(artist);
+            var outputs = new ArtistsDto
+            {
+                ArtistName = artist,
+                ArtistsList = LastFmHelper.SearchArtistByName(InputHandler(artist))
+            };
 
             return outputs;
         }
@@ -50,6 +50,11 @@ namespace BackOffice
         public int RequestOrder()
         {
             return 43;
+        }
+
+        private static string InputHandler(string input)
+        {
+            return input.Replace(" ","+").Replace("&", "").Replace(",", "").Replace(".", "").Replace("+++", "+").Replace("++", "+");
         }
     }
 }

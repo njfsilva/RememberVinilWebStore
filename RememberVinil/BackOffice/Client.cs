@@ -2,14 +2,14 @@
 {
     class Client
     {
-        public string ClientID { get; set; }
+        public string ClientId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
-        public string TransportadoraID { get; set; }
+        public string TransportadoraId { get; set; }
 
-        public Client(string ClientID)
+        public Client(string clientId)
         {
-            this.ClientID = ClientID;
+            ClientId = clientId;
         }
     }
 }

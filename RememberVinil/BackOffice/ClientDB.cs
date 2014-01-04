@@ -2,7 +2,7 @@
 
 namespace BackOffice
 {
-    class ClientDB
+    class ClientDb
     {
         static List<Client> DbBackOffice = new List<Client>();
 
@@ -19,13 +19,13 @@ namespace BackOffice
             return DbBackOffice;
         }
 
-        public static string GetTransportIDbyClientID(string id)
+        public static string GetTransportIDbyClientId(string id)
         {
-            foreach (Client c in DbBackOffice)
+            foreach (var c in DbBackOffice)
             {
-                if (c.ClientID == id)
+                if (c.ClientId == id)
                 {
-                    return c.TransportadoraID;
+                    return c.TransportadoraId;
                 }
             } 
             return "";

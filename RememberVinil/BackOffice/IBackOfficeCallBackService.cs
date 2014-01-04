@@ -9,6 +9,6 @@ namespace BackOffice
     {
 
         [OperationContract]
-        string getStatus(TransportJobResponse response);
+        string GetStatus(TransportJobResponse response);
     }
 }

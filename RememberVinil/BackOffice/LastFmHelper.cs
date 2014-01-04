@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -25,42 +26,65 @@ namespace BackOffice
 
         public static List<string> GetArtistTopTracks(string artistName)
         {
-            var topTracksByArtist = "?method=artist.gettoptracks&artist=" + artistName + "&api_key=3de031038c2c688d3e3da6ec730628ae&format=json";
+            try
+            {
+                var topTracksByArtist = "?method=artist.gettoptracks&artist=" + artistName + "&api_key=3de031038c2c688d3e3da6ec730628ae&format=json";
 
-            var topTracks = JObject.Parse(CallApi(topTracksByArtist));
+                var topTracks = JObject.Parse(CallApi(topTracksByArtist));
 
-            var trackNames =
-                from track in topTracks["toptracks"]["track"]
-                select (string)track["name"];
+                var trackNames =
+                    from track in topTracks["toptracks"]["track"]
+                    select (string)track["name"];
 
-            return trackNames.ToList();
+                return trackNames.ToList();
+            }
+            catch (Exception)
+            {
+                return new List<string>();
+            }
+
         }
 
-        public static List<string> GetAlbumTracksByMbId(string mbID)
+        public static List<string> GetAlbumTracksByMbId(string mbId)
         {
-            var albumTacksByAlbumMbId = "?method=album.getinfo&api_key=3de031038c2c688d3e3da6ec730628ae&mbid=" + mbID + "&format=json";
+            try
+            {
+                var albumTacksByAlbumMbId = "?method=album.getinfo&api_key=3de031038c2c688d3e3da6ec730628ae&mbid=" + mbId + "&format=json";
 
-            var albumTracks = JObject.Parse(CallApi(albumTacksByAlbumMbId));
+                var albumTracks = JObject.Parse(CallApi(albumTacksByAlbumMbId));
 
-            var trackNames =
-                from track in albumTracks["album"]["tracks"]["track"]
-                select (string)track["name"];
+                var trackNames =
+                    from track in albumTracks["album"]["tracks"]["track"]
+                    select (string)track["name"];
 
-            return trackNames.ToList();
+                return trackNames.ToList();
+            }
+            catch (Exception)
+            {
+                return new List<string>();
+            }
+
 
         }
 
         public static List<string> SearchArtistByName(string artistName)
         {
-            var searchArtistiByname = "?method=artist.search&artist=" + artistName + "&api_key=3de031038c2c688d3e3da6ec730628ae&format=json";
+            try
+            {
+                var searchArtistiByname = "?method=artist.search&artist=" + artistName + "&api_key=3de031038c2c688d3e3da6ec730628ae&format=json";
 
-            var artists = JObject.Parse(CallApi(searchArtistiByname));
+                var artists = JObject.Parse(CallApi(searchArtistiByname));
 
-            var artistNames =
-                from artist in artists["results"]["artistmatches"]["artist"]
-                select (string)artist["name"];
+                var artistNames =
+                    from artist in artists["results"]["artistmatches"]["artist"]
+                    select (string)artist["name"];
 
-            return artistNames.ToList();
+                return artistNames.ToList();
+            }
+            catch (Exception)
+            {
+                return new List<string>();
+            }
         }
 
         private static string CallApi(string whatToGet)

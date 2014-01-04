@@ -8,17 +8,17 @@ namespace Website
 {
     public partial class WebsiteMain : Form
     {
-        private static readonly RestClient Client = new RestClient(BackOfficeServiceREST);
-        public const string BackOfficeServiceREST = "http://localhost:9001/WebSiteService";
+        private static readonly RestClient Client = new RestClient(BackOfficeServiceRest);
+        public const string BackOfficeServiceRest = "http://localhost:9001/WebSiteService";
 
         public static List<string> ShoppingCartItems = new List<string>();
+        public static string Artist = string.Empty;
+
         
         public WebsiteMain()
         {
             InitializeComponent();
         }
-
-        
 
         private void button1_Click(object sender, System.EventArgs e)
         {
@@ -58,6 +58,8 @@ namespace Website
 
         private void lbArtists_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            Artist = lbArtists.SelectedItem.ToString();
+
             //Top Tracks by artist
             var response = CallApi("/TopTracks/" + lbArtists.SelectedItem);
             var songs = JObject.Parse(response);
