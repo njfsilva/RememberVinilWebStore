@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 
 namespace FabricanteB
 {
@@ -6,6 +7,8 @@ namespace FabricanteB
     {
         static void Main(string[] args)
         {
+            var host = new ServiceHost(typeof(FabricanteBService));
+            host.Open();
             Console.ReadLine();
         }
     }
