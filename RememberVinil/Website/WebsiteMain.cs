@@ -95,29 +95,4 @@ namespace Website
             }
         }
     }
-
-    //public class teste
-    //{
-    //    public string musica;
-    //    public string preco = "$0.99";
-
-    //}
-
-    //listView1.Columns.Add("Musica");
-    //            listView1.Columns.Add("Preco");
-    //            listView1.View = View.Details;
-
-    //            foreach (var trackName in trackNames)
-    //            {
-    //                List<teste> teste = new List<teste>();
-    //                var merda = new teste();
-    //                merda.musica = trackName;
-    //                teste.Add(merda);
-
-
-    //                string[] row = { merda.musica, merda.preco };
-    //                var listViewItem = new ListViewItem(row);
-                    
-    //                listView1.Items.Add(listViewItem);
-    //            }
 }

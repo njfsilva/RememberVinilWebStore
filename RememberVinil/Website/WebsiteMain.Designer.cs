@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddSongToOrder = new System.Windows.Forms.Button();
-            this.lbShoppingCart = new System.Windows.Forms.ListBox();
             this.lbOrderStatus = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCheckPrices = new System.Windows.Forms.Button();
@@ -109,14 +108,6 @@
             this.btnAddSongToOrder.Text = "Adicionar";
             this.btnAddSongToOrder.UseVisualStyleBackColor = true;
             this.btnAddSongToOrder.Click += new System.EventHandler(this.btnAddSongToOrder_Click);
-            // 
-            // lbShoppingCart
-            // 
-            this.lbShoppingCart.FormattingEnabled = true;
-            this.lbShoppingCart.Location = new System.Drawing.Point(820, 293);
-            this.lbShoppingCart.Name = "lbShoppingCart";
-            this.lbShoppingCart.Size = new System.Drawing.Size(143, 134);
-            this.lbShoppingCart.TabIndex = 8;
             // 
             // lbOrderStatus
             // 
@@ -199,7 +190,6 @@
             this.Controls.Add(this.btnCheckPrices);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbOrderStatus);
-            this.Controls.Add(this.lbShoppingCart);
             this.Controls.Add(this.btnAddSongToOrder);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -223,7 +213,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAddSongToOrder;
-        private System.Windows.Forms.ListBox lbShoppingCart;
         private System.Windows.Forms.ListBox lbOrderStatus;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCheckPrices;
