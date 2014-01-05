@@ -24,7 +24,7 @@ namespace BackOffice
             return albumNames.ToList();
         }
 
-        public static List<string> GetArtistTopTracks(string artistName)
+        public static List<Track> GetArtistTopTracks(string artistName)
         {
             try
             {
@@ -36,11 +36,16 @@ namespace BackOffice
                     from track in topTracks["toptracks"]["track"]
                     select (string)track["name"];
 
-                return trackNames.ToList();
+
+                return trackNames.Select(trackName => new Track()
+                {
+                    ArtisName = artistName, TrackName = trackName, Price = 0.99, PriceFormatted = "0.99€"
+                }).ToList();
+
             }
             catch (Exception)
             {
-                return new List<string>();
+                return new List<Track>();
             }
 
         }

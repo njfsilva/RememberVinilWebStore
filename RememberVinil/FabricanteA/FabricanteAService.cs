@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FabricanteA
+﻿namespace FabricanteA
 {
     public class FabricanteAService : IFabricanteAService
     {

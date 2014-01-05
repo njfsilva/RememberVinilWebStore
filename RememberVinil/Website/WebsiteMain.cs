@@ -11,13 +11,16 @@ namespace Website
         private static readonly RestClient Client = new RestClient(BackOfficeServiceRest);
         public const string BackOfficeServiceRest = "http://localhost:9001/WebSiteService";
 
-        public static List<string> ShoppingCartItems = new List<string>();
+        public static List<Track> ShoppingCartItems = new List<Track>();
         public static string Artist = string.Empty;
 
         
         public WebsiteMain()
         {
             InitializeComponent();
+            lvShoppingCart.Columns.Add("Song");
+            lvShoppingCart.Columns.Add("Price");
+            lvShoppingCart.View = View.Details;
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -46,12 +49,18 @@ namespace Website
 
         private void btnAddSongToOrder_Click(object sender, System.EventArgs e)
         {
-            var selectSong = lbSongs.SelectedItem;
+            var song = new Track()
+            {
+                ArtisName = Artist,
+                TrackName = lvSongs.SelectedItems[0].Text,
+                PriceFormatted = lvSongs.SelectedItems[0].SubItems[1].Text
+            };
 
-            ShoppingCartItems.Add(selectSong.ToString());
+            ShoppingCartItems.Add(song);
 
-            lbShoppingCart.DataSource = null;
-            lbShoppingCart.DataSource = ShoppingCartItems;
+            string[] track = {song.TrackName, song.PriceFormatted};
+            var item = new ListViewItem(track);
+            lvShoppingCart.Items.Add(item);
         }
 
         private void lbArtists_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -65,10 +74,25 @@ namespace Website
 
             var trackNames =
                 from track in songs["TracksList"]
-                select track.ToString();
+                select new Track()
+                {
+                    ArtisName = (string) track["ArtisName"],
+                    TrackName = (string) track["TrackName"],
+                    Price = (double) track["Price"],
+                    PriceFormatted = (string) track["PriceFormatted"]
+                };
 
-            lbSongs.DataSource = null;
-            lbSongs.DataSource = trackNames.ToList();
+            lvSongs.Clear();
+            lvSongs.View = View.Details;
+            lvSongs.Columns.Add("Song");
+            lvSongs.Columns.Add("Price");
+           
+            foreach (var trackName in trackNames)
+            {
+                string[] song = {trackName.TrackName, trackName.PriceFormatted};
+                var item = new ListViewItem(song);
+                lvSongs.Items.Add(item);
+            }
         }
     }
 

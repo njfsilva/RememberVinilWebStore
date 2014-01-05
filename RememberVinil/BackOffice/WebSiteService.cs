@@ -1,6 +1,4 @@
-﻿using System.Resources;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 
 namespace BackOffice
 {
@@ -54,7 +52,7 @@ namespace BackOffice
 
         private static string InputHandler(string input)
         {
-            return input.Replace(" ","+").Replace("&", "").Replace(",", "").Replace(".", "").Replace("+++", "+").Replace("++", "+");
+            return input.Replace(" ", "+").Replace(",", "").Replace(".", "").Replace("&", "+").Replace("+++", "+").Replace("++", "+");
         }
     }
 }
