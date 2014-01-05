@@ -10,8 +10,6 @@ namespace FabricanteA
             var host = new ServiceHost(typeof(FabricanteAService));
             host.Open();
             Console.ReadLine();
-
-            Console.ReadLine();
         }
     }
 }

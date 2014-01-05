@@ -34,8 +34,6 @@ namespace Website
                 select artist.ToString();
 
             lbArtists.DataSource = artistsNames.ToList();
-
-            
         }
 
         private static string CallApi(string whatToGet)
