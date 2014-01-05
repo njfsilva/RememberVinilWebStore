@@ -37,13 +37,18 @@
             this.btnAddSongToOrder = new System.Windows.Forms.Button();
             this.lbOrderStatus = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnCheckPrices = new System.Windows.Forms.Button();
+            this.btnFinishOrder = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lbPrices = new System.Windows.Forms.ListBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.btnPlaceOrder = new System.Windows.Forms.Button();
             this.lvSongs = new System.Windows.Forms.ListView();
             this.lvShoppingCart = new System.Windows.Forms.ListView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.btnConfirmOrder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtArtist
@@ -101,7 +106,7 @@
             // 
             // btnAddSongToOrder
             // 
-            this.btnAddSongToOrder.Location = new System.Drawing.Point(221, 493);
+            this.btnAddSongToOrder.Location = new System.Drawing.Point(307, 491);
             this.btnAddSongToOrder.Name = "btnAddSongToOrder";
             this.btnAddSongToOrder.Size = new System.Drawing.Size(75, 23);
             this.btnAddSongToOrder.TabIndex = 7;
@@ -112,7 +117,7 @@
             // lbOrderStatus
             // 
             this.lbOrderStatus.FormattingEnabled = true;
-            this.lbOrderStatus.Location = new System.Drawing.Point(492, 312);
+            this.lbOrderStatus.Location = new System.Drawing.Point(989, 296);
             this.lbOrderStatus.Name = "lbOrderStatus";
             this.lbOrderStatus.Size = new System.Drawing.Size(143, 173);
             this.lbOrderStatus.TabIndex = 9;
@@ -126,19 +131,20 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Carrinho";
             // 
-            // btnCheckPrices
+            // btnFinishOrder
             // 
-            this.btnCheckPrices.Location = new System.Drawing.Point(492, 233);
-            this.btnCheckPrices.Name = "btnCheckPrices";
-            this.btnCheckPrices.Size = new System.Drawing.Size(93, 23);
-            this.btnCheckPrices.TabIndex = 11;
-            this.btnCheckPrices.Text = "Verificar Preco";
-            this.btnCheckPrices.UseVisualStyleBackColor = true;
+            this.btnFinishOrder.Location = new System.Drawing.Point(492, 233);
+            this.btnFinishOrder.Name = "btnFinishOrder";
+            this.btnFinishOrder.Size = new System.Drawing.Size(93, 23);
+            this.btnFinishOrder.TabIndex = 11;
+            this.btnFinishOrder.Text = "Finalizar";
+            this.btnFinishOrder.UseVisualStyleBackColor = true;
+            this.btnFinishOrder.Click += new System.EventHandler(this.btnFinishOrder_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(817, 76);
+            this.label5.Location = new System.Drawing.Point(986, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 12;
@@ -147,14 +153,14 @@
             // lbPrices
             // 
             this.lbPrices.FormattingEnabled = true;
-            this.lbPrices.Location = new System.Drawing.Point(820, 92);
+            this.lbPrices.Location = new System.Drawing.Point(989, 76);
             this.lbPrices.Name = "lbPrices";
             this.lbPrices.Size = new System.Drawing.Size(134, 134);
             this.lbPrices.TabIndex = 13;
             // 
             // btnPlaceOrder
             // 
-            this.btnPlaceOrder.Location = new System.Drawing.Point(820, 233);
+            this.btnPlaceOrder.Location = new System.Drawing.Point(989, 217);
             this.btnPlaceOrder.Name = "btnPlaceOrder";
             this.btnPlaceOrder.Size = new System.Drawing.Size(75, 23);
             this.btnPlaceOrder.TabIndex = 14;
@@ -165,7 +171,7 @@
             // 
             this.lvSongs.Location = new System.Drawing.Point(224, 130);
             this.lvSongs.Name = "lvSongs";
-            this.lvSongs.Size = new System.Drawing.Size(195, 355);
+            this.lvSongs.Size = new System.Drawing.Size(250, 355);
             this.lvSongs.TabIndex = 15;
             this.lvSongs.UseCompatibleStateImageBehavior = false;
             // 
@@ -173,21 +179,68 @@
             // 
             this.lvShoppingCart.Location = new System.Drawing.Point(492, 93);
             this.lvShoppingCart.Name = "lvShoppingCart";
-            this.lvShoppingCart.Size = new System.Drawing.Size(196, 133);
+            this.lvShoppingCart.Size = new System.Drawing.Size(262, 133);
             this.lvShoppingCart.TabIndex = 16;
             this.lvShoppingCart.UseCompatibleStateImageBehavior = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(598, 233);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Total: ";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(642, 232);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(0, 13);
+            this.lblTotal.TabIndex = 18;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Location = new System.Drawing.Point(489, 279);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(147, 13);
+            this.lblAddress.TabIndex = 19;
+            this.lblAddress.Text = "Por favor insira a sua morada:";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(492, 296);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(350, 20);
+            this.txtAddress.TabIndex = 20;
+            // 
+            // btnConfirmOrder
+            // 
+            this.btnConfirmOrder.Location = new System.Drawing.Point(625, 322);
+            this.btnConfirmOrder.Name = "btnConfirmOrder";
+            this.btnConfirmOrder.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirmOrder.TabIndex = 21;
+            this.btnConfirmOrder.Text = "Confirmar Encomenda";
+            this.btnConfirmOrder.UseVisualStyleBackColor = true;
             // 
             // WebsiteMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1148, 528);
+            this.Controls.Add(this.btnConfirmOrder);
+            this.Controls.Add(this.txtAddress);
+            this.Controls.Add(this.lblAddress);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lvShoppingCart);
             this.Controls.Add(this.lvSongs);
             this.Controls.Add(this.btnPlaceOrder);
             this.Controls.Add(this.lbPrices);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnCheckPrices);
+            this.Controls.Add(this.btnFinishOrder);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbOrderStatus);
             this.Controls.Add(this.btnAddSongToOrder);
@@ -215,12 +268,17 @@
         private System.Windows.Forms.Button btnAddSongToOrder;
         private System.Windows.Forms.ListBox lbOrderStatus;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnCheckPrices;
+        private System.Windows.Forms.Button btnFinishOrder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox lbPrices;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button btnPlaceOrder;
         private System.Windows.Forms.ListView lvSongs;
         private System.Windows.Forms.ListView lvShoppingCart;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Button btnConfirmOrder;
     }
 }

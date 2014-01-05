@@ -2,9 +2,9 @@
 
 namespace BackOffice
 {
-    class ClientDb
+    public class ClientDb
     {
-        static List<Client> DbBackOffice = new List<Client>();
+        public static List<Client> DbBackOffice = new List<Client>();
 
         public static bool AddNewTransportJob(Client c)
         {

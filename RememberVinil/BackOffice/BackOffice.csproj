@@ -73,6 +73,8 @@
     </Compile>
     <Compile Include="Track.cs" />
     <Compile Include="TracksDto.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserDB.cs" />
     <Compile Include="WebSiteService.cs" />
   </ItemGroup>
   <ItemGroup>

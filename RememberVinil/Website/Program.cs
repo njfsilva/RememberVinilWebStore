@@ -14,6 +14,7 @@ namespace Website
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WebsiteMain());
+            //Application.Run(new LoginForm());
         }
     }
 }

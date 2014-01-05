@@ -3,6 +3,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System.Globalization;
+using System;
 
 namespace Website
 {
@@ -13,7 +15,6 @@ namespace Website
 
         public static List<Track> ShoppingCartItems = new List<Track>();
         public static string Artist = string.Empty;
-
         
         public WebsiteMain()
         {
@@ -21,6 +22,9 @@ namespace Website
             lvShoppingCart.Columns.Add("Song");
             lvShoppingCart.Columns.Add("Price");
             lvShoppingCart.View = View.Details;
+            lblTotal.Text = "0.00€";
+            lblAddress.Visible = false;
+            txtAddress.Visible = false;
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -61,6 +65,11 @@ namespace Website
             string[] track = {song.TrackName, song.PriceFormatted};
             var item = new ListViewItem(track);
             lvShoppingCart.Items.Add(item);
+
+            double songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty)) / 100;
+            double previousTotal = double.Parse(lblTotal.Text.Replace("€", string.Empty));
+            double total = songDouble + previousTotal;
+            lblTotal.Text = total.ToString() + "€";
         }
 
         private void lbArtists_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -93,6 +102,12 @@ namespace Website
                 var item = new ListViewItem(song);
                 lvSongs.Items.Add(item);
             }
+        }
+
+        private void btnFinishOrder_Click(object sender, EventArgs e)
+        {
+            lblAddress.Visible = !lblAddress.Visible;
+            txtAddress.Visible = !txtAddress.Visible;
         }
     }
 }
