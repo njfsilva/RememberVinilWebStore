@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Messaging;
 using System.Timers;
+using System.Collections.Generic;
+using System.IO;
 
 namespace CDFactory
 {
@@ -20,7 +22,11 @@ namespace CDFactory
             myTimer.Elapsed += new ElapsedEventHandler(LookForWork);
             myTimer.Interval = 5000;
             myTimer.Enabled = true;
-            
+
+            //remover
+            DoWork(new Message());
+
+
             Console.ReadLine();
         }
 
@@ -38,7 +44,20 @@ namespace CDFactory
 
         public static void DoWork(Message messageToProcess)
         {
-            Console.WriteLine(messageToProcess.Body);
+            var test = new List<string>
+            {
+                "Myley Cyrus - Recking Ball",
+                "Eminem - Berzerk"
+            };
+
+            var dirinfo = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\IdDaEncomenda");
+
+            foreach (var song in test)
+            {
+                File.Create(dirinfo.FullName + "\\" + song + ".mp3");
+            }
+            
+            //zipar conteudo e enviar para a message queue outbox
         }
     }
 }
