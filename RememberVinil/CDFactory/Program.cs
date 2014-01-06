@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Messaging;
+using System.Threading;
 using System.Timers;
 using System.Collections.Generic;
 using System.IO;
@@ -17,20 +18,40 @@ namespace CDFactory
             MessageQueueHelper.CreateQueue(InboxQueuePath);
             MessageQueueHelper.CreateQueue(OutboxQueuePath);
 
-            // Create a timer to look for work
+            //// Create a timer to look for work
             var myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForWork);
-            myTimer.Interval = 5000;
+            myTimer.Interval = 1;
             myTimer.Enabled = true;
 
-            //remover
-            DoWork(new Message());
+            //var msmqPooling = new Thread(() =>
+            //{
+            //    while (true)
+            //    {
+            //        AddToMsmq();
+            //    }
+            //}
+            //    );
 
+            //msmqPooling.Start();
 
             Console.ReadLine();
         }
 
-        public static void LookForWork(object source, ElapsedEventArgs e)
+        public static void AddToMsmq()
+        {
+            //teste
+            var test = new List<string>
+            {
+                "Myley Cyrus - Recking Ball",
+                "Eminem - Berzerk"
+            };
+
+
+            MessageQueueHelper.SendMessage(InboxQueuePath, test, "Test Message");
+        }
+
+        public static void LookForWork(object sender, EventArgs e)
         {
             string errorMessage = string.Empty;
 
@@ -44,19 +65,17 @@ namespace CDFactory
 
         public static void DoWork(Message messageToProcess)
         {
-            var test = new List<string>
-            {
-                "Myley Cyrus - Recking Ball",
-                "Eminem - Berzerk"
-            };
+
+            var test = messageToProcess.Body;
 
             var dirinfo = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\IdDaEncomenda");
 
-            foreach (var song in test)
+            foreach (var song in (List<string>)test)
             {
-                File.Create(dirinfo.FullName + "\\" + song + ".mp3");
+                //File.Create(dirinfo.FullName + "\\" + song + ".mp3");
+                Console.WriteLine("Processed: " + song);
             }
-            
+
             //zipar conteudo e enviar para a message queue outbox
         }
     }
