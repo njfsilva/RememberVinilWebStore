@@ -32,7 +32,7 @@ namespace BackOffice
             //Create timer to check messageQueue Outbox
             var myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
-            myTimer.Interval = 5000;
+            myTimer.Interval = 5;
             myTimer.Enabled = true;
 
             List<Track> Lista = new List<Track>();
