@@ -31,7 +31,7 @@ namespace BackOffice
             webSiteServer.Open();
 
             //Create timer to check messageQueue Outbox
-            var myTimer = new System.Timers.Timer();
+            var myTimer = new Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
             myTimer.Interval = 5;
             myTimer.Enabled = true;

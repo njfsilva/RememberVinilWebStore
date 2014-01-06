@@ -26,7 +26,7 @@ namespace Website
             txtAddress.Visible = false;
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtArtist.Text)) return;
             
@@ -50,7 +50,7 @@ namespace Website
             return response.Content;
         }
 
-        private void btnAddSongToOrder_Click(object sender, System.EventArgs e)
+        private void btnAddSongToOrder_Click(object sender, EventArgs e)
         {
             var song = new Track()
             {
@@ -71,7 +71,7 @@ namespace Website
             lblTotal.Text = total.ToString() + "€";
         }
 
-        private void lbArtists_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void lbArtists_SelectedIndexChanged(object sender, EventArgs e)
         {
             Artist = lbArtists.SelectedItem.ToString();
 

@@ -11,7 +11,7 @@
 
         public TransportJobResponse(string status)
         {
-            this.Status = status;
+            Status = status;
         }
     }
 }

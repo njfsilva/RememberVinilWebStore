@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Messaging;
 using System.Threading;
 using System.Timers;
@@ -6,6 +7,8 @@ using System.Collections.Generic;
 using System.IO;
 using BackOffice;
 using Ionic.Zip;
+using Ionic.Zlib;
+using Timer = System.Timers.Timer;
 
 
 namespace CDFactory
@@ -26,7 +29,7 @@ namespace CDFactory
             
 
             //// Create a timer to look for work
-            var myTimer = new System.Timers.Timer();
+            var myTimer = new Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForWork);
             myTimer.Interval = 1;
             myTimer.Enabled = true;
@@ -42,23 +45,23 @@ namespace CDFactory
                 new Track
                 {
                     ArtisName = "Myley Cyrus",
-                    TrackName = "Myley Cyrus - Recking Ball",
+                    TrackName = "Recking Ball",
                 },
                 new Track
                 {
                     ArtisName = "Eminem",
-                    TrackName = "Eminem - Berzerk",
-                },
-                new Track
-                {
-                    ArtisName = "Tretas",
-                    TrackName = "Tretas - Recking Ball",
-                },
-                new Track
-                {
-                    ArtisName = "Super Tretas",
-                    TrackName = "Super Tretas - Recking Ball",
+                    TrackName = "Berzerk",
                 }
+                //new Track
+                //{
+                //    ArtisName = "Tretas",
+                //    TrackName = "Recking Ball",
+                //},
+                //new Track
+                //{
+                //    ArtisName = "Super Tretas",
+                //    TrackName = "Recking Ball",
+                //}
             };
 
             var songsByorder = new SongsByOrder
@@ -91,15 +94,26 @@ namespace CDFactory
 
             foreach (var song in songsByOrder.TrackList)
             {
-                File.Create(dirinfo.FullName + "\\" + song.TrackName + ".mp3").Dispose();
+                var mp3File = dirinfo.FullName + "\\" + song.TrackName + ".mp3";
+                var lyricsFile = dirinfo.FullName + "\\" + song.TrackName + ".txt";
+
+                File.Create(mp3File).Dispose();
+                File.Create(lyricsFile).Dispose();
+
+                var lyrics = new List<string>();
+
+                lyrics.Add(LyricsHelper.GetLyrics(song.TrackName, song.ArtisName));
+
+                File.WriteAllLines(lyricsFile, lyrics);
+
                 Console.WriteLine("Processed: " + song.TrackName + " for Order number: " + songsByOrder.OrderId);
             }
 
             using (var zip = new ZipFile())
             {
                 zip.AddDirectory(dirinfo.FullName);
-                zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
+                zip.CompressionLevel = CompressionLevel.BestCompression;
+                zip.Comment = "This zip was created at " + DateTime.Now.ToString("G");
                 zip.Save(string.Format("Order{0}.zip", songsByOrder.OrderId)); 
             }
 

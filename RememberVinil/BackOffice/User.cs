@@ -9,10 +9,10 @@
 
         public User(string username, string password)
         {
-            this.Username = username;
-            this.Password = password;
-            this.HasPermissionToChat = false;
-            this.CallBackUrl = string.Empty;
+            Username = username;
+            Password = password;
+            HasPermissionToChat = false;
+            CallBackUrl = string.Empty;
         }
     }
 }

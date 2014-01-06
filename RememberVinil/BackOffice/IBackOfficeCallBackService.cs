@@ -11,7 +11,5 @@ namespace BackOffice
         [OperationContract]
         string GetStatus(TransportJobResponse response);
 
-        [OperationContract]
-        string NotifyCDReady(object response);//object cdready
     }
 }

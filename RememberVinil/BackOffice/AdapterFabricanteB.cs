@@ -5,9 +5,9 @@ namespace BackOffice
 {
     public class AdapterFabricanteB : IAdapterFabricantes
     {
-        private FabricanteBService.FabricanteBServiceClient AFabricanteB { get; set; }
+        private FabricanteBServiceClient AFabricanteB { get; set; }
 
-        public AdapterFabricanteB(FabricanteBService.FabricanteBServiceClient a)
+        public AdapterFabricanteB(FabricanteBServiceClient a)
         {
             AFabricanteB = a;
         }

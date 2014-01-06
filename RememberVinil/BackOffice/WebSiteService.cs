@@ -1,4 +1,6 @@
 ﻿using System.ServiceModel;
+using System.Text;
+using RestSharp.Extensions;
 
 namespace BackOffice
 {
@@ -52,7 +54,10 @@ namespace BackOffice
 
         private static string InputHandler(string input)
         {
-            return input.Replace(" ", "+").Replace(",", "").Replace(".", "").Replace("&", "+").Replace("+++", "+").Replace("++", "+");
+            byte[] bytes = Encoding.Default.GetBytes(input);
+            return Encoding.UTF8.GetString(bytes);
+            
+            //return input.Replace(" ", "+").Replace(",", "").Replace(".", "").Replace("&", "+").Replace("+++", "+").Replace("++", "+");
         }
     }
 }

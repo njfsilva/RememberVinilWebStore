@@ -10,10 +10,5 @@ namespace BackOffice
         {
             return response.Status;
         }
-
-        public string NotifyCDReady(object response)
-        {
-            return string.Empty;
-        }
     }
 }
