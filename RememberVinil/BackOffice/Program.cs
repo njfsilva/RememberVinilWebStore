@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Messaging;
 using System.ServiceModel.Web;
 using System.Timers;
 using CDFactory;
@@ -11,7 +12,7 @@ namespace BackOffice
 {
     class Program
     {
-        //const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
+        const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
         const string OutboxQueuePath = ".\\Private$\\CDFactoryOutBox";
 
         static void Main()
@@ -77,13 +78,14 @@ namespace BackOffice
 
             if (message != null)
             {
-                NotifyUserDownloadReady();
+                NotifyUserDownloadReady(message);
             }
         }
 
-        public static void NotifyUserDownloadReady()
+        public static void NotifyUserDownloadReady(Message msgToProcess)
         {
-
+            var cdReady = (DownloadReady) msgToProcess.Body;
+            Console.WriteLine("Download ready for order {0}: {1}", cdReady.OrderId, cdReady.LinkToDownload);
         }
     }
 }
