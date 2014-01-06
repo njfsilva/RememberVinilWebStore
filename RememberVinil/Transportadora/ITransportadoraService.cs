@@ -8,5 +8,8 @@ namespace Transportadora
     {
         [OperationContract]
         string TransportJob(TransportJobRequest request);
+
+        [OperationContract]
+        TransportJobPriceRequest TransportJobPrice(TransportJobPriceRequest request);
     }
 }

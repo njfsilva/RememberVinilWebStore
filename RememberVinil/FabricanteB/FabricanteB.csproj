@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,16 +50,53 @@
   <ItemGroup>
     <Compile Include="FabricaBDB.cs" />
     <Compile Include="FabricanteBService.cs" />
+    <Compile Include="FabricantePriceResponse.cs" />
     <Compile Include="IFabricanteBService.cs" />
     <Compile Include="Music.cs" />
     <Compile Include="ObjectCDRequest.cs" />
     <Compile Include="ObjectQuoteRequest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\BOCallBack\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Service References\BOCallBack\BackOffice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BOCallBack\service.wsdl" />
+    <None Include="Service References\BOCallBack\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BOCallBack\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BOCallBack\Transportadora.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BOCallBack\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BOCallBack\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BOCallBack\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BOCallBack\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

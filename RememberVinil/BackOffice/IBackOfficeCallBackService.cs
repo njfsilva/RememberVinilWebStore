@@ -11,7 +11,13 @@ namespace BackOffice
         [OperationContract]
         string GetStatus(TransportJobResponse response);
 
+        //[OperationContract]
+        //string NotifyCDReady(object response);//object cdready
+
         [OperationContract]
-        string NotifyCDReady(object response);//object cdready
+        string GetTransporterPrice(TransportJobPriceResponse response);
+
+        [OperationContract]
+        string GetFabricantePrice(FabricantePriceResponse response);
     }
 }

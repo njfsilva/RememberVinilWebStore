@@ -46,5 +46,30 @@ namespace BackOffice
         {
             return UserDb.FirstOrDefault(u => u.Username.Equals(username));
         }
+
+        public static bool AddNewTransportJob(User c)
+        {
+            UserDb.Add(c);
+
+            return true;
+        }
+
+
+        public static List<User> GetClients()
+        {
+            return UserDb;
+        }
+
+        public static string GetTransportIDbyClientId(string id)
+        {
+            foreach (var c in UserDb)
+            {
+                if (c.userID == id)
+                {
+                    return c.TransportadoraId;
+                }
+            }
+            return "";
+        }
     }
 }

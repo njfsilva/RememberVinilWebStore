@@ -9,6 +9,10 @@
 //------------------------------------------------------------------------------
 
 namespace Transportadora.VinilBackoffice {
+    using System.Runtime.Serialization;
+    using System;
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TransportJobResponse", Namespace="http://schemas.datacontract.org/2004/07/Transportadora")]
@@ -70,12 +74,124 @@ namespace Transportadora.VinilBackoffice {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TransportJobPriceResponse", Namespace="http://schemas.datacontract.org/2004/07/BackOffice")]
+    [System.SerializableAttribute()]
+    public partial class TransportJobPriceResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string encomendaIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fabricanteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string refRequestPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string userIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string encomendaID {
+            get {
+                return this.encomendaIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
+                    this.encomendaIDField = value;
+                    this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fabricante {
+            get {
+                return this.fabricanteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fabricanteField, value) != true)) {
+                    this.fabricanteField = value;
+                    this.RaisePropertyChanged("fabricante");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string refRequestPrice {
+            get {
+                return this.refRequestPriceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.refRequestPriceField, value) != true)) {
+                    this.refRequestPriceField = value;
+                    this.RaisePropertyChanged("refRequestPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string userID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userIDField, value) != true)) {
+                    this.userIDField = value;
+                    this.RaisePropertyChanged("userID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="VinilBackoffice.IBackOfficeCallBackService")]
     public interface IBackOfficeCallBackService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBackOfficeCallBackService/getStatus", ReplyAction="http://tempuri.org/IBackOfficeCallBackService/getStatusResponse")]
-        string getStatus(Transportadora.VinilBackoffice.TransportJobResponse response);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBackOfficeCallBackService/GetStatus", ReplyAction="http://tempuri.org/IBackOfficeCallBackService/GetStatusResponse")]
+        string GetStatus(Transportadora.VinilBackoffice.TransportJobResponse response);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPrice", ReplyAction="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPriceResponse")]
+        string GetTransporterPrice(Transportadora.VinilBackoffice.TransportJobPriceResponse response);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -105,8 +221,12 @@ namespace Transportadora.VinilBackoffice {
                 base(binding, remoteAddress) {
         }
         
-        public string getStatus(Transportadora.VinilBackoffice.TransportJobResponse response) {
-            return base.Channel.getStatus(response);
+        public string GetStatus(Transportadora.VinilBackoffice.TransportJobResponse response) {
+            return base.Channel.GetStatus(response);
+        }
+        
+        public string GetTransporterPrice(Transportadora.VinilBackoffice.TransportJobPriceResponse response) {
+            return base.Channel.GetTransporterPrice(response);
         }
     }
 }

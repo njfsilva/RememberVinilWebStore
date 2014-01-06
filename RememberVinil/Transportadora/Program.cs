@@ -17,13 +17,13 @@ namespace Transportadora
             var boCallback = new BackOfficeCallBackServiceClient();
             VinilBackoffice.TransportJobResponse resposta = new VinilBackoffice.TransportJobResponse();
             resposta.Status = "pedido recebido";
-            boCallback.getStatus(resposta);
+            //boCallback.getStatus(resposta);
             Thread.Sleep(2000);
             resposta.Status = "pedido a ser tratado";
-            boCallback.getStatus(resposta);
+            //boCallback.getStatus(resposta);
             Thread.Sleep(2000);
             resposta.Status = "pedido concluido";
-            boCallback.getStatus(resposta);
+            //boCallback.getStatus(resposta);
             //var req = new TransportJobRequest();
             //req.DeliveryAdress = "address";
             //req.Status = "ordered";

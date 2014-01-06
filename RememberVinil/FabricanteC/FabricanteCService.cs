@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Threading;
+using FabricanteC.BOCallBack;
 
 namespace FabricanteC
 {
@@ -16,6 +14,32 @@ namespace FabricanteC
                 //total += 0.99;
             }
             return total;
+        }
+
+        public FabricantePriceResponse getQuote(ObjectQuoteRequest request)
+        {
+
+            Thread thread = new Thread(() =>
+            {
+                double total = 0;
+                foreach (Music m in request.ListaMusicas)
+                {
+                    total += m.price;
+                    //total += 0.99;
+                }
+
+                BackOfficeCallBackServiceClient client = new BackOfficeCallBackServiceClient();
+
+                BOCallBack.TransportJobPriceResponse response = new BOCallBack.TransportJobPriceResponse();
+                response.encomendaID = request.encomendaID;
+                response.fabricante = request.fabricante;
+                response.refRequestPrice = request.WSCallback;
+                response.Price = total;
+                response.userID = request.userID;
+                client.GetTransporterPrice(response);
+            });
+            thread.Start();
+            return new FabricantePriceResponse();
         }
 
         public string MakeCD(ObjectCDRequest request)
