@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/FabricanteB" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FabricanteB" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ObjectQuoteRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ListaMusicas" nillable="true" type="tns:ArrayOfMusic" />
+      <xs:element minOccurs="0" name="WSCallback" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObjectQuoteRequest" nillable="true" type="tns:ObjectQuoteRequest" />
+  <xs:complexType name="ArrayOfMusic">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Music" nillable="true" type="tns:Music" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMusic" nillable="true" type="tns:ArrayOfMusic" />
+  <xs:complexType name="Music">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArtisName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="PriceFormatted" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Music" nillable="true" type="tns:Music" />
+  <xs:complexType name="ObjectCDRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ListaMusicas" nillable="true" type="tns:ArrayOfMusic" />
+      <xs:element minOccurs="0" name="WSCallback" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObjectCDRequest" nillable="true" type="tns:ObjectCDRequest" />
+</xs:schema>

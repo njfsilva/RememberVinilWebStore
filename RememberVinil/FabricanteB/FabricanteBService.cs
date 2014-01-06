@@ -13,7 +13,7 @@ namespace FabricanteB
             foreach (Music m in request.ListaMusicas)
             {
                 //total += m.price;
-                total += 0.99;
+                total += 1;
             }
             return total;
         }

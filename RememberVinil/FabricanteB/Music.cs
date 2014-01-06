@@ -7,9 +7,9 @@ namespace FabricanteB
 {
     public class Music
     {
-        public string nome { get; set; }
-        public string album { get; set; }
-        public double duracao { get; set; }
-        public double price { get; set; }  
+        public string ArtisName { get; set; }
+        public string TrackName { get; set; }
+        public double Price { get; set; }
+        public string PriceFormatted { get; set; }
     }
 }

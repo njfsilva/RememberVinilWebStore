@@ -12,8 +12,8 @@ namespace FabricanteC
             double total = 0;
             foreach (Music m in request.ListaMusicas)
             {
-                //total += m.price;
-                total += 0.99;
+                total += m.price;
+                //total += 0.99;
             }
             return total;
         }

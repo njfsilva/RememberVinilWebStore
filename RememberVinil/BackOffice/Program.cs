@@ -2,6 +2,10 @@
 using System.ServiceModel.Web;
 using System.Timers;
 using CDFactory;
+using BackOffice.FabricanteAService;
+using BackOffice.FabricanteBService;
+using BackOffice.FabricanteCService;
+using System.Collections.Generic;
 
 namespace BackOffice
 {
@@ -31,6 +35,24 @@ namespace BackOffice
             myTimer.Interval = 5000;
             myTimer.Enabled = true;
 
+            List<Track> Lista = new List<Track>();
+
+            Lista.Add(new Track("ole", 12.5));
+            Lista.Add(new Track("oli", 10.5));
+            Lista.Add(new Track("olu", 9.5));
+
+            IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
+            double pricefabricantea = adapterA.getPrice(Lista);
+
+            IAdapterFabricantes adapterB = new AdapterFabricanteB(new FabricanteBServiceClient());
+            double pricefabricanteb = adapterB.getPrice(Lista);
+
+            IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
+            double pricefabricantec = adapterC.getPrice(Lista);
+
+            Console.WriteLine("a: " + pricefabricantea);
+            Console.WriteLine("b: " + pricefabricanteb);
+            Console.WriteLine("c: " + pricefabricantec);
 
             ////Transp Service test
             //var transp = new TransportadoraServiceClient();
