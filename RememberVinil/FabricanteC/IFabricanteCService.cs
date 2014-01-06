@@ -6,9 +6,9 @@ namespace FabricanteC
     public interface IFabricanteCService
     {
         [OperationContract]
-        double getQuote(ObjectQuoteRequest request);
+        FabricantePriceResponse GetQuote(ObjectQuoteRequest request);
 
         [OperationContract]
-        string MakeCD(ObjectCDRequest request);
+        string MakeCd(ObjectCDRequest request);
     }
 }

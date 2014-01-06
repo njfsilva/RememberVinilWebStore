@@ -62,7 +62,7 @@ namespace BackOffice
         {
             foreach (var c in UserDb)
             {
-                if (c.userID == id)
+                if (c.UserId == id)
                 {
                     return c.TransportadoraId;
                 }

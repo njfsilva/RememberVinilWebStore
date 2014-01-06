@@ -1,4 +1,6 @@
-﻿namespace BackOffice
+﻿using System.Collections.Generic;
+
+namespace BackOffice
 {
     class User
     {
@@ -6,7 +8,7 @@
         public string Password { get; set; }
         public string CallBackUrl { get; set; }
         public bool HasPermissionToChat { get; set; }
-        public string userID { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
         public List<Order> ListaEncomendas { get; set; }
@@ -18,7 +20,7 @@
 
         public User(string clientId)
         {
-            userID = clientId;
+            UserId = clientId;
         }
 
         public User(string username, string password)

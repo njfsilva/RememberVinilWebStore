@@ -22,13 +22,13 @@ namespace BackOffice
 
         public ObjectQuoteRequest newQuoteRequest(List<Track> list)
         {
-            ObjectQuoteRequest request = new ObjectQuoteRequest();
+            var request = new ObjectQuoteRequest();
             request.WSCallback = "xxxxxxx";
-            Music[] arrayOfMusic = new Music[list.Count];
-            int x = 0;
-            foreach (Track t in list)
+            var arrayOfMusic = new Music[list.Count];
+            var x = 0;
+            foreach (var t in list)
 	        {
-		            Music m = new Music();
+		            var m = new Music();
                     m.nome=t.TrackName;
                     m.price=t.Price;
                     m.duracao = getMusicDuration(m.nome);
@@ -41,8 +41,8 @@ namespace BackOffice
 
         public double getMusicDuration(string musicName)
         {
-            Random random = new Random();
-            double minutes = random.NextDouble() * (5 - 3) + 3;
+            var random = new Random();
+            var minutes = random.NextDouble() * (5 - 3) + 3;
 
             return Math.Round(minutes, 2);
         }

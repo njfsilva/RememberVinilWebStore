@@ -5,44 +5,35 @@ namespace FabricanteC
 {
     public class FabricanteCService : IFabricanteCService
     {
-        public double getQuote(ObjectQuoteRequest request)
-        {
-            double total = 0;
-            foreach (Music m in request.ListaMusicas)
-            {
-                total += m.price;
-                //total += 0.99;
-            }
-            return total;
-        }
-
-        public FabricantePriceResponse getQuote(ObjectQuoteRequest request)
+        public FabricantePriceResponse GetQuote(ObjectQuoteRequest request)
         {
 
-            Thread thread = new Thread(() =>
+            var thread = new Thread(() =>
             {
                 double total = 0;
-                foreach (Music m in request.ListaMusicas)
+                foreach (var m in request.ListaMusicas)
                 {
                     total += m.price;
                     //total += 0.99;
                 }
 
-                BackOfficeCallBackServiceClient client = new BackOfficeCallBackServiceClient();
+                var client = new BackOfficeCallBackServiceClient();
 
-                BOCallBack.TransportJobPriceResponse response = new BOCallBack.TransportJobPriceResponse();
-                response.encomendaID = request.encomendaID;
-                response.fabricante = request.fabricante;
-                response.refRequestPrice = request.WSCallback;
-                response.Price = total;
-                response.userID = request.userID;
+                var response = new BOCallBack.TransportJobPriceResponse
+                {
+                    encomendaID = request.encomendaID,
+                    fabricante = request.fabricante,
+                    refRequestPrice = request.WSCallback,
+                    Price = total,
+                    userID = request.userID
+                };
                 client.GetTransporterPrice(response);
             });
             thread.Start();
             return new FabricantePriceResponse();
         }
 
-        public string MakeCD(ObjectCDRequest request)
+        public string MakeCd(ObjectCDRequest request)
         {
             return FabricaCDB.AddNewCDRequest(request).ToString();
         }

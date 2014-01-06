@@ -75,7 +75,7 @@ namespace CDFactory
 
         public static void LookForWork(object sender, EventArgs e)
         {
-            string errorMessage = string.Empty;
+            var errorMessage = string.Empty;
 
             var message = MessageQueueHelper.ReceiveMessage(InboxQueuePath, 1000, out errorMessage);
 

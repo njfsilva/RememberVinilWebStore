@@ -23,14 +23,14 @@ namespace BackOffice
 
         public ObjectQuoteRequest newQuoteRequest(List<Track> list)
         {
-            ObjectQuoteRequest request = new ObjectQuoteRequest();
+            var request = new ObjectQuoteRequest();
             request.WSCallback = "xxxxxxx";
             
-            Music[] arrayOfMusic = new Music[list.Count];
-            int x = 0;
-            foreach (Track t in list)
+            var arrayOfMusic = new Music[list.Count];
+            var x = 0;
+            foreach (var t in list)
 	        {
-		            Music m = new Music();
+		            var m = new Music();
                     m.nome=t.TrackName;
                     m.price=t.Price;
                     arrayOfMusic[x]=m;
@@ -43,14 +43,14 @@ namespace BackOffice
 
         public string setOrder(List<Track> list)
         {
-            ObjectCDRequest request = new ObjectCDRequest();
+            var request = new ObjectCDRequest();
             request.WSCallback = "xxxxxxx";
 
-            Music[] arrayOfMusic = new Music[list.Count];
-            int x = 0;
-            foreach (Track t in list)
+            var arrayOfMusic = new Music[list.Count];
+            var x = 0;
+            foreach (var t in list)
             {
-                Music m = new Music();
+                var m = new Music();
                 m.nome = t.TrackName;
                 m.price = t.Price;
                 arrayOfMusic[x] = m;

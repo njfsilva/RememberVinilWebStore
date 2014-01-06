@@ -36,13 +36,13 @@ namespace BackOffice
             myTimer.Interval = 5;
             myTimer.Enabled = true;
 
-            List<Track> Lista = new List<Track>();
+            var Lista = new List<Track>();
 
             Lista.Add(new Track("ole", 12.5));
             Lista.Add(new Track("oli", 10.5));
             Lista.Add(new Track("olu", 9.5));
 
-            string result=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
+            var result=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
             
 
             //IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
@@ -75,7 +75,7 @@ namespace BackOffice
 
         public static void LookForDownloadReady(object source, ElapsedEventArgs e)
         {
-            string errorMessage = string.Empty;
+            var errorMessage = string.Empty;
 
             var message = MessageQueueHelper.ReceiveMessage(OutboxQueuePath, 20, out errorMessage);
 

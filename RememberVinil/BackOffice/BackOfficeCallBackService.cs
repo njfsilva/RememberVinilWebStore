@@ -13,14 +13,12 @@ namespace BackOffice
         {
             return response.Status;
         }
-<<<<<<< HEAD
-=======
         
         public string GetTransporterPrice(TransportJobPriceResponse response)
         {
             OrderInfo order=null;
             
-            foreach (OrderInfo item in orderList)
+            foreach (var item in orderList)
             {
                 if (item.encomendaid == response.encomendaID)
                 {
@@ -30,9 +28,7 @@ namespace BackOffice
             }
             if (order == null)
             {
-                order = new OrderInfo();
-                order.encomendaid = response.encomendaID;
-                order.userID = response.userID;
+                order = new OrderInfo {encomendaid = response.encomendaID, userID = response.userID};
                 order.addpriceTransp(response.fabricante, response.Price);
             }
             else
@@ -40,7 +36,7 @@ namespace BackOffice
                 order.addpriceTransp(response.fabricante, response.Price);
                 if (order.all3Received())
                 {
-                    string bestdeal = order.getbestdeal();
+                    var bestdeal = order.getbestdeal();
                     orderList.Remove(order);
                     //send to website
                 }
@@ -52,7 +48,7 @@ namespace BackOffice
         {
             OrderInfo order = null;
 
-            foreach (OrderInfo item in orderList)
+            foreach (var item in orderList)
             {
                 if (item.encomendaid == response.encomendaID)
                 {
@@ -62,9 +58,7 @@ namespace BackOffice
             }
             if (order == null)
             {
-                order = new OrderInfo();
-                order.encomendaid = response.encomendaID;
-                order.userID = response.userID;
+                order = new OrderInfo {encomendaid = response.encomendaID, userID = response.userID};
                 order.addpriceFabric(response.fabricante, response.Price);
             }
             else
@@ -72,13 +66,12 @@ namespace BackOffice
                 order.addpriceFabric(response.fabricante, response.Price);
                 if (order.all3Received())
                 {
-                    string bestdeal = order.getbestdeal();
+                    var bestdeal = order.getbestdeal();
                     orderList.Remove(order);
                     //send to website
                 }
             }
             return "ack";
         }
->>>>>>> 7bc9f85ce012c8ce9d45709c3105f223564621b2
     }
 }

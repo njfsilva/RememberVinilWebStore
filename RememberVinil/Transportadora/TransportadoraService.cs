@@ -9,7 +9,7 @@ namespace Transportadora
         public string TransportJob(TransportJobRequest request)
         {
             var response = new TransportJobResponse();
-            int id = 0;
+            var id = 0;
             try
             {
                 id=TransportadoraDB.AddNewTransportJob(request);
@@ -27,8 +27,8 @@ namespace Transportadora
 
         public TransportJobPriceRequest TransportJobPrice(TransportJobPriceRequest request)
         {
-            PriceCalculator workerObject = new PriceCalculator();
-            Thread thread = new Thread(() => workerObject.PriceCalc(request));
+            var workerObject = new PriceCalculator();
+            var thread = new Thread(() => workerObject.PriceCalc(request));
             thread.Start();
             return new TransportJobPriceRequest();
         }

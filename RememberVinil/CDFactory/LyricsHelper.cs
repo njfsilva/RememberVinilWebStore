@@ -44,7 +44,7 @@ namespace CDFactory
 
         private static string InputHandler(string input)
         {
-            byte[] bytes = Encoding.Default.GetBytes(input);
+            var bytes = Encoding.Default.GetBytes(input);
             return Encoding.UTF8.GetString(bytes);
         }
 

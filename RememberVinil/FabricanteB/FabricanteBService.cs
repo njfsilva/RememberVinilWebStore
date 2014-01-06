@@ -8,18 +8,18 @@ namespace FabricanteB
         public FabricantePriceResponse getQuote(ObjectQuoteRequest request)
         {
 
-            Thread thread = new Thread(() =>
+            var thread = new Thread(() =>
             {
                 double total = 0;
-                foreach (Music m in request.ListaMusicas)
+                foreach (var m in request.ListaMusicas)
                 {
                     //total += m.price;
                     total += 1;
                 }
 
-                BackOfficeCallBackServiceClient client = new BackOfficeCallBackServiceClient();
+                var client = new BackOfficeCallBackServiceClient();
 
-                BOCallBack.TransportJobPriceResponse response = new BOCallBack.TransportJobPriceResponse();
+                var response = new BOCallBack.TransportJobPriceResponse();
                 response.encomendaID = request.encomendaID;
                 response.fabricante = request.fabricante;
                 response.refRequestPrice = request.WSCallback;

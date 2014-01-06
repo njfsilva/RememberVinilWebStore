@@ -65,9 +65,9 @@ namespace Website
             var item = new ListViewItem(track);
             lvShoppingCart.Items.Add(item);
 
-            double songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty)) / 100;
-            double previousTotal = double.Parse(lblTotal.Text.Replace("€", string.Empty));
-            double total = songDouble + previousTotal;
+            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty)) / 100;
+            var previousTotal = double.Parse(lblTotal.Text.Replace("€", string.Empty));
+            var total = songDouble + previousTotal;
             lblTotal.Text = total.ToString() + "€";
         }
 

@@ -31,7 +31,7 @@ namespace BackOffice
 
         public void addpriceTransp(string f, double p)
         {
-            order o = new order();
+            var o = new order();
             o.fabrica = f;
             o.price = p;
             pricesTransp.Add(o);
@@ -39,7 +39,7 @@ namespace BackOffice
 
         public void addpriceFabric(string f, double p)
         {
-            order o = new order();
+            var o = new order();
             o.fabrica = f;
             o.price = p;
             pricesFabric.Add(o);
@@ -48,16 +48,16 @@ namespace BackOffice
         public string getbestdeal()
         {
             double lowest = Int32.MaxValue;
-            string result= string.Empty;
-            foreach (order itemTransp in pricesTransp)
+            var result= string.Empty;
+            foreach (var itemTransp in pricesTransp)
             {
-                string fabrica = itemTransp.fabrica;
-                double pricetrans = itemTransp.price;
-                foreach (order itemFabric in pricesFabric)
+                var fabrica = itemTransp.fabrica;
+                var pricetrans = itemTransp.price;
+                foreach (var itemFabric in pricesFabric)
                 {
                     if (itemFabric.fabrica == fabrica)
                     {
-                        double total = pricetrans + itemFabric.price;
+                        var total = pricetrans + itemFabric.price;
                         if (total < lowest)
                         {
                             lowest = total;

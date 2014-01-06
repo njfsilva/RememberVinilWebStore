@@ -22,9 +22,9 @@ namespace Transportadora
                 d = 0;
             }
             result = (d * 0.26 / 1000);
-            BackOfficeCallBackServiceClient client = new BackOfficeCallBackServiceClient();
+            var client = new BackOfficeCallBackServiceClient();
 
-            VinilBackoffice.TransportJobPriceResponse response = new VinilBackoffice.TransportJobPriceResponse();
+            var response = new VinilBackoffice.TransportJobPriceResponse();
             response.encomendaID = request.encomendaID;
             response.fabricante = request.fabrica;
             response.refRequestPrice = request.WSCallback;

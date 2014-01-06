@@ -15,7 +15,7 @@ namespace Transportadora
 
             ////Callback test
             var boCallback = new BackOfficeCallBackServiceClient();
-            VinilBackoffice.TransportJobResponse resposta = new VinilBackoffice.TransportJobResponse();
+            var resposta = new VinilBackoffice.TransportJobResponse();
             resposta.Status = "pedido recebido";
             //boCallback.getStatus(resposta);
             Thread.Sleep(2000);
