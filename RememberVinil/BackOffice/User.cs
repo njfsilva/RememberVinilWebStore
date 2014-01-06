@@ -2,12 +2,12 @@
 
 namespace BackOffice
 {
-    class User
+    public class User
     {
         public string Username { get; set; }
         public string Password { get; set; }
         public string CallBackUrl { get; set; }
-        public bool HasPermissionToChat { get; set; }
+        public bool HasPermissionToUseApplication { get; set; }
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
@@ -27,12 +27,16 @@ namespace BackOffice
         {
             Username = username;
             Password = password;
-            HasPermissionToChat = false;
+            HasPermissionToUseApplication = false;
             CallBackUrl = string.Empty;
+        }
+
+        public User()
+        {
         }
     }
 
-    class Order
+    public class Order
     {
         public string orderID { get; set; }
         public string status { get; set; }

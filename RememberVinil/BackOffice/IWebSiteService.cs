@@ -7,9 +7,9 @@ namespace BackOffice
     [ServiceContract]
     public interface IWebSiteService
     {
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json, UriTemplate = "/session/login.json")]
-        string SessionLogin(string loginName);
+        [WebGet(UriTemplate = "/Login/{user}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        User SessionLogin(string user);
 
         [WebGet(UriTemplate = "/TopTracks/{artist}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]

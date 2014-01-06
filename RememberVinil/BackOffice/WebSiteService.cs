@@ -1,6 +1,5 @@
 ﻿using System.ServiceModel;
 using System.Text;
-using RestSharp.Extensions;
 
 namespace BackOffice
 {
@@ -8,9 +7,21 @@ namespace BackOffice
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class WebSiteService : IWebSiteService
     {
-        public string SessionLogin(string loginName)
+        public User SessionLogin(string loginName)
         {
-            return loginName;
+            var user = UserDB.GetUserByUsername(loginName);
+
+            if (!string.IsNullOrEmpty(user.Username))
+            {
+                user.HasPermissionToUseApplication = true;
+                UserDB.GetLoggedInUsers().Add(user);
+                return user;
+            }
+
+            return new User
+            {
+                HasPermissionToUseApplication = false
+            };
         }
 
         public TracksDto GetArtistTopTracks(string artist)
