@@ -91,6 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="SongsByOrder.cs" />
     <Compile Include="Track.cs" />
     <Compile Include="TracksDto.cs" />
     <Compile Include="TransportJobPriceResponse.cs" />

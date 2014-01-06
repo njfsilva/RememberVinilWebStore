@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using FabricanteB.BOCallBack;
-
 namespace FabricanteB
 {
     public class FabricanteBService : IFabricanteBService
