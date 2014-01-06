@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Transportadora
 {
@@ -21,6 +22,15 @@ namespace Transportadora
 
 
             return id.ToString();
+        }
+
+
+        public TransportJobPriceRequest TransportJobPrice(TransportJobPriceRequest request)
+        {
+            PriceCalculator workerObject = new PriceCalculator();
+            Thread thread = new Thread(() => workerObject.PriceCalc(request));
+            thread.Start();
+            return new TransportJobPriceRequest();
         }
     }
 }

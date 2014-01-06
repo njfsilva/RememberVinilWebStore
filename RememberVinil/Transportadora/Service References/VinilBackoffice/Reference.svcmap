@@ -25,6 +25,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c8453de3-c5f6-417b-bd68-4d8d0a1b3968" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="8be72e58-6787-43b5-bc3b-6415c8b0af47" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
     <MetadataFile FileName="Transportadora.xsd" MetadataType="Schema" ID="72321e20-5f66-4550-a7b4-b3c53bc1d2e0" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
+    <MetadataFile FileName="BackOffice.xsd" MetadataType="Schema" ID="0f5e01cf-3b9b-4b95-af2f-039277600093" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

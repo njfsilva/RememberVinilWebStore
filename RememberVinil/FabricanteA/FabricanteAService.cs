@@ -1,21 +1,40 @@
-﻿namespace FabricanteA
+﻿using System.Threading;
+using FabricanteA.BOCallBack;
+
+namespace FabricanteA
 {
     public class FabricanteAService : IFabricanteAService
     {
-        public double getQuote(ObjectQuoteRequest request)
+        public FabricantePriceResponse getQuote(ObjectQuoteRequest request)
         {
-            double total = 0;
-            foreach(Music m in request.ListaMusicas)
+
+            Thread thread = new Thread(() =>
             {
-                //total += m.price;
-                total += 0.99;
-            }
-            return total;
+                double total = 0;
+                foreach (Music m in request.ListaMusicas)
+                {
+                    //total += m.price;
+                    total += 0.99;
+                }
+
+                BackOfficeCallBackServiceClient client = new BackOfficeCallBackServiceClient();
+
+                BOCallBack.TransportJobPriceResponse response = new BOCallBack.TransportJobPriceResponse();
+                response.encomendaID = request.encomendaID;
+                response.fabricante = request.fabricante;
+                response.refRequestPrice = request.WSCallback;
+                response.Price = total;
+                response.userID = request.userID;
+                client.GetTransporterPrice(response);
+            });
+            thread.Start();
+            return new FabricantePriceResponse();
         }
 
         public string MakeCD(ObjectCDRequest request)
         {
             return FabricaADB.AddNewCDRequest(request).ToString();
         }
+
     }
 }

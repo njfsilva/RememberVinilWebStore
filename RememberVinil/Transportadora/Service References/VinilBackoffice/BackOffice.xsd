@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BackOffice" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BackOffice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="TransportJobPriceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="encomendaID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fabricante" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="refRequestPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransportJobPriceResponse" nillable="true" type="tns:TransportJobPriceResponse" />
+</xs:schema>

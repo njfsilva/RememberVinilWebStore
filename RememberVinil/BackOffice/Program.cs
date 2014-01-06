@@ -42,18 +42,21 @@ namespace BackOffice
             Lista.Add(new Track("oli", 10.5));
             Lista.Add(new Track("olu", 9.5));
 
-            IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
-            double pricefabricantea = adapterA.getPrice(Lista);
+            string result=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
+            
 
-            IAdapterFabricantes adapterB = new AdapterFabricanteB(new FabricanteBServiceClient());
-            double pricefabricanteb = adapterB.getPrice(Lista);
+            //IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
+            //double pricefabricantea = adapterA.getPrice(Lista);
 
-            IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
-            double pricefabricantec = adapterC.getPrice(Lista);
+            //IAdapterFabricantes adapterB = new AdapterFabricanteB(new FabricanteBServiceClient());
+            //double pricefabricanteb = adapterB.getPrice(Lista);
 
-            Console.WriteLine("a: " + pricefabricantea);
-            Console.WriteLine("b: " + pricefabricanteb);
-            Console.WriteLine("c: " + pricefabricantec);
+            //IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
+            //double pricefabricantec = adapterC.getPrice(Lista);
+
+            //Console.WriteLine("a: " + pricefabricantea);
+            //Console.WriteLine("b: " + pricefabricanteb);
+            //Console.WriteLine("c: " + pricefabricantec);
 
             ////Transp Service test
             //var transp = new TransportadoraServiceClient();
