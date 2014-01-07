@@ -24,7 +24,6 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="6fa5a1c7-e4a6-4656-8af7-517687738fff" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9fa5023d-7cf7-4e2c-84b1-9ab573e1fdc3" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4caf5550-a572-4034-a1fa-f42fc3d7055e" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
-    <MetadataFile FileName="Transportadora.xsd" MetadataType="Schema" ID="a9e04148-6d3b-4291-9dc2-0962fb0c6be6" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
     <MetadataFile FileName="BackOffice.xsd" MetadataType="Schema" ID="a171be22-359d-4c3b-95a5-2667e97b4c20" SourceId="1" SourceUrl="http://localhost:9003/BackOfficeCallBackService/mex" />
   </Metadata>
   <Extensions>

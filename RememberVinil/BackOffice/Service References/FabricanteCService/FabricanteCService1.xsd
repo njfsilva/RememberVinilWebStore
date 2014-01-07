@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:9012/FabricanteCService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FabricanteC" />
-  <xs:element name="getQuote">
+  <xs:element name="GetQuote">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/FabricanteC" minOccurs="0" name="request" nillable="true" type="q1:ObjectQuoteRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getQuoteResponse">
+  <xs:element name="GetQuoteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="getQuoteResult" type="xs:double" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FabricanteC" minOccurs="0" name="GetQuoteResult" nillable="true" type="q2:FabricantePriceResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MakeCD">
+  <xs:element name="MakeCd">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FabricanteC" minOccurs="0" name="request" nillable="true" type="q2:ObjectCDRequest" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/FabricanteC" minOccurs="0" name="request" nillable="true" type="q3:ObjectCDRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MakeCDResponse">
+  <xs:element name="MakeCdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="MakeCDResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/FabricanteC" minOccurs="0" name="MakeCdResult" nillable="true" type="q4:ObjectMakeCDResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

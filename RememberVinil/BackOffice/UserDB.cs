@@ -45,6 +45,11 @@ namespace BackOffice
             return UserDb.FirstOrDefault(u => u.Username.Equals(username));
         }
 
+        public static User GetUserByUserID(string UserID)
+        {
+            return UserDb.FirstOrDefault(u => u.UserId.Equals(UserID));
+        }
+
         public static bool AddNewTransportJob(User c)
         {
             UserDb.Add(c);

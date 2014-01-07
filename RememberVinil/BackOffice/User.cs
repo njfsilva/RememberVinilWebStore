@@ -11,7 +11,7 @@ namespace BackOffice
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
-        public List<Order> ListaEncomendas { get; set; }
+        public List<Order> ListaEncomendas = new List<Order>();
 
         public string TransportadoraId { get; set; }
         //public string TransportadoraStatus { get; set; }
@@ -29,6 +29,19 @@ namespace BackOffice
             Password = password;
             HasPermissionToChat = false;
             CallBackUrl = string.Empty;
+        }
+
+        public string addOrder()
+        {
+            var o = new Order { orderID = ListaEncomendas.Count.ToString() };
+            ListaEncomendas.Add(o);
+            return o.orderID;
+        }
+
+        public void updateOrderStatus(string id, string status)
+        {
+            var ord= ListaEncomendas.Find(o => o.orderID.Equals(id));
+            ord.status = status;
         }
     }
 

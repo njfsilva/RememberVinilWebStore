@@ -7,7 +7,7 @@ namespace Transportadora
     public interface ITransportadoraService
     {
         [OperationContract]
-        string TransportJob(TransportJobRequest request);
+        TransportJobPriceResponse TransportJob(TransportJobRequest request);
 
         [OperationContract]
         TransportJobPriceRequest TransportJobPrice(TransportJobPriceRequest request);

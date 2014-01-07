@@ -13,14 +13,7 @@ namespace BackOffice
             AFabricanteA = a;
 
         }
-        
-        
-        public double getPrice(List<Track> list)
-        {
-            return AFabricanteA.getQuote(newQuoteRequest(list));
-
-        }
-
+                
         public ObjectQuoteRequest newQuoteRequest(List<Track> list)
         {
             var request = new ObjectQuoteRequest();
@@ -40,8 +33,14 @@ namespace BackOffice
             return request;
         }
 
+        public FabricantePriceResponse getPrice(List<Track> list)
+        {
+            AFabricanteA.getQuote(newQuoteRequest(list));
+            return new FabricantePriceResponse();
+        }
 
-        public string setOrder(List<Track> list)
+
+        public ObjectMakeCDResponse setOrder(List<Track> list)
         {
             var request = new ObjectCDRequest();
             request.WSCallback = "xxxxxxx";
@@ -57,7 +56,9 @@ namespace BackOffice
                 x++;
             }
             request.ListaMusicas = arrayOfMusic;
-            return AFabricanteA.MakeCD(request);
+            AFabricanteA.MakeCD(request);
+
+            return new ObjectMakeCDResponse();
         }
     }
 }

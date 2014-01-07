@@ -33,9 +33,33 @@ namespace FabricanteC
             return new FabricantePriceResponse();
         }
 
-        public string MakeCd(ObjectCDRequest request)
+        public ObjectMakeCDResponse MakeCd(ObjectCDRequest request)
         {
-            return FabricaCDB.AddNewCDRequest(request).ToString();
+            var thread = new Thread(() =>
+            {
+                int newID = FabricaCDB.AddNewCDRequest(request);
+                var client = new BackOfficeCallBackServiceClient();
+
+                var response = new BOCallBack.ObjectMakeCDResponse();
+
+                //response.id = newID;
+                //response.refRequestCD = request.WSCallback;
+                //response.userID = request.userid;
+                //response.Status = "recebida a encomenda";
+                //client.GetStatus(response);
+                Thread.Sleep(2000);
+
+                response.id = newID;
+                response.refRequestCD = request.WSCallback;
+                response.userID = request.userid;
+                response.Status = "Pronto a levantar";
+                response.fabrica = "fabrica c";
+                response.Distance = request.Distance;
+                response.DeliveryAdress = request.DeliveryAdress;
+                client.GetStatus(response);
+            });
+            thread.Start();
+            return new ObjectMakeCDResponse();
         }
     }
 }

@@ -9,11 +9,10 @@ namespace BackOffice
     {
 
         [OperationContract]
-        string GetStatus(TransportJobResponse response);
+        string GetStatus(ObjectMakeCDResponse response);
 
-
-        //[OperationContract]
-        //string NotifyCDReady(object response);//object cdready
+        [OperationContract]
+        string UpdateOrderTransportStatus(TransportJobResponse response);
 
         [OperationContract]
         string GetTransporterPrice(TransportJobPriceResponse response);

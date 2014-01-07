@@ -4,7 +4,9 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ListaMusicas" nillable="true" type="tns:ArrayOfMusic" />
       <xs:element minOccurs="0" name="WSCallback" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="encomendaID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fabricante" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ObjectQuoteRequest" nillable="true" type="tns:ObjectQuoteRequest" />
@@ -23,12 +25,36 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Music" nillable="true" type="tns:Music" />
+  <xs:complexType name="FabricantePriceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="encomendaID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fabricante" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="refRequestPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FabricantePriceResponse" nillable="true" type="tns:FabricantePriceResponse" />
   <xs:complexType name="ObjectCDRequest">
     <xs:sequence>
+      <xs:element minOccurs="0" name="DeliveryAdress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ListaMusicas" nillable="true" type="tns:ArrayOfMusic" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WSCallback" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="encomendaID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="userid" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ObjectCDRequest" nillable="true" type="tns:ObjectCDRequest" />
+  <xs:complexType name="ObjectMakeCDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="refRequestCD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObjectMakeCDResponse" nillable="true" type="tns:ObjectMakeCDResponse" />
 </xs:schema>

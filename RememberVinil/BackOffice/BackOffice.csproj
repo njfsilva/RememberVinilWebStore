@@ -95,6 +95,7 @@
     <Compile Include="Track.cs" />
     <Compile Include="TracksDto.cs" />
     <Compile Include="TransportJobPriceResponse.cs" />
+    <Compile Include="TransportJobResponse.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserDB.cs" />
     <Compile Include="WebSiteService.cs" />
@@ -105,6 +106,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Service References\FabricanteAService\BackOffice.FabricanteAService.FabricantePriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FabricanteAService\BackOffice.FabricanteAService.ObjectMakeCDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FabricanteAService\FabricanteAService.wsdl" />
     <None Include="Service References\FabricanteAService\FabricanteAService.xsd">
       <SubType>Designer</SubType>
@@ -114,6 +121,12 @@
     </None>
     <None Include="Service References\FabricanteAService\FabricanteAService2.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FabricanteBService\BackOffice.FabricanteBService.FabricantePriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FabricanteBService\BackOffice.FabricanteBService.ObjectMakeCDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FabricanteBService\FabricanteBService.wsdl" />
     <None Include="Service References\FabricanteBService\FabricanteBService.xsd">
@@ -125,6 +138,12 @@
     <None Include="Service References\FabricanteBService\FabricanteBService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\FabricanteCService\BackOffice.FabricanteCService.FabricantePriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FabricanteCService\BackOffice.FabricanteCService.ObjectMakeCDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FabricanteCService\FabricanteCService.wsdl" />
     <None Include="Service References\FabricanteCService\FabricanteCService.xsd">
       <SubType>Designer</SubType>
@@ -135,17 +154,20 @@
     <None Include="Service References\FabricanteCService\FabricanteCService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TransportadoraServiceReference\BackOffice.TransportadoraServiceReference.TransportJobResponse.datasource">
+    <None Include="Service References\TransportadoraServiceReference\BackOffice.TransportadoraServiceReference.TransportJobPriceRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TransportadoraServiceReference\TransportadoraService.wsdl" />
-    <None Include="Service References\TransportadoraServiceReference\TransportadoraService.xsd">
+    <None Include="Service References\TransportadoraServiceReference\BackOffice.TransportadoraServiceReference.TransportJobPriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TransportadoraServiceReference\service.wsdl" />
+    <None Include="Service References\TransportadoraServiceReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TransportadoraServiceReference\TransportadoraService1.xsd">
+    <None Include="Service References\TransportadoraServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TransportadoraServiceReference\TransportadoraService2.xsd">
+    <None Include="Service References\TransportadoraServiceReference\Transportadora.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -160,9 +182,6 @@
     <WCFMetadataStorage Include="Service References\FabricanteBService\" />
     <WCFMetadataStorage Include="Service References\FabricanteCService\" />
     <WCFMetadataStorage Include="Service References\TransportadoraServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TransportadoraServiceReference\TransportadoraService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TransportadoraServiceReference\configuration91.svcinfo" />

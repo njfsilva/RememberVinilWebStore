@@ -9,5 +9,6 @@
         public string Distance { get; set; }
         public string userID { get; set; }
         public string encomendaID { get; set; }
+        public string fabrica { get; set; }
     }
 }

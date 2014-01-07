@@ -43,8 +43,13 @@ namespace BackOffice
             Lista.Add(new Track("olu", 9.5));
 
             var result=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
+            //Console.WriteLine(result);
+            var artist = LastFmHelper.SearchArtistByName("linkin park");
+            foreach (var item in artist)
+            {
+                //Console.WriteLine(item);
+            }
             
-
             //IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
             //double pricefabricantea = adapterA.getPrice(Lista);
 

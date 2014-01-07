@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackOffice.TransportadoraServiceReference;
+using System.Threading;
 
 
 namespace BackOffice
@@ -8,10 +9,33 @@ namespace BackOffice
     public class BackOfficeCallBackService : IBackOfficeCallBackService
     {
         private static List<OrderInfo> orderList = new List<OrderInfo>();
-        
-        public string GetStatus(TransportJobResponse response)
+
+        public string GetStatus(ObjectMakeCDResponse response)//bad name: confirm order
         {
-            return response.Status;
+            string UserID = response.userID.ToString();
+            var user =UserDB.GetUserByUserID(UserID);
+            var orderID=user.addOrder();
+            var thread = new Thread(() =>
+            {
+                var transportadora = new TransportadoraServiceClient();
+                var request = new TransportadoraServiceReference.TransportJobRequest();
+                request.DeliveryAdress = response.DeliveryAdress;
+                request.Distance = response.Distance;
+                request.encomendaID = orderID;
+                request.userID = UserID;
+                request.fabrica = response.fabrica;
+                transportadora.TransportJob(request);
+            });
+            thread.Start();
+            return "ack";
+        }
+
+        public string UpdateOrderTransportStatus(TransportJobResponse response)
+        {
+            string UserID = response.userID.ToString();
+            var user = UserDB.GetUserByUserID(UserID);
+            user.updateOrderStatus(response.encomendaID,response.Status);
+            return "ack";
         }
         
         public string GetTransporterPrice(TransportJobPriceResponse response)
@@ -38,6 +62,11 @@ namespace BackOffice
                 {
                     var bestdeal = order.getbestdeal();
                     orderList.Remove(order);
+                    //send to website
+                    //send to website
+                    //send to website
+                    //send to website
+                    //send to website
                     //send to website
                 }
             }
@@ -69,9 +98,15 @@ namespace BackOffice
                     var bestdeal = order.getbestdeal();
                     orderList.Remove(order);
                     //send to website
+                    //send to website
+                    //send to website
+                    //send to website
+                    //send to website
+                    //send to website
                 }
             }
             return "ack";
         }
+
     }
 }

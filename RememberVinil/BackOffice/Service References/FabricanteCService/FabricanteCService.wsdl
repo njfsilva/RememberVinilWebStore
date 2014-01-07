@@ -7,32 +7,32 @@
       <xsd:import schemaLocation="http://localhost:9012/FabricanteCService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FabricanteC" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IFabricanteCService_getQuote_InputMessage">
-    <wsdl:part name="parameters" element="tns:getQuote" />
+  <wsdl:message name="IFabricanteCService_GetQuote_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuote" />
   </wsdl:message>
-  <wsdl:message name="IFabricanteCService_getQuote_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getQuoteResponse" />
+  <wsdl:message name="IFabricanteCService_GetQuote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuoteResponse" />
   </wsdl:message>
-  <wsdl:message name="IFabricanteCService_MakeCD_InputMessage">
-    <wsdl:part name="parameters" element="tns:MakeCD" />
+  <wsdl:message name="IFabricanteCService_MakeCd_InputMessage">
+    <wsdl:part name="parameters" element="tns:MakeCd" />
   </wsdl:message>
-  <wsdl:message name="IFabricanteCService_MakeCD_OutputMessage">
-    <wsdl:part name="parameters" element="tns:MakeCDResponse" />
+  <wsdl:message name="IFabricanteCService_MakeCd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MakeCdResponse" />
   </wsdl:message>
   <wsdl:portType name="IFabricanteCService">
-    <wsdl:operation name="getQuote">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFabricanteCService/getQuote" message="tns:IFabricanteCService_getQuote_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFabricanteCService/getQuoteResponse" message="tns:IFabricanteCService_getQuote_OutputMessage" />
+    <wsdl:operation name="GetQuote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFabricanteCService/GetQuote" message="tns:IFabricanteCService_GetQuote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFabricanteCService/GetQuoteResponse" message="tns:IFabricanteCService_GetQuote_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="MakeCD">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFabricanteCService/MakeCD" message="tns:IFabricanteCService_MakeCD_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFabricanteCService/MakeCDResponse" message="tns:IFabricanteCService_MakeCD_OutputMessage" />
+    <wsdl:operation name="MakeCd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFabricanteCService/MakeCd" message="tns:IFabricanteCService_MakeCd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFabricanteCService/MakeCdResponse" message="tns:IFabricanteCService_MakeCd_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFabricanteCService" type="tns:IFabricanteCService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="getQuote">
-      <soap:operation soapAction="http://tempuri.org/IFabricanteCService/getQuote" style="document" />
+    <wsdl:operation name="GetQuote">
+      <soap:operation soapAction="http://tempuri.org/IFabricanteCService/GetQuote" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -40,8 +40,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MakeCD">
-      <soap:operation soapAction="http://tempuri.org/IFabricanteCService/MakeCD" style="document" />
+    <wsdl:operation name="MakeCd">
+      <soap:operation soapAction="http://tempuri.org/IFabricanteCService/MakeCd" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -18,14 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:9002/TransportadoraService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:9002/TransportadoraService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TransportadoraService.xsd" MetadataType="Schema" ID="a10d8c02-c72e-4098-bb98-1fc243ab0354" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService?xsd=xsd0" />
-    <MetadataFile FileName="TransportadoraService1.xsd" MetadataType="Schema" ID="1cbcd8b0-2365-4908-ba20-cdf07b02f086" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService?xsd=xsd1" />
-    <MetadataFile FileName="TransportadoraService2.xsd" MetadataType="Schema" ID="d6b8a51f-65a5-4bd2-a5d0-4de8b9d9a4d4" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService?xsd=xsd2" />
-    <MetadataFile FileName="TransportadoraService.wsdl" MetadataType="Wsdl" ID="fe3669d2-cd4d-46e0-aed9-8602e5d212d9" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService?wsdl" />
-    <MetadataFile FileName="TransportadoraService.disco" MetadataType="Disco" ID="c51e8071-0be4-47b7-b316-11b26ad981ad" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService?disco" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5bdc7cfc-cac1-466a-90c5-6d071aa644b8" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="55b10231-88c5-4b6f-b524-8e87f82c7712" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e5cd2f0d-b941-4653-bc21-8711c19d78a1" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService/mex" />
+    <MetadataFile FileName="Transportadora.xsd" MetadataType="Schema" ID="1f1c9877-62ed-4163-83f5-76e4e35085f5" SourceId="1" SourceUrl="http://localhost:9002/TransportadoraService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

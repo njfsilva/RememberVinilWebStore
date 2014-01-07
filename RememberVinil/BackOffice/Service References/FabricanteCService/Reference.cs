@@ -9,6 +9,10 @@
 //------------------------------------------------------------------------------
 
 namespace BackOffice.FabricanteCService {
+    using System.Runtime.Serialization;
+    using System;
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ObjectQuoteRequest", Namespace="http://schemas.datacontract.org/2004/07/FabricanteC")]
@@ -25,7 +29,13 @@ namespace BackOffice.FabricanteCService {
         private string WSCallbackField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
+        private string encomendaIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fabricanteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string userIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -64,14 +74,40 @@ namespace BackOffice.FabricanteCService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
+        public string encomendaID {
             get {
-                return this.idField;
+                return this.encomendaIDField;
             }
             set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
+                if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
+                    this.encomendaIDField = value;
+                    this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fabricante {
+            get {
+                return this.fabricanteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fabricanteField, value) != true)) {
+                    this.fabricanteField = value;
+                    this.RaisePropertyChanged("fabricante");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string userID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userIDField, value) != true)) {
+                    this.userIDField = value;
+                    this.RaisePropertyChanged("userID");
                 }
             }
         }
@@ -181,21 +217,27 @@ namespace BackOffice.FabricanteCService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectCDRequest", Namespace="http://schemas.datacontract.org/2004/07/FabricanteC")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FabricantePriceResponse", Namespace="http://schemas.datacontract.org/2004/07/FabricanteC")]
     [System.SerializableAttribute()]
-    public partial class ObjectCDRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class FabricantePriceResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BackOffice.FabricanteCService.Music[] ListaMusicasField;
+        private double PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string WSCallbackField;
+        private string encomendaIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
+        private string fabricanteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string refRequestPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string userIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -208,6 +250,150 @@ namespace BackOffice.FabricanteCService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string encomendaID {
+            get {
+                return this.encomendaIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
+                    this.encomendaIDField = value;
+                    this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fabricante {
+            get {
+                return this.fabricanteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fabricanteField, value) != true)) {
+                    this.fabricanteField = value;
+                    this.RaisePropertyChanged("fabricante");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string refRequestPrice {
+            get {
+                return this.refRequestPriceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.refRequestPriceField, value) != true)) {
+                    this.refRequestPriceField = value;
+                    this.RaisePropertyChanged("refRequestPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string userID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userIDField, value) != true)) {
+                    this.userIDField = value;
+                    this.RaisePropertyChanged("userID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectCDRequest", Namespace="http://schemas.datacontract.org/2004/07/FabricanteC")]
+    [System.SerializableAttribute()]
+    public partial class ObjectCDRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeliveryAdressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DistanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BackOffice.FabricanteCService.Music[] ListaMusicasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WSCallbackField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string encomendaIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int useridField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeliveryAdress {
+            get {
+                return this.DeliveryAdressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeliveryAdressField, value) != true)) {
+                    this.DeliveryAdressField = value;
+                    this.RaisePropertyChanged("DeliveryAdress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Distance {
+            get {
+                return this.DistanceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DistanceField, value) != true)) {
+                    this.DistanceField = value;
+                    this.RaisePropertyChanged("Distance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public BackOffice.FabricanteCService.Music[] ListaMusicas {
             get {
                 return this.ListaMusicasField;
@@ -216,6 +402,19 @@ namespace BackOffice.FabricanteCService {
                 if ((object.ReferenceEquals(this.ListaMusicasField, value) != true)) {
                     this.ListaMusicasField = value;
                     this.RaisePropertyChanged("ListaMusicas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
                 }
             }
         }
@@ -234,6 +433,19 @@ namespace BackOffice.FabricanteCService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string encomendaID {
+            get {
+                return this.encomendaIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
+                    this.encomendaIDField = value;
+                    this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int id {
             get {
                 return this.idField;
@@ -242,6 +454,112 @@ namespace BackOffice.FabricanteCService {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userid {
+            get {
+                return this.useridField;
+            }
+            set {
+                if ((this.useridField.Equals(value) != true)) {
+                    this.useridField = value;
+                    this.RaisePropertyChanged("userid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectMakeCDResponse", Namespace="http://schemas.datacontract.org/2004/07/FabricanteC")]
+    [System.SerializableAttribute()]
+    public partial class ObjectMakeCDResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string refRequestCDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int userIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string refRequestCD {
+            get {
+                return this.refRequestCDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.refRequestCDField, value) != true)) {
+                    this.refRequestCDField = value;
+                    this.RaisePropertyChanged("refRequestCD");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                if ((this.userIDField.Equals(value) != true)) {
+                    this.userIDField = value;
+                    this.RaisePropertyChanged("userID");
                 }
             }
         }
@@ -260,11 +578,11 @@ namespace BackOffice.FabricanteCService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FabricanteCService.IFabricanteCService")]
     public interface IFabricanteCService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFabricanteCService/getQuote", ReplyAction="http://tempuri.org/IFabricanteCService/getQuoteResponse")]
-        double getQuote(BackOffice.FabricanteCService.ObjectQuoteRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFabricanteCService/GetQuote", ReplyAction="http://tempuri.org/IFabricanteCService/GetQuoteResponse")]
+        BackOffice.FabricanteCService.FabricantePriceResponse GetQuote(BackOffice.FabricanteCService.ObjectQuoteRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFabricanteCService/MakeCD", ReplyAction="http://tempuri.org/IFabricanteCService/MakeCDResponse")]
-        string MakeCD(BackOffice.FabricanteCService.ObjectCDRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFabricanteCService/MakeCd", ReplyAction="http://tempuri.org/IFabricanteCService/MakeCdResponse")]
+        BackOffice.FabricanteCService.ObjectMakeCDResponse MakeCd(BackOffice.FabricanteCService.ObjectCDRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -294,12 +612,12 @@ namespace BackOffice.FabricanteCService {
                 base(binding, remoteAddress) {
         }
         
-        public double getQuote(BackOffice.FabricanteCService.ObjectQuoteRequest request) {
-            return base.Channel.getQuote(request);
+        public BackOffice.FabricanteCService.FabricantePriceResponse GetQuote(BackOffice.FabricanteCService.ObjectQuoteRequest request) {
+            return base.Channel.GetQuote(request);
         }
         
-        public string MakeCD(BackOffice.FabricanteCService.ObjectCDRequest request) {
-            return base.Channel.MakeCD(request);
+        public BackOffice.FabricanteCService.ObjectMakeCDResponse MakeCd(BackOffice.FabricanteCService.ObjectCDRequest request) {
+            return base.Channel.MakeCd(request);
         }
     }
 }

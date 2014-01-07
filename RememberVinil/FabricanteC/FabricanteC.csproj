@@ -54,6 +54,7 @@
     <Compile Include="IFabricanteCService.cs" />
     <Compile Include="Music.cs" />
     <Compile Include="ObjectCDRequest.cs" />
+    <Compile Include="ObjectMakeCDResponse.cs" />
     <Compile Include="ObjectQuoteRequest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,9 +75,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\BOCallBack\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BOCallBack\Transportadora.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

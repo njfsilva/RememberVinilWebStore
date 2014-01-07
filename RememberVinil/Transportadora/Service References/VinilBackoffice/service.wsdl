@@ -4,7 +4,6 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Transportadora" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/BackOffice" />
     </xsd:schema>
   </wsdl:types>
@@ -14,20 +13,40 @@
   <wsdl:message name="IBackOfficeCallBackService_GetStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IBackOfficeCallBackService_UpdateOrderTransportStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderTransportStatus" />
+  </wsdl:message>
+  <wsdl:message name="IBackOfficeCallBackService_UpdateOrderTransportStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderTransportStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="IBackOfficeCallBackService_GetTransporterPrice_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTransporterPrice" />
   </wsdl:message>
   <wsdl:message name="IBackOfficeCallBackService_GetTransporterPrice_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTransporterPriceResponse" />
   </wsdl:message>
+  <wsdl:message name="IBackOfficeCallBackService_GetFabricantePrice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFabricantePrice" />
+  </wsdl:message>
+  <wsdl:message name="IBackOfficeCallBackService_GetFabricantePrice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFabricantePriceResponse" />
+  </wsdl:message>
   <wsdl:portType name="IBackOfficeCallBackService">
     <wsdl:operation name="GetStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetStatus" message="tns:IBackOfficeCallBackService_GetStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetStatusResponse" message="tns:IBackOfficeCallBackService_GetStatus_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateOrderTransportStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/UpdateOrderTransportStatus" message="tns:IBackOfficeCallBackService_UpdateOrderTransportStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/UpdateOrderTransportStatusResponse" message="tns:IBackOfficeCallBackService_UpdateOrderTransportStatus_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetTransporterPrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPrice" message="tns:IBackOfficeCallBackService_GetTransporterPrice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPriceResponse" message="tns:IBackOfficeCallBackService_GetTransporterPrice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFabricantePrice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetFabricantePrice" message="tns:IBackOfficeCallBackService_GetFabricantePrice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetFabricantePriceResponse" message="tns:IBackOfficeCallBackService_GetFabricantePrice_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IBackOfficeCallBackService" type="tns:IBackOfficeCallBackService">
@@ -41,8 +60,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateOrderTransportStatus">
+      <soap:operation soapAction="http://tempuri.org/IBackOfficeCallBackService/UpdateOrderTransportStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetTransporterPrice">
       <soap:operation soapAction="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFabricantePrice">
+      <soap:operation soapAction="http://tempuri.org/IBackOfficeCallBackService/GetFabricantePrice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

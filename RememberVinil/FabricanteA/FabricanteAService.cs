@@ -24,17 +24,43 @@ namespace FabricanteA
                 response.fabricante = request.fabricante;
                 response.refRequestPrice = request.WSCallback;
                 response.Price = total;
-                response.userID = request.userID;
                 client.GetTransporterPrice(response);
             });
             thread.Start();
             return new FabricantePriceResponse();
         }
 
-        public string MakeCD(ObjectCDRequest request)
-        {
-            return FabricaADB.AddNewCDRequest(request).ToString();
-        }
 
+
+
+        public ObjectMakeCDResponse MakeCD(ObjectCDRequest request)
+        {
+            var thread = new Thread(() =>
+            {
+                int newID= FabricaADB.AddNewCDRequest(request);
+                var client = new BackOfficeCallBackServiceClient();
+
+                var response = new BOCallBack.ObjectMakeCDResponse();
+
+                //response.id = newID;
+                //response.refRequestCD = request.WSCallback;
+                //response.userID = request.userid;
+                //response.Status = "recebida a encomenda";
+                //client.GetStatus(response);
+                Thread.Sleep(2000);
+
+                response.id = newID;
+                response.refRequestCD = request.WSCallback;
+                response.userID = request.userid;
+                response.Status = "Pronto a levantar";
+                response.fabrica = "fabrica a";
+                response.Distance = request.Distance;
+                response.DeliveryAdress = request.DeliveryAdress;
+                client.GetStatus(response);
+            });
+            thread.Start();
+
+            return new ObjectMakeCDResponse();
+        }
     }
 }

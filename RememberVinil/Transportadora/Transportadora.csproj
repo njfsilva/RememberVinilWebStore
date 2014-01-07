@@ -78,9 +78,6 @@
     <None Include="Service References\VinilBackoffice\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\VinilBackoffice\Transportadora.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

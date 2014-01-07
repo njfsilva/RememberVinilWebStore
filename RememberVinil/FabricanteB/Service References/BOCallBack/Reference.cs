@@ -15,18 +15,36 @@ namespace FabricanteB.BOCallBack {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TransportJobResponse", Namespace="http://schemas.datacontract.org/2004/07/Transportadora")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectMakeCDResponse", Namespace="http://schemas.datacontract.org/2004/07/BackOffice")]
     [System.SerializableAttribute()]
-    public partial class TransportJobResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ObjectMakeCDResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeliveryAdressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DistanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string StatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool SucessField;
+        private string encomendaIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fabricaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string refRequestCDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int userIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -35,6 +53,32 @@ namespace FabricanteB.BOCallBack {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeliveryAdress {
+            get {
+                return this.DeliveryAdressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeliveryAdressField, value) != true)) {
+                    this.DeliveryAdressField = value;
+                    this.RaisePropertyChanged("DeliveryAdress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Distance {
+            get {
+                return this.DistanceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DistanceField, value) != true)) {
+                    this.DistanceField = value;
+                    this.RaisePropertyChanged("Distance");
+                }
             }
         }
         
@@ -52,14 +96,66 @@ namespace FabricanteB.BOCallBack {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Sucess {
+        public string encomendaID {
             get {
-                return this.SucessField;
+                return this.encomendaIDField;
             }
             set {
-                if ((this.SucessField.Equals(value) != true)) {
-                    this.SucessField = value;
-                    this.RaisePropertyChanged("Sucess");
+                if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
+                    this.encomendaIDField = value;
+                    this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fabrica {
+            get {
+                return this.fabricaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fabricaField, value) != true)) {
+                    this.fabricaField = value;
+                    this.RaisePropertyChanged("fabrica");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string refRequestCD {
+            get {
+                return this.refRequestCDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.refRequestCDField, value) != true)) {
+                    this.refRequestCDField = value;
+                    this.RaisePropertyChanged("refRequestCD");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                if ((this.userIDField.Equals(value) != true)) {
+                    this.userIDField = value;
+                    this.RaisePropertyChanged("userID");
                 }
             }
         }
@@ -297,7 +393,7 @@ namespace FabricanteB.BOCallBack {
     public interface IBackOfficeCallBackService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBackOfficeCallBackService/GetStatus", ReplyAction="http://tempuri.org/IBackOfficeCallBackService/GetStatusResponse")]
-        string GetStatus(FabricanteB.BOCallBack.TransportJobResponse response);
+        string GetStatus(FabricanteB.BOCallBack.ObjectMakeCDResponse response);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPrice", ReplyAction="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPriceResponse")]
         string GetTransporterPrice(FabricanteB.BOCallBack.TransportJobPriceResponse response);
@@ -333,7 +429,7 @@ namespace FabricanteB.BOCallBack {
                 base(binding, remoteAddress) {
         }
         
-        public string GetStatus(FabricanteB.BOCallBack.TransportJobResponse response) {
+        public string GetStatus(FabricanteB.BOCallBack.ObjectMakeCDResponse response) {
             return base.Channel.GetStatus(response);
         }
         

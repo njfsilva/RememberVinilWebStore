@@ -11,13 +11,6 @@ namespace BackOffice
         {
             AFabricanteB = a;
         }
-        
-        
-        public double getPrice(List<Track> list)
-        {
-            return AFabricanteB.getQuote(newQuoteRequest(list));
-
-        }
 
         public ObjectQuoteRequest newQuoteRequest(List<Track> list)
         {
@@ -37,6 +30,35 @@ namespace BackOffice
 	        }
             request.ListaMusicas = arrayOfMusic;
             return request;
+        }
+
+        public FabricantePriceResponse getPrice(List<Track> list)
+        {
+            AFabricanteB.getQuote(newQuoteRequest(list));
+            return new FabricantePriceResponse();
+        }
+
+
+        public ObjectMakeCDResponse setOrder(List<Track> list)
+        {
+            var request = new ObjectCDRequest();
+            request.WSCallback = "xxxxxxx";
+            var arrayOfMusic = new Music[list.Count];
+            var x = 0;
+            foreach (var t in list)
+            {
+                var m = new Music();
+                m.TrackName = t.TrackName;
+                m.Price = t.Price;
+                m.ArtisName = t.ArtisName;
+                m.PriceFormatted = t.PriceFormatted;
+                arrayOfMusic[x] = m;
+                x++;
+            }
+            request.ListaMusicas = arrayOfMusic;
+            AFabricanteB.MakeCD(request);
+            
+            return new ObjectMakeCDResponse();
         }
     }
 }
