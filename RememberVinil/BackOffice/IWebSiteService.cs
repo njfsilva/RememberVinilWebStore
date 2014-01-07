@@ -27,7 +27,7 @@ namespace BackOffice
         [OperationContract]
         int RequestOrder();
 
-        [WebGet(UriTemplate = "/RequestUpdate/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/RequestUpdate/{loginName}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         string getOrderStatus(string loginName);
     }
