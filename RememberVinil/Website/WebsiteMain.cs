@@ -28,7 +28,7 @@ namespace Website
             lblAddress.Visible = false;
             txtAddress.Visible = false;
             btnConfirmOrder.Visible = false;
-            //lbOrderStatus.DataSource = GetStatusList();
+            lb_Status2.DataSource = GetStatusList();
         }
 
         private void button1_Click(object sender, EventArgs e)
