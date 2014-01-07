@@ -4,6 +4,11 @@ using System.ServiceModel.Web;
 using System.Timers;
 using CDFactory;
 using System.Collections.Generic;
+using BackOffice.FabricanteAService;
+using BackOffice.FabricanteBService;
+using BackOffice.FabricanteCService;
+using BackOffice.TransportadoraServiceReference;
+using System.Threading;
 
 namespace BackOffice
 {
@@ -28,7 +33,7 @@ namespace BackOffice
             webSiteServer.Open();
 
             //Create timer to check messageQueue Outbox
-            var myTimer = new Timer();
+            var myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
             myTimer.Interval = 5;
             myTimer.Enabled = true;
@@ -48,13 +53,29 @@ namespace BackOffice
             }
             
             //IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
-            //double pricefabricantea = adapterA.getPrice(Lista);
+            //adapterA.getPrice(Lista);
 
             //IAdapterFabricantes adapterB = new AdapterFabricanteB(new FabricanteBServiceClient());
-            //double pricefabricanteb = adapterB.getPrice(Lista);
+            //adapterB.getPrice(Lista);
 
             //IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
-            //double pricefabricantec = adapterC.getPrice(Lista);
+            //adapterC.getPrice(Lista);
+
+            TransportadoraServiceReference.TransportadoraServiceClient transp = new TransportadoraServiceClient();
+            TransportJobPriceRequest request =new TransportJobPriceRequest();
+            request.DeliveryAdress="qwerty";
+            request.Distance=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
+            request.fabrica="fabrica a";
+            request.userID="1";
+
+            transp.TransportJobPrice(request);
+            request.fabrica = "fabrica b";
+            Thread.Sleep(1000);
+            transp.TransportJobPrice(request);
+            request.fabrica = "fabrica c";
+            Thread.Sleep(1000);
+            transp.TransportJobPrice(request);
+
 
             //Console.WriteLine("a: " + pricefabricantea);
             //Console.WriteLine("b: " + pricefabricanteb);

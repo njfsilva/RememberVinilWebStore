@@ -35,19 +35,23 @@ namespace BackOffice
             string UserID = response.userID.ToString();
             var user = UserDB.GetUserByUserID(UserID);
             user.updateOrderStatus(response.encomendaID,response.Status);
+            //System.Console.WriteLine(response.Status);
             return "ack";
         }
         
         public string GetTransporterPrice(TransportJobPriceResponse response)
         {
             OrderInfo order=null;
-            
-            foreach (var item in orderList)
+            System.Console.WriteLine(response.fabricante+" "+response.Price);
+            if (orderList.Count > 0)
             {
-                if (item.encomendaid == response.encomendaID)
+                foreach (var item in orderList)
                 {
-                    order = item;
-                    break;
+                    if (item.encomendaid == response.encomendaID)
+                    {
+                        order = item;
+                        break;
+                    }
                 }
             }
             if (order == null)
@@ -62,6 +66,8 @@ namespace BackOffice
                 {
                     var bestdeal = order.getbestdeal();
                     orderList.Remove(order);
+
+                    System.Console.WriteLine(bestdeal);
                     //send to website
                     //send to website
                     //send to website

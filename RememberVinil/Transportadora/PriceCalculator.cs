@@ -11,7 +11,7 @@ namespace Transportadora
             double result;
             try
             {
-                d = Convert.ToDouble(request.Distance)/1000;
+                d = Convert.ToDouble(request.Distance);
             }
             catch (Exception)
             {
