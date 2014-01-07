@@ -31,12 +31,9 @@ namespace BackOffice
         [WebInvoke(Method = "POST", UriTemplate = "/RequestOrder/", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Order RequestOrder(OrderInfo order);
 
-<<<<<<< HEAD
+
         [WebGet(UriTemplate = "/RequestUpdate/{loginName}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-=======
-        [WebGet(UriTemplate = "/RequestUpdate/{user}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
->>>>>>> a5e2125dd197c19eca738c8a9ad03a3638cfafc0
         [OperationContract]
-        string getOrderStatus(string user);
+        string getOrderStatus(string loginName);
     }
 }
