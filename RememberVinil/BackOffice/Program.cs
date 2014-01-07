@@ -39,11 +39,11 @@ namespace BackOffice
             myTimer.Interval = 5;
             myTimer.Enabled = true;
 
-            var Lista = new List<Track>();
+            //var Lista = new List<Track>();
 
-            Lista.Add(new Track("ole", 12.5));
-            Lista.Add(new Track("oli", 10.5));
-            Lista.Add(new Track("olu", 9.5));
+            //Lista.Add(new Track("ole", 12.5));
+            //Lista.Add(new Track("oli", 10.5));
+            //Lista.Add(new Track("olu", 9.5));
 
 
             //IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
@@ -56,20 +56,20 @@ namespace BackOffice
             //adapterC.getPrice(Lista);
 
 
-            TransportadoraServiceClient transp = new TransportadoraServiceClient();
-            TransportJobPriceRequest request =new TransportJobPriceRequest();
-            request.DeliveryAdress="qwerty";
-            request.Distance=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
-            request.fabrica="fabrica a";
-            request.userID="1";
+            //TransportadoraServiceClient transp = new TransportadoraServiceClient();
+            //TransportJobPriceRequest request =new TransportJobPriceRequest();
+            //request.DeliveryAdress="qwerty";
+            //request.Distance=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
+            //request.fabrica="fabrica a";
+            //request.userID="1";
 
-            transp.TransportJobPrice(request);
-            request.fabrica = "fabrica b";
-            Thread.Sleep(1000);
-            transp.TransportJobPrice(request);
-            request.fabrica = "fabrica c";
-            Thread.Sleep(1000);
-            transp.TransportJobPrice(request);
+            //transp.TransportJobPrice(request);
+            //request.fabrica = "fabrica b";
+            //Thread.Sleep(1000);
+            //transp.TransportJobPrice(request);
+            //request.fabrica = "fabrica c";
+            //Thread.Sleep(1000);
+            //transp.TransportJobPrice(request);
 
             //TransportadoraServiceReference.TransportadoraServiceClient transp = new TransportadoraServiceClient();
             //TransportJobPriceRequest request =new TransportJobPriceRequest();
