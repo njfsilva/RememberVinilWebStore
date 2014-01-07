@@ -9,6 +9,9 @@ using BackOffice.FabricanteBService;
 using BackOffice.FabricanteCService;
 using BackOffice.TransportadoraServiceReference;
 using System.Threading;
+using Newtonsoft.Json;
+using RestSharp;
+using Website;
 using Timer = System.Timers.Timer;
 
 namespace BackOffice
@@ -122,6 +125,24 @@ namespace BackOffice
         public static void NotifyUserDownloadReady(Message msgToProcess)
         {
             var cdReady = (DownloadReady) msgToProcess.Body;
+            
+            const string WebsiteNotification = "http://localhost:9010/WebsiteNotificationService";
+            RestClient client = new RestClient(WebsiteNotification);
+
+            var whatToGet = "/Notitication/";
+
+            var request = new RestRequest("/Notitication/", Method.POST);
+
+            var notification = new Notification()
+            {
+                DownloadReadyNotification = "O CD da ordem " +cdReady.OrderId + " esta pronto e localiz-se em: "+ cdReady.LinkToDownload
+            };
+
+            var json = JsonConvert.SerializeObject(notification);
+            request.AddParameter("text/json", json, ParameterType.RequestBody);
+
+            var response = client.Execute(request);
+
             Console.WriteLine("Download ready for order {0}: {1}", cdReady.OrderId, cdReady.LinkToDownload);
         }
     }

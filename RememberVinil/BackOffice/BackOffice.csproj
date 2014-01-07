@@ -176,6 +176,10 @@
       <Project>{C7AF22D0-6E78-4009-B65E-1E1DDB8F87B1}</Project>
       <Name>CDFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Website\Website.csproj">
+      <Project>{97090e1e-abcf-49cf-9c07-d5641d6d45e4}</Project>
+      <Name>Website</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\FabricanteAService\" />

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Web;
+using System.Timers;
 using System.Windows.Forms;
 using BackOffice;
 using Newtonsoft.Json;
@@ -7,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Text.RegularExpressions;
+using Timer = System.Timers.Timer;
 
 namespace Website
 {
@@ -17,9 +20,15 @@ namespace Website
 
         public static List<Track> ShoppingCartItems = new List<Track>();
         public static string Artist = string.Empty;
+
+        public static List<string> notifications = new List<string>();
         
         public WebsiteMain()
         {
+            //Start REST WebSiteService 
+            var webSiteServer = new WebServiceHost(typeof(WebsiteNotificationService));
+            webSiteServer.Open(); 
+
             InitializeComponent();
             lvShoppingCart.Columns.Add("Song");
             lvShoppingCart.Columns.Add("Price");
@@ -29,6 +38,25 @@ namespace Website
             txtAddress.Visible = false;
             btnConfirmOrder.Visible = false;
             //lbOrderStatus.DataSource = GetStatusList();
+
+            //Create timer to check messageQueue Outbox
+            var myTimer = new Timer();
+            myTimer.Elapsed += new ElapsedEventHandler(ShowNotifications);
+            myTimer.Interval = 5000;
+            myTimer.Enabled = true;
+        }
+
+        private void ShowNotifications(object sender, EventArgs e)
+        {
+            if (lbNotifications.InvokeRequired)
+            {
+                lbNotifications.Invoke(new MethodInvoker(AddDataSourceToLb));
+            }
+        }
+
+        private void AddDataSourceToLb()
+        {
+            lbNotifications.DataSource = notifications.ToList().Count > 0 ? notifications.ToList() : null;
         }
 
         private void button1_Click(object sender, EventArgs e)
