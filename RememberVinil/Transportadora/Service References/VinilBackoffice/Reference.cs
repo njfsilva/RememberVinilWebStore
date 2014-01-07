@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Transportadora.VinilBackoffice {
+<<<<<<< HEAD
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ObjectMakeCDResponse", Namespace="http://schemas.datacontract.org/2004/07/BackOffice")]
@@ -166,6 +167,8 @@ namespace Transportadora.VinilBackoffice {
         }
     }
     
+=======
+>>>>>>> d5b413fc2d13c0ff628939525ea99d6e6edbec4a
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TransportJobResponse", Namespace="http://schemas.datacontract.org/2004/07/BackOffice")]
