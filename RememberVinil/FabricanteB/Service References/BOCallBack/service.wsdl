@@ -13,6 +13,12 @@
   <wsdl:message name="IBackOfficeCallBackService_GetStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IBackOfficeCallBackService_UpdateOrderTransportStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderTransportStatus" />
+  </wsdl:message>
+  <wsdl:message name="IBackOfficeCallBackService_UpdateOrderTransportStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderTransportStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="IBackOfficeCallBackService_GetTransporterPrice_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTransporterPrice" />
   </wsdl:message>
@@ -30,6 +36,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetStatus" message="tns:IBackOfficeCallBackService_GetStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetStatusResponse" message="tns:IBackOfficeCallBackService_GetStatus_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateOrderTransportStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/UpdateOrderTransportStatus" message="tns:IBackOfficeCallBackService_UpdateOrderTransportStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/UpdateOrderTransportStatusResponse" message="tns:IBackOfficeCallBackService_UpdateOrderTransportStatus_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetTransporterPrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPrice" message="tns:IBackOfficeCallBackService_GetTransporterPrice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBackOfficeCallBackService/GetTransporterPriceResponse" message="tns:IBackOfficeCallBackService_GetTransporterPrice_OutputMessage" />
@@ -43,6 +53,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetStatus">
       <soap:operation soapAction="http://tempuri.org/IBackOfficeCallBackService/GetStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderTransportStatus">
+      <soap:operation soapAction="http://tempuri.org/IBackOfficeCallBackService/UpdateOrderTransportStatus" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

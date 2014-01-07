@@ -37,6 +37,7 @@ namespace Website
             lblAddress.Visible = false;
             txtAddress.Visible = false;
             btnConfirmOrder.Visible = false;
+<<<<<<< HEAD
             //lbOrderStatus.DataSource = GetStatusList();
 
             //Create timer to check messageQueue Outbox
@@ -57,6 +58,9 @@ namespace Website
         private void AddDataSourceToLb()
         {
             lbNotifications.DataSource = notifications.ToList().Count > 0 ? notifications.ToList() : null;
+=======
+            lb_Status2.DataSource = GetStatusList();
+>>>>>>> 1d83be93a0688535d92549871e06fe0902c79765
         }
 
         private void button1_Click(object sender, EventArgs e)

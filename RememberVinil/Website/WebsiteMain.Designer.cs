@@ -46,7 +46,12 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.btnConfirmOrder = new System.Windows.Forms.Button();
             this.lbResultado = new System.Windows.Forms.Label();
+<<<<<<< HEAD
             this.lbNotifications = new System.Windows.Forms.ListBox();
+=======
+            this.lb_Status2 = new System.Windows.Forms.ListBox();
+            this.lb_Status = new System.Windows.Forms.Label();
+>>>>>>> 1d83be93a0688535d92549871e06fe0902c79765
             this.SuspendLayout();
             // 
             // txtArtist
@@ -198,6 +203,7 @@
             this.lbResultado.Size = new System.Drawing.Size(0, 13);
             this.lbResultado.TabIndex = 22;
             // 
+<<<<<<< HEAD
             // lbNotifications
             // 
             this.lbNotifications.FormattingEnabled = true;
@@ -206,13 +212,36 @@
             this.lbNotifications.Name = "lbNotifications";
             this.lbNotifications.Size = new System.Drawing.Size(399, 95);
             this.lbNotifications.TabIndex = 23;
+=======
+            // lb_Status2
+            // 
+            this.lb_Status2.FormattingEnabled = true;
+            this.lb_Status2.Location = new System.Drawing.Point(934, 93);
+            this.lb_Status2.Name = "lb_Status2";
+            this.lb_Status2.Size = new System.Drawing.Size(182, 238);
+            this.lb_Status2.TabIndex = 23;
+            // 
+            // lb_Status
+            // 
+            this.lb_Status.AutoSize = true;
+            this.lb_Status.Location = new System.Drawing.Point(934, 60);
+            this.lb_Status.Name = "lb_Status";
+            this.lb_Status.Size = new System.Drawing.Size(125, 13);
+            this.lb_Status.TabIndex = 24;
+            this.lb_Status.Text = "Estado das Encomendas";
+>>>>>>> 1d83be93a0688535d92549871e06fe0902c79765
             // 
             // WebsiteMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1148, 528);
+<<<<<<< HEAD
             this.Controls.Add(this.lbNotifications);
+=======
+            this.Controls.Add(this.lb_Status);
+            this.Controls.Add(this.lb_Status2);
+>>>>>>> 1d83be93a0688535d92549871e06fe0902c79765
             this.Controls.Add(this.lbResultado);
             this.Controls.Add(this.btnConfirmOrder);
             this.Controls.Add(this.txtAddress);
@@ -257,6 +286,11 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Button btnConfirmOrder;
         private System.Windows.Forms.Label lbResultado;
+<<<<<<< HEAD
         private System.Windows.Forms.ListBox lbNotifications;
+=======
+        private System.Windows.Forms.ListBox lb_Status2;
+        private System.Windows.Forms.Label lb_Status;
+>>>>>>> 1d83be93a0688535d92549871e06fe0902c79765
     }
 }
