@@ -61,6 +61,7 @@
     <Compile Include="AlbumsDTO.cs" />
     <Compile Include="ArtistsDto.cs" />
     <Compile Include="BackOfficeCallBackService.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="FabricantePriceResponse.cs" />
     <Compile Include="GeocodingHelper.cs" />
     <Compile Include="IAdapterFabricantes.cs" />
