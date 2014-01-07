@@ -13,6 +13,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ObjectMakeCDResponse" nillable="true" type="tns:ObjectMakeCDResponse" />
+  <xs:complexType name="TransportJobResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeliveryAdress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sucess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="encomendaID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fabrica" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransportJobResponse" nillable="true" type="tns:TransportJobResponse" />
   <xs:complexType name="TransportJobPriceResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="Price" type="xs:double" />

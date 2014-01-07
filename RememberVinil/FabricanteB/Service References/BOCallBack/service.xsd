@@ -15,10 +15,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateOrderTransportStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BackOffice" minOccurs="0" name="response" nillable="true" type="q2:TransportJobResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOrderTransportStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateOrderTransportStatusResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetTransporterPrice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BackOffice" minOccurs="0" name="response" nillable="true" type="q2:TransportJobPriceResponse" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BackOffice" minOccurs="0" name="response" nillable="true" type="q3:TransportJobPriceResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -32,7 +46,7 @@
   <xs:element name="GetFabricantePrice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BackOffice" minOccurs="0" name="response" nillable="true" type="q3:FabricantePriceResponse" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BackOffice" minOccurs="0" name="response" nillable="true" type="q4:FabricantePriceResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
