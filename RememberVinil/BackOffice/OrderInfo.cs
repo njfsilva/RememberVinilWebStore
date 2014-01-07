@@ -10,6 +10,11 @@ namespace BackOffice
         public List<order> pricesTransp { get; set; }
         public List<order> pricesFabric { get; set; }
 
+        public OrderInfo()
+        {
+            pricesTransp = new List<order>();
+        }
+
         public int countpricesTransp()
         {
             return pricesTransp.Count;

@@ -70,5 +70,17 @@ namespace BackOffice
             
             //return input.Replace(" ", "+").Replace(",", "").Replace(".", "").Replace("&", "+").Replace("+++", "+").Replace("++", "+");
         }
+
+        public string getOrderStatus(string loginName)
+        {
+            var user = UserDB.GetUserByUsername(loginName);
+
+            if (user!=null)
+            {
+                return user.getLatestOrderStatus();
+            }
+            
+            return string.Empty;
+        }
     }
 }

@@ -48,6 +48,17 @@ namespace BackOffice
             ord.status = status;
         }
 
+        public string getLatestOrderStatus()
+        {
+            string resultado = string.Empty;
+            foreach (var item in ListaEncomendas)
+            {
+                resultado += item.orderID + " está " + item.status;
+                resultado += "\n";
+            }
+            return resultado;
+        }
+
     }
 
     public class Order
