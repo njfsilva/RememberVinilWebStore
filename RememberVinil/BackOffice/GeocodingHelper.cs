@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -23,21 +24,29 @@ namespace BackOffice
         /// <returns></returns>
         public static string GetDistanceBetweenPlaces(string point1, string point2)
         {
-            var origin = point1.Replace(" ", "+");
-            var destination = point2.Replace(" ", "+");
+            try
+            {
+                var origin = point1.Replace(" ", "+");
+                var destination = point2.Replace(" ", "+");
 
-            var getLocation =
-                "json?origins="+origin+"&destinations="+destination+"&mode=driving&language=en-US&sensor=false";
+                var getLocation =
+                    "json?origins=" + origin + "&destinations=" + destination + "&mode=driving&language=en-US&sensor=false";
 
-            var distanceMatrixOutput = JObject.Parse(CallApi(getLocation));
+                var distanceMatrixOutput = JObject.Parse(CallApi(getLocation));
 
-            var actualDistance =
-                from distance in distanceMatrixOutput["rows"][0]["elements"]
-            select distance["distance"]["value"];
+                var actualDistance =
+                    from distance in distanceMatrixOutput["rows"][0]["elements"]
+                    select distance["distance"]["value"];
 
-            var firstOrDefault = actualDistance.FirstOrDefault();
-            if (firstOrDefault != null) 
-                return firstOrDefault.ToString();
+                var firstOrDefault = actualDistance.FirstOrDefault();
+                if (firstOrDefault != null)
+                    return firstOrDefault.ToString();
+            }
+            catch (Exception)
+            {
+
+                return string.Empty;
+            }
 
             return string.Empty;
         }

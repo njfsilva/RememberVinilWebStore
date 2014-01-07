@@ -77,6 +77,29 @@ namespace BackOffice
             {
                 BackOfficeCallBackService.orderList.Add(order);
 
+                //add to cdfactory
+                var inboxMessage = new CDFactory.SongsByOrder
+                {
+                    OrderId = BackOfficeCallBackService.orderList.IndexOf(order).ToString(),
+                    TrackList = new List<CDFactory.Track>()
+                };
+
+                foreach (var track in order.orderedTracks)
+                {
+                    var newTrack = new CDFactory.Track
+                    {
+                        ArtisName = track.ArtisName,
+                        Price = track.Price,
+                        PriceFormatted = track.PriceFormatted,
+                        TrackName = track.TrackName
+                    };
+
+                    inboxMessage.TrackList.Add(newTrack);
+                }
+
+                MessageQueueHelper.SendMessage(InboxQueuePath, inboxMessage, "Order to Process");
+
+
                 //get quotes from fabricantes
                 IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
                 adapterA.getPrice(order.orderedTracks);
@@ -146,28 +169,6 @@ namespace BackOffice
                     default:
                         break;
                 }
-
-                //add to cdfactory
-                var inboxMessage = new CDFactory.SongsByOrder
-                {
-                    OrderId = BackOfficeCallBackService.orderList.IndexOf(order).ToString(),
-                    TrackList = new List<CDFactory.Track>()
-                };
-
-                foreach (var track in order.orderedTracks)
-                {
-                    var newTrack = new CDFactory.Track
-                    {
-                        ArtisName = track.ArtisName,
-                        Price = track.Price,
-                        PriceFormatted = track.PriceFormatted,
-                        TrackName = track.TrackName
-                    };
-
-                    inboxMessage.TrackList.Add(newTrack);
-                }
-
-                MessageQueueHelper.SendMessage(InboxQueuePath, inboxMessage, "Order to Process");
             });
             
             thread.Start();

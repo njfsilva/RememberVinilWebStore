@@ -29,7 +29,7 @@ namespace BackOffice
 
         public Boolean all3Received()
         {
-            if (pricesTransp.Count == 3 && pricesFabric.Count == 3)
+            if (pricesTransp.Count == 3 && pricesFabric != null && pricesFabric.Count == 3)
                 return true;
             return false;
         }
