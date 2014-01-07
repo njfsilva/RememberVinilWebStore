@@ -3,7 +3,6 @@ using System.Messaging;
 using System.Timers;
 using System.Collections.Generic;
 using System.IO;
-using BackOffice;
 using Ionic.Zip;
 using Ionic.Zlib;
 using Timer = System.Timers.Timer;
@@ -87,6 +86,11 @@ namespace CDFactory
         {
 
             var songsByOrder = (SongsByOrder)messageToProcess.Body;
+
+            //SongsByOrder songsbyorder = new SongsByOrder
+            //{
+            //    OrderId = songsByOrder.OrderId
+            //};
 
             var dirinfo = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\" + songsByOrder.OrderId);
 

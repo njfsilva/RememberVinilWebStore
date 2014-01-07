@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BackOffice
+namespace CDFactory
 {
     [Serializable]
     public class Track

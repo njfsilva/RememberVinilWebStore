@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace BackOffice
 {
-    class SongsByOrder
+    [Serializable]
+    [DataContract]
+    public class SongsByOrder
     {
+        [DataMember]
         public string OrderId { get; set; }
+        [DataMember]
         public List<Track> TrackList { get; set; }
     }
 }

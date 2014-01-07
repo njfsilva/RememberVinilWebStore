@@ -35,13 +35,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddSongToOrder = new System.Windows.Forms.Button();
-            this.lbOrderStatus = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnFinishOrder = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lbPrices = new System.Windows.Forms.ListBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.btnPlaceOrder = new System.Windows.Forms.Button();
             this.lvSongs = new System.Windows.Forms.ListView();
             this.lvShoppingCart = new System.Windows.Forms.ListView();
             this.label6 = new System.Windows.Forms.Label();
@@ -115,14 +111,6 @@
             this.btnAddSongToOrder.UseVisualStyleBackColor = true;
             this.btnAddSongToOrder.Click += new System.EventHandler(this.btnAddSongToOrder_Click);
             // 
-            // lbOrderStatus
-            // 
-            this.lbOrderStatus.FormattingEnabled = true;
-            this.lbOrderStatus.Location = new System.Drawing.Point(989, 296);
-            this.lbOrderStatus.Name = "lbOrderStatus";
-            this.lbOrderStatus.Size = new System.Drawing.Size(143, 173);
-            this.lbOrderStatus.TabIndex = 9;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -141,32 +129,6 @@
             this.btnFinishOrder.Text = "Finalizar";
             this.btnFinishOrder.UseVisualStyleBackColor = true;
             this.btnFinishOrder.Click += new System.EventHandler(this.btnFinishOrder_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(986, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Precos";
-            // 
-            // lbPrices
-            // 
-            this.lbPrices.FormattingEnabled = true;
-            this.lbPrices.Location = new System.Drawing.Point(989, 76);
-            this.lbPrices.Name = "lbPrices";
-            this.lbPrices.Size = new System.Drawing.Size(134, 134);
-            this.lbPrices.TabIndex = 13;
-            // 
-            // btnPlaceOrder
-            // 
-            this.btnPlaceOrder.Location = new System.Drawing.Point(989, 217);
-            this.btnPlaceOrder.Name = "btnPlaceOrder";
-            this.btnPlaceOrder.Size = new System.Drawing.Size(75, 23);
-            this.btnPlaceOrder.TabIndex = 14;
-            this.btnPlaceOrder.Text = "Encomendar";
-            this.btnPlaceOrder.UseVisualStyleBackColor = true;
             // 
             // lvSongs
             // 
@@ -248,12 +210,8 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lvShoppingCart);
             this.Controls.Add(this.lvSongs);
-            this.Controls.Add(this.btnPlaceOrder);
-            this.Controls.Add(this.lbPrices);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnFinishOrder);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbOrderStatus);
             this.Controls.Add(this.btnAddSongToOrder);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -277,13 +235,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAddSongToOrder;
-        private System.Windows.Forms.ListBox lbOrderStatus;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnFinishOrder;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox lbPrices;
         private System.Windows.Forms.FontDialog fontDialog1;
-        private System.Windows.Forms.Button btnPlaceOrder;
         private System.Windows.Forms.ListView lvSongs;
         private System.Windows.Forms.ListView lvShoppingCart;
         private System.Windows.Forms.Label label6;

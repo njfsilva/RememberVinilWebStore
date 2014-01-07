@@ -9,12 +9,13 @@ using BackOffice.FabricanteBService;
 using BackOffice.FabricanteCService;
 using BackOffice.TransportadoraServiceReference;
 using System.Threading;
+using Timer = System.Timers.Timer;
 
 namespace BackOffice
 {
     class Program
     {
-        const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
+        
         const string OutboxQueuePath = ".\\Private$\\CDFactoryOutBox";
 
         static void Main()
@@ -33,7 +34,7 @@ namespace BackOffice
             webSiteServer.Open();
 
             //Create timer to check messageQueue Outbox
-            var myTimer = new System.Timers.Timer();
+            var myTimer = new Timer();
             myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
             myTimer.Interval = 5;
             myTimer.Enabled = true;
@@ -44,14 +45,7 @@ namespace BackOffice
             Lista.Add(new Track("oli", 10.5));
             Lista.Add(new Track("olu", 9.5));
 
-            var result=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
-            //Console.WriteLine(result);
-            var artist = LastFmHelper.SearchArtistByName("linkin park");
-            foreach (var item in artist)
-            {
-                //Console.WriteLine(item);
-            }
-            
+
             //IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
             //adapterA.getPrice(Lista);
 
@@ -61,7 +55,7 @@ namespace BackOffice
             //IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
             //adapterC.getPrice(Lista);
 
-            TransportadoraServiceReference.TransportadoraServiceClient transp = new TransportadoraServiceClient();
+            TransportadoraServiceClient transp = new TransportadoraServiceClient();
             TransportJobPriceRequest request =new TransportJobPriceRequest();
             request.DeliveryAdress="qwerty";
             request.Distance=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");

@@ -80,17 +80,20 @@ namespace Website
 
             //Top Tracks by artist
             var response = CallApi("/TopTracks/" + lbArtists.SelectedItem);
+            //response = response.Replace("k__BackingField", "");
+
             var songs = JObject.Parse(response);
 
+           
 
             var trackNames =
                 from track in songs["TracksList"]
                 select new Track()
                 {
-                    ArtisName = (string) track["ArtisName"],
-                    TrackName = (string) track["TrackName"],
-                    Price = (double) track["Price"],
-                    PriceFormatted = (string) track["PriceFormatted"]
+                    ArtisName = (string)track["ArtisName"],
+                    TrackName = (string)track["TrackName"],
+                    Price = (double)track["Price"],
+                    PriceFormatted = (string)track["PriceFormatted"]
                 };
 
             lvSongs.Clear();

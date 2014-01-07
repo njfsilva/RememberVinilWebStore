@@ -1,5 +1,8 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.Text;
+using System.Threading;
+using CDFactory;
 
 namespace BackOffice
 {
@@ -7,6 +10,8 @@ namespace BackOffice
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class WebSiteService : IWebSiteService
     {
+        public const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
+
         public User SessionLogin(string loginName)
         {
             var user = UserDB.GetUserByUsername(loginName);
@@ -60,7 +65,39 @@ namespace BackOffice
 
         public Order RequestOrder(OrderInfo order)
         {
-            BackOfficeCallBackService.orderList.Add(order);
+            var thread = new Thread(() =>
+            {
+                BackOfficeCallBackService.orderList.Add(order);
+
+                //get quotes from fabricantes
+                //get quotes from transportadora
+                //select fabricante and tell transportadora qhere to get cd and where to deliver
+                
+                
+                //add to cdfactory
+                var inboxMessage = new CDFactory.SongsByOrder
+                {
+                    OrderId = BackOfficeCallBackService.orderList.IndexOf(order).ToString(),
+                    TrackList = new List<CDFactory.Track>()
+                };
+
+                foreach (var track in order.orderedTracks)
+                {
+                    var newTrack = new CDFactory.Track
+                    {
+                        ArtisName = track.ArtisName,
+                        Price = track.Price,
+                        PriceFormatted = track.PriceFormatted,
+                        TrackName = track.TrackName
+                    };
+
+                    inboxMessage.TrackList.Add(newTrack);
+                }
+
+                MessageQueueHelper.SendMessage(InboxQueuePath, inboxMessage, "Order to Process");
+            });
+            
+            thread.Start();
 
             return new Order
             {
