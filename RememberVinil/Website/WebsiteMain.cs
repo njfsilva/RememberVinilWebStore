@@ -24,6 +24,7 @@ namespace Website
             lblTotal.Text = "0.00€";
             lblAddress.Visible = false;
             txtAddress.Visible = false;
+            btnConfirmOrder.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,10 +66,10 @@ namespace Website
             var item = new ListViewItem(track);
             lvShoppingCart.Items.Add(item);
 
-            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty)) / 100;
+            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty));
             var previousTotal = double.Parse(lblTotal.Text.Replace("€", string.Empty));
             var total = songDouble + previousTotal;
-            lblTotal.Text = total.ToString() + "€";
+            lblTotal.Text = total + "€";
         }
 
         private void lbArtists_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,6 +108,7 @@ namespace Website
         {
             lblAddress.Visible = !lblAddress.Visible;
             txtAddress.Visible = !txtAddress.Visible;
+            btnConfirmOrder.Visible = !btnConfirmOrder.Visible;
         }
     }
 }
