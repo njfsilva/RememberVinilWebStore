@@ -22,6 +22,9 @@ namespace BackOffice
         {
             UserId = clientId;
         }
+        public User()
+        {
+        }
 
         public User(string username, string password)
         {
@@ -31,9 +34,7 @@ namespace BackOffice
             CallBackUrl = string.Empty;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         public string addOrder()
         {
             var o = new Order { orderID = ListaEncomendas.Count.ToString() };
@@ -43,21 +44,10 @@ namespace BackOffice
 
         public void updateOrderStatus(string id, string status)
         {
-            var ord= ListaEncomendas.Find(o => o.orderID.Equals(id));
+            var ord = ListaEncomendas.Find(o => o.orderID.Equals(id));
             ord.status = status;
-=======
-        public User()
-        {
->>>>>>> d5b413fc2d13c0ff628939525ea99d6e6edbec4a
-=======
-        public User()
-        {
->>>>>>> d5b413fc2d13c0ff628939525ea99d6e6edbec4a
-=======
-        public User()
-        {
->>>>>>> d5b413fc2d13c0ff628939525ea99d6e6edbec4a
         }
+
     }
 
     public class Order
