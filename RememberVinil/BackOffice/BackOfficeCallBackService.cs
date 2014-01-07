@@ -8,7 +8,7 @@ namespace BackOffice
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BackOfficeCallBackService" in both code and config file together.
     public class BackOfficeCallBackService : IBackOfficeCallBackService
     {
-        private static List<OrderInfo> orderList = new List<OrderInfo>();
+        public static List<OrderInfo> orderList = new List<OrderInfo>();
 
         public string GetStatus(ObjectMakeCDResponse response)//bad name: confirm order
         {
