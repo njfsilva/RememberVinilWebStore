@@ -55,6 +55,7 @@ namespace BackOffice
             //IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
             //adapterC.getPrice(Lista);
 
+<<<<<<< HEAD
             TransportadoraServiceClient transp = new TransportadoraServiceClient();
             TransportJobPriceRequest request =new TransportJobPriceRequest();
             request.DeliveryAdress="qwerty";
@@ -69,6 +70,22 @@ namespace BackOffice
             request.fabrica = "fabrica c";
             Thread.Sleep(1000);
             transp.TransportJobPrice(request);
+=======
+            //TransportadoraServiceReference.TransportadoraServiceClient transp = new TransportadoraServiceClient();
+            //TransportJobPriceRequest request =new TransportJobPriceRequest();
+            //request.DeliveryAdress="qwerty";
+            //request.Distance=GeocodingHelper.GetDistanceBetweenPlaces("praça do império,porto", "rotunda da boavista,porto");
+            //request.fabrica="fabrica a";
+            //request.userID="1";
+
+            //transp.TransportJobPrice(request);
+            //request.fabrica = "fabrica b";
+            //Thread.Sleep(1000);
+            //transp.TransportJobPrice(request);
+            //request.fabrica = "fabrica c";
+            //Thread.Sleep(1000);
+            //transp.TransportJobPrice(request);
+>>>>>>> 3c1b24fe79c10f92fe70bd2c8eaa886a2edfabb9
 
 
             //Console.WriteLine("a: " + pricefabricantea);

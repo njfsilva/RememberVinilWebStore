@@ -114,7 +114,7 @@ namespace BackOffice
         public string getOrderStatus(string loginName)
         {
             var user = UserDB.GetUserByUsername(loginName);
-
+            //user.ListaEncomendas.Add(new BackOffice.Order() { orderID="1",status="check"});
             if (user!=null)
             {
                 return user.getLatestOrderStatus();

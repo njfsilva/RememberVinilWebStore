@@ -54,7 +54,7 @@ namespace BackOffice
             foreach (var item in ListaEncomendas)
             {
                 resultado += item.orderID + " está " + item.status;
-                resultado += "\n";
+                resultado += "*";
             }
             return resultado;
         }

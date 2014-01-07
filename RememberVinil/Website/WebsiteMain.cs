@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Website
 {
@@ -27,6 +28,7 @@ namespace Website
             lblAddress.Visible = false;
             txtAddress.Visible = false;
             btnConfirmOrder.Visible = false;
+            lbOrderStatus.DataSource = GetStatusList();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,6 +45,18 @@ namespace Website
                 select artist.ToString();
 
             lbArtists.DataSource = artistsNames.ToList();
+        }
+
+        private List<string> GetStatusList()
+        {
+            List<string> result = new List<string>();
+            string response = CallApi("/RequestUpdate/u1");
+            string[] array = response.Split('*');
+            foreach (string pos in array)
+            {
+                result.Add(pos);
+            }
+            return result;
         }
 
         private static string CallApi(string whatToGet)
