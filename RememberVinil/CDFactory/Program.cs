@@ -23,7 +23,7 @@ namespace CDFactory
             MessageQueueHelper.CreateQueue(OutboxQueuePath);
 
             //test code
-                AddToMsmq();
+                //AddToMsmq();
             
 
             //// Create a timer to look for work

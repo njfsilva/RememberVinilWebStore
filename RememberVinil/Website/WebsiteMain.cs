@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using BackOffice;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -109,6 +111,30 @@ namespace Website
             lblAddress.Visible = !lblAddress.Visible;
             txtAddress.Visible = !txtAddress.Visible;
             btnConfirmOrder.Visible = !btnConfirmOrder.Visible;
+        }
+
+        private void btnConfirmOrder_Click(object sender, EventArgs e)
+        {
+            var request = new RestRequest("/RequestOrder/", Method.POST);
+
+            var orderInfo = new OrderInfo
+            {
+
+                orderedTracks = ShoppingCartItems,
+                morada = txtAddress.Text
+            };
+
+            var json = JsonConvert.SerializeObject(orderInfo);
+            request.AddParameter("text/json", json, ParameterType.RequestBody);
+
+            var response = Client.Execute(request);
+
+            var res = JObject.Parse(response.Content);
+
+            var sucesso = (string) res["status"];
+
+            lbResultado.Text = sucesso;
+
         }
     }
 }

@@ -23,12 +23,16 @@ namespace BackOffice
         [OperationContract]
         ArtistsDto SearchForArtists(string artist);
 
-        [WebGet(UriTemplate = "/RequestOrder/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        [OperationContract]
-        int RequestOrder();
+        //[WebGet(UriTemplate = "/RequestOrder/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        //[OperationContract]
+        //int RequestOrder();
 
-        [WebGet(UriTemplate = "/RequestUpdate/", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        //[OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/RequestOrder/", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        Order RequestOrder(OrderInfo order);
+
+        [WebGet(UriTemplate = "/RequestUpdate/{user}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        string getOrderStatus(string loginName);
+        string getOrderStatus(string user);
     }
 }

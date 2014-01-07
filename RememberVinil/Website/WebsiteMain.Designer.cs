@@ -49,6 +49,7 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.btnConfirmOrder = new System.Windows.Forms.Button();
+            this.lbResultado = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtArtist
@@ -224,12 +225,22 @@
             this.btnConfirmOrder.TabIndex = 21;
             this.btnConfirmOrder.Text = "Confirmar Encomenda";
             this.btnConfirmOrder.UseVisualStyleBackColor = true;
+            this.btnConfirmOrder.Click += new System.EventHandler(this.btnConfirmOrder_Click);
+            // 
+            // lbResultado
+            // 
+            this.lbResultado.AutoSize = true;
+            this.lbResultado.Location = new System.Drawing.Point(492, 379);
+            this.lbResultado.Name = "lbResultado";
+            this.lbResultado.Size = new System.Drawing.Size(0, 13);
+            this.lbResultado.TabIndex = 22;
             // 
             // WebsiteMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1148, 528);
+            this.Controls.Add(this.lbResultado);
             this.Controls.Add(this.btnConfirmOrder);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.lblAddress);
@@ -280,5 +291,6 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Button btnConfirmOrder;
+        private System.Windows.Forms.Label lbResultado;
     }
 }

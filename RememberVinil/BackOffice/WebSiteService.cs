@@ -58,17 +58,20 @@ namespace BackOffice
             return outputs;
         }
 
-        public int RequestOrder()
+        public Order RequestOrder(OrderInfo order)
         {
-            return 43;
+            BackOfficeCallBackService.orderList.Add(order);
+
+            return new Order
+            {
+                status = "Encomenda Recebida"
+            };
         }
 
         private static string InputHandler(string input)
         {
             var bytes = Encoding.Default.GetBytes(input);
             return Encoding.UTF8.GetString(bytes);
-            
-            //return input.Replace(" ", "+").Replace(",", "").Replace(".", "").Replace("&", "+").Replace("+++", "+").Replace("++", "+");
         }
 
         public string getOrderStatus(string loginName)
