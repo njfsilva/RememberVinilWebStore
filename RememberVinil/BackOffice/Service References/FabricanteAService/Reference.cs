@@ -320,6 +320,9 @@ namespace BackOffice.FabricanteAService {
         private string encomendaIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fabricaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -409,6 +412,19 @@ namespace BackOffice.FabricanteAService {
                 if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
                     this.encomendaIDField = value;
                     this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fabrica {
+            get {
+                return this.fabricaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fabricaField, value) != true)) {
+                    this.fabricaField = value;
+                    this.RaisePropertyChanged("fabrica");
                 }
             }
         }

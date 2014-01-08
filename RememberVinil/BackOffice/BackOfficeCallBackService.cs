@@ -9,6 +9,7 @@ namespace BackOffice
     public class BackOfficeCallBackService : IBackOfficeCallBackService
     {
         public static List<OrderInfo> orderList = new List<OrderInfo>();
+        private static object _sync = new object();
 
         public string GetStatus(ObjectMakeCDResponse response)//bad name: confirm order
         {
@@ -35,16 +36,45 @@ namespace BackOffice
             string UserID = response.userID.ToString();
             var user = UserDB.GetUserByUserID(UserID);
             user.updateOrderStatus(response.encomendaID,response.Status);
-            //System.Console.WriteLine(response.Status);
+            System.Console.WriteLine(response.Status);
             return "ack";
         }
         
         public string GetTransporterPrice(TransportJobPriceResponse response)
         {
-            OrderInfo order=null;
-            System.Console.WriteLine(response.fabricante+" "+response.Price);
-            if (orderList.Count > 0)
+            lock (_sync)
             {
+                OrderInfo order = null;
+                System.Console.WriteLine(response.fabricante + " " + response.Price);
+                if (orderList.Count > 0)
+                {
+                    foreach (var item in orderList)
+                    {
+                        if (item.encomendaid == response.encomendaID)
+                        {
+                            order = item;
+                            break;
+                        }
+                    }
+                }
+                if (order == null)
+                {
+                    order = new OrderInfo(response.userID, response.encomendaID);
+                    order.addpriceTransp(response.fabricante, response.Price);
+                }
+                else
+                {
+                    order.addpriceTransp(response.fabricante, response.Price);
+                }
+            }
+            return "ack";
+        }
+
+        public string GetFabricantePrice(FabricantePriceResponse response)
+        {
+            lock (_sync)
+            {
+                OrderInfo order = null;
                 foreach (var item in orderList)
                 {
                     if (item.encomendaid == response.encomendaID)
@@ -53,62 +83,14 @@ namespace BackOffice
                         break;
                     }
                 }
-            }
-            if (order == null)
-            {
-                order = new OrderInfo {encomendaid = response.encomendaID, userID = response.userID};
-                order.addpriceTransp(response.fabricante, response.Price);
-            }
-            else
-            {
-                order.addpriceTransp(response.fabricante, response.Price);
-                if (order.all3Received())
+                if (order == null)
                 {
-                    var bestdeal = order.getbestdeal();
-                    orderList.Remove(order);
-
-                    System.Console.WriteLine(bestdeal);
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
+                    order = new OrderInfo(response.userID, response.encomendaID);
+                    order.addpriceFabric(response.fabricante, response.Price);
                 }
-            }
-            return "ack";
-        }
-
-        public string GetFabricantePrice(FabricantePriceResponse response)
-        {
-            OrderInfo order = null;
-
-            foreach (var item in orderList)
-            {
-                if (item.encomendaid == response.encomendaID)
+                else
                 {
-                    order = item;
-                    break;
-                }
-            }
-            if (order == null)
-            {
-                order = new OrderInfo {encomendaid = response.encomendaID, userID = response.userID};
-                order.addpriceFabric(response.fabricante, response.Price);
-            }
-            else
-            {
-                order.addpriceFabric(response.fabricante, response.Price);
-                if (order.all3Received())
-                {
-                    var bestdeal = order.getbestdeal();
-                    orderList.Remove(order);
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
+                    order.addpriceFabric(response.fabricante, response.Price);
                 }
             }
             return "ack";

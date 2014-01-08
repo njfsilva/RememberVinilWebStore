@@ -8,13 +8,23 @@ namespace BackOffice
         public string userID { get; set; }
         public string encomendaid { get; set; }
         public string morada { get; set; }
+        public string distance { get; set; }
         public List<Track> orderedTracks { get; set; }
-        public List<order> pricesTransp { get; set; }
-        public List<order> pricesFabric { get; set; }
+        public List<Order> pricesFabric= new List<Order>();
+        public List<Order> pricesTransp =new List<Order>();
+
+        public OrderInfo(string u, string id)
+        {
+            userID = u;
+            encomendaid = id;
+            pricesTransp = new List<Order>();
+            pricesFabric = new List<Order>();
+        }
 
         public OrderInfo()
         {
-            pricesTransp = new List<order>();
+            pricesFabric = new List<Order>();
+            pricesTransp = new List<Order>();
         }
 
         public int countpricesTransp()
@@ -36,7 +46,7 @@ namespace BackOffice
 
         public void addpriceTransp(string f, double p)
         {
-            var o = new order();
+            var o = new Order();
             o.fabrica = f;
             o.price = p;
             pricesTransp.Add(o);
@@ -44,7 +54,9 @@ namespace BackOffice
 
         public void addpriceFabric(string f, double p)
         {
-            var o = new order();
+            if (pricesFabric==null)
+                pricesFabric = new List<Order>();
+            var o = new Order();
             o.fabrica = f;
             o.price = p;
             pricesFabric.Add(o);
@@ -68,6 +80,7 @@ namespace BackOffice
                             lowest = total;
                             result = fabrica;
                         }
+                        break;
                     }
                 }
                
@@ -76,7 +89,7 @@ namespace BackOffice
         }
     }
 
-    public class order
+    public class Order
     {
         public string fabrica { get; set; }
         public double price { get; set; } 

@@ -71,7 +71,7 @@ namespace BackOffice
             return outputs;
         }
 
-        public Order RequestOrder(OrderInfo order)
+        public OrderStatus RequestOrder(OrderInfo order)
         {
             var thread = new Thread(() =>
             {
@@ -102,11 +102,11 @@ namespace BackOffice
 
                 //get quotes from fabricantes
                 IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
-                adapterA.getPrice(order.orderedTracks);
+                adapterA.getPrice(order);
                 IAdapterFabricantes adapterB = new AdapterFabricanteB(new FabricanteBServiceClient());
-                adapterB.getPrice(order.orderedTracks);
+                adapterB.getPrice(order);
                 IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
-                adapterC.getPrice(order.orderedTracks);
+                adapterC.getPrice(order);
 
                 //get quotes from transportadora
                 TransportadoraServiceClient transp = new TransportadoraServiceClient();
@@ -136,35 +136,44 @@ namespace BackOffice
                 while (order.all3Received()==false)
                 {
                     System.Console.WriteLine("Waiting for CallBacks to Select the best Manufacturer");
+                    Thread.Sleep(1000);
                 }
 
-                TransportJobRequest request = new TransportJobRequest();
+                //TransportJobRequest request = new TransportJobRequest();
                 switch (order.getbestdeal())
                 {
                     case("fabrica a"):
-                        request.DeliveryAdress = order.morada;
-                        request.Distance= requestA.Distance;
-                        request.encomendaID = order.encomendaid;
-                        request.fabrica="fabrica a";
-                        request.userID = order.userID;
-                        transp.TransportJob(request);
+                        order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaA);
+                        order.userID = "1";
+                        adapterA.setOrder(order);
+                        //request.DeliveryAdress = order.morada;
+                        //request.Distance= requestA.Distance;
+                        //request.encomendaID = order.encomendaid;
+                        //request.fabrica="fabrica a";
+                        //request.userID = order.userID;
+                        //transp.TransportJob(request);
                         break;
                     case ("fabrica b"):
-                        request.DeliveryAdress = order.morada;
-                        request.Distance= requestA.Distance;
-                        request.encomendaID = order.encomendaid;
-                        request.fabrica="fabrica b";
-                        request.userID = order.userID;
-                        transp.TransportJob(request);
-                        transp.TransportJob(request);
+                        order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaC);
+                        adapterB.setOrder(order);
+                        order.userID = "1";
+                        //request.DeliveryAdress = order.morada;
+                        //request.Distance= requestA.Distance;
+                        //request.encomendaID = order.encomendaid;
+                        //request.fabrica="fabrica b";
+                        //request.userID = order.userID;
+                        //transp.TransportJob(request);
                         break;
                     case ("fabrica c"):
-                        request.DeliveryAdress = order.morada;
-                        request.Distance= requestA.Distance;
-                        request.encomendaID = order.encomendaid;
-                        request.fabrica="fabrica c";
-                        request.userID = order.userID;
-                        transp.TransportJob(request);
+                        order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaB);
+                        adapterC.setOrder(order);
+                        order.userID = "1";
+                        //request.DeliveryAdress = order.morada;
+                        //request.Distance= requestA.Distance;
+                        //request.encomendaID = order.encomendaid;
+                        //request.fabrica="fabrica c";
+                        //request.userID = order.userID;
+                        //transp.TransportJob(request);
                         break;
                     default:
                         break;
@@ -173,7 +182,7 @@ namespace BackOffice
             
             thread.Start();
 
-            return new Order
+            return new OrderStatus
             {
                 status = "Encomenda Recebida"
             };

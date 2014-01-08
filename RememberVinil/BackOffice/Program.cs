@@ -24,9 +24,9 @@ namespace BackOffice
         static void Main()
         {
             //Create Users
-            UserDB.AddUser(new User("u1", "p1"));
-            UserDB.AddUser(new User("u2", "p2"));
-            UserDB.AddUser(new User("u3", "p3"));
+            UserDB.AddUser(new User("u1", "p1","1"));
+            UserDB.AddUser(new User("u2", "p2","2"));
+            UserDB.AddUser(new User("u3", "p3","3"));
 
             //Start BackOfficeService
             var backOfficeCallBackServiceHost = new WebServiceHost(typeof(BackOfficeCallBackService));

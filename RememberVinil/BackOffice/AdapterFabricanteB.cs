@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BackOffice.FabricanteBService;
+using System;
 
 namespace BackOffice
 {
@@ -12,40 +13,46 @@ namespace BackOffice
             AFabricanteB = a;
         }
 
-        public ObjectQuoteRequest newQuoteRequest(List<Track> list)
+        public FabricantePriceResponse getPrice(OrderInfo order)
         {
             var request = new ObjectQuoteRequest();
-            request.WSCallback = "xxxxxxx";
-            var arrayOfMusic = new Music[list.Count];
+            request.encomendaID = order.encomendaid;
+            request.fabricante = "fabrica b";
+            request.userID = order.userID;
+            request.WSCallback = "qwerty";
             var x = 0;
-            foreach (var t in list)
-	        {
-		            var m = new Music();
-                    m.TrackName=t.TrackName;
-                    m.Price=t.Price;
-                    m.ArtisName = t.ArtisName;
-                    m.PriceFormatted = t.PriceFormatted;
-                    arrayOfMusic[x]=m;
-                    x++;
-	        }
+            var arrayOfMusic = new Music[order.orderedTracks.Count];
+            foreach (var t in order.orderedTracks)
+            {
+                var m = new Music();
+                m.TrackName = t.TrackName;
+                m.Price = t.Price;
+                m.ArtisName = t.ArtisName;
+                m.PriceFormatted = t.PriceFormatted;
+                arrayOfMusic[x] = m;
+                x++;
+            }
             request.ListaMusicas = arrayOfMusic;
-            return request;
-        }
 
-        public FabricantePriceResponse getPrice(List<Track> list)
-        {
-            AFabricanteB.getQuote(newQuoteRequest(list));
+            AFabricanteB.getQuote(request);
             return new FabricantePriceResponse();
         }
 
 
-        public ObjectMakeCDResponse setOrder(List<Track> list)
+        public ObjectMakeCDResponse setOrder(OrderInfo order)
         {
             var request = new ObjectCDRequest();
             request.WSCallback = "xxxxxxx";
-            var arrayOfMusic = new Music[list.Count];
+            request.WSCallback = "xxxxxxx";
+            request.DeliveryAdress = order.morada;
+            request.Distance = order.distance;
+            //request.Distance = requestA.Distance;
+            request.encomendaID = order.encomendaid;
+            request.fabrica = "fabrica b";
+            request.userid = Convert.ToInt32(order.userID);
+            var arrayOfMusic = new Music[order.orderedTracks.Count];
             var x = 0;
-            foreach (var t in list)
+            foreach (var t in order.orderedTracks)
             {
                 var m = new Music();
                 m.TrackName = t.TrackName;

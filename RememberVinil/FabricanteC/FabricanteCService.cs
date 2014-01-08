@@ -19,7 +19,7 @@ namespace FabricanteC
 
                 var client = new BackOfficeCallBackServiceClient();
 
-                var response = new BOCallBack.TransportJobPriceResponse
+                var response = new BOCallBack.FabricantePriceResponse
                 {
                     encomendaID = request.encomendaID,
                     fabricante = request.fabricante,
@@ -27,7 +27,7 @@ namespace FabricanteC
                     Price = total,
                     userID = request.userID
                 };
-                client.GetTransporterPrice(response);
+                client.GetFabricantePrice(response);
             });
             thread.Start();
             return new FabricantePriceResponse();

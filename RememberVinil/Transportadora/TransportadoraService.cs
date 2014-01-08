@@ -26,7 +26,7 @@ namespace Transportadora
                 dados.Status = "estou a caminho do cliente";
                 client.UpdateOrderTransportStatus(dados);
                 Thread.Sleep(2000);
-                dados.Status = "ja fui ao fabricante";
+                dados.Status = "Entregue!";
                 client.UpdateOrderTransportStatus(dados);
             });
             thread.Start();

@@ -4,8 +4,8 @@ namespace BackOffice
 {
     public interface IAdapterFabricantes
     {
-        FabricantePriceResponse getPrice(List<Track> list);
+        FabricantePriceResponse getPrice(OrderInfo order);
 
-        ObjectMakeCDResponse setOrder(List<Track> list);
+        ObjectMakeCDResponse setOrder(OrderInfo order);
     }
 }

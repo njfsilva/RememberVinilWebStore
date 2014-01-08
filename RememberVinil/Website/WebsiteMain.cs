@@ -105,7 +105,8 @@ namespace Website
             {
                 ArtisName = Artist,
                 TrackName = lvSongs.SelectedItems[0].Text,
-                PriceFormatted = lvSongs.SelectedItems[0].SubItems[1].Text
+                PriceFormatted = lvSongs.SelectedItems[0].SubItems[1].Text,
+                Price = Convert.ToDouble(lvSongs.SelectedItems[0].SubItems[1].Text.Replace("€", string.Empty))
             };
 
             ShoppingCartItems.Add(song);

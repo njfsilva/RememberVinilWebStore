@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BackOffice
 {
@@ -11,7 +12,7 @@ namespace BackOffice
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
-        public List<Order> ListaEncomendas = new List<Order>();
+        public List<OrderStatus> ListaEncomendas = new List<OrderStatus>();
 
         public string TransportadoraId { get; set; }
         //public string TransportadoraStatus { get; set; }
@@ -26,18 +27,28 @@ namespace BackOffice
         {
         }
 
-        public User(string username, string password)
+        //public User(string username, string password)
+        //{
+        //    Username = username;
+        //    Password = password;
+        //    System.Random rnd = new System.Random();
+        //    UserId = Convert.ToString(rnd.Next(1, 100)); 
+        //    HasPermissionToUseApplication = false;
+        //    CallBackUrl = string.Empty;
+        //}
+
+        public User(string username, string password, string uid)
         {
             Username = username;
             Password = password;
+            UserId = uid;
             HasPermissionToUseApplication = false;
             CallBackUrl = string.Empty;
         }
 
-
         public string addOrder()
         {
-            var o = new Order { orderID = ListaEncomendas.Count.ToString() };
+            var o = new OrderStatus { orderID = ListaEncomendas.Count.ToString() };
             ListaEncomendas.Add(o);
             return o.orderID;
         }
@@ -61,7 +72,7 @@ namespace BackOffice
 
     }
 
-    public class Order
+    public class OrderStatus
     {
         public string orderID { get; set; }
         public string status { get; set; }
