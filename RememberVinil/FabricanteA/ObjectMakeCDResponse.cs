@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace FabricanteA
 {
         [Serializable]
     [DataContract]
-    public class ObjectMakeCDResponse
+    public class ObjectMakeCdResponse
     {
-            [DataMember]
-            public int id { get; set; }
         [DataMember]
-        public int userID { get; set; }
+        public int Id { get; set; }
         [DataMember]
-        public string refRequestCD { get; set; }
+        public int UserId { get; set; }
+        [DataMember]
+        public string RefRequestCd { get; set; }
         [DataMember]
         public string DeliveryAdress { get; set; }
         [DataMember]
-        public string fabrica { get; set; }
+        public string Fabrica { get; set; }
         [DataMember]
         public string Status { get; set; }
         [DataMember]
         public string Distance { get; set; }
         [DataMember]
-        public string encomendaID { get; set; }
+        public string EncomendaId { get; set; }
     }
 }

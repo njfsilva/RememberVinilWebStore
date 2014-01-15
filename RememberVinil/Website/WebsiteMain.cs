@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Web;
-using System.Timers;
 using System.Windows.Forms;
 using BackOffice;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
-using System.Text.RegularExpressions;
 using Timer = System.Timers.Timer;
 
 namespace Website
@@ -21,7 +19,7 @@ namespace Website
         public static List<Track> ShoppingCartItems = new List<Track>();
         public static string Artist = string.Empty;
 
-        public static List<string> notifications = new List<string>();
+        public static List<string> Notifications = new List<string>();
         
         public WebsiteMain()
         {
@@ -37,12 +35,13 @@ namespace Website
             lblAddress.Visible = false;
             txtAddress.Visible = false;
             btnConfirmOrder.Visible = false;
+            lbNotifications.SelectionMode = SelectionMode.MultiExtended;
 
             //lbOrderStatus.DataSource = GetStatusList();
 
             //Create timer to check messageQueue Outbox
             var myTimer = new Timer();
-            myTimer.Elapsed += new ElapsedEventHandler(ShowNotifications);
+            myTimer.Elapsed += ShowNotifications;
             myTimer.Interval = 5000;
             myTimer.Enabled = true;
         }
@@ -57,7 +56,7 @@ namespace Website
 
         private void AddDataSourceToLb()
         {
-            lbNotifications.DataSource = notifications.ToList().Count > 0 ? notifications.ToList() : null;
+            lbNotifications.DataSource = Notifications.ToList().Count > 0 ? Notifications.ToList() : null;
 
             lb_Status2.DataSource = GetStatusList();
 
@@ -79,16 +78,11 @@ namespace Website
             lbArtists.DataSource = artistsNames.ToList();
         }
 
-        private List<string> GetStatusList()
+        private static List<string> GetStatusList()
         {
-            List<string> result = new List<string>();
-            string response = CallApi("/RequestUpdate/u1");
-            string[] array = response.Split('*');
-            foreach (string pos in array)
-            {
-                result.Add(pos);
-            }
-            return result;
+            var response = CallApi("/RequestUpdate/u1");
+            var array = response.Split('*');
+            return array.ToList();
         }
 
         private static string CallApi(string whatToGet)
@@ -101,7 +95,7 @@ namespace Website
 
         private void btnAddSongToOrder_Click(object sender, EventArgs e)
         {
-            var song = new Track()
+            var song = new Track
             {
                 ArtisName = Artist,
                 TrackName = lvSongs.SelectedItems[0].Text,
@@ -115,7 +109,7 @@ namespace Website
             var item = new ListViewItem(track);
             lvShoppingCart.Items.Add(item);
 
-            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty));
+            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty)) / 100;
             var previousTotal = double.Parse(lblTotal.Text.Replace("€", string.Empty));
             var total = songDouble + previousTotal;
             lblTotal.Text = total + "€";
@@ -135,7 +129,7 @@ namespace Website
 
             var trackNames =
                 from track in songs["TracksList"]
-                select new Track()
+                select new Track
                 {
                     ArtisName = (string)track["ArtisName"],
                     TrackName = (string)track["TrackName"],
@@ -167,14 +161,14 @@ namespace Website
         {
             var request = new RestRequest("/RequestOrder/", Method.POST);
 
-            var orderInfo = new OrderInfo
+            var orderInfo = new OrderInfo()
             {
-
                 orderedTracks = ShoppingCartItems,
                 morada = txtAddress.Text
             };
 
             var json = JsonConvert.SerializeObject(orderInfo);
+            
             request.AddParameter("text/json", json, ParameterType.RequestBody);
 
             var response = Client.Execute(request);

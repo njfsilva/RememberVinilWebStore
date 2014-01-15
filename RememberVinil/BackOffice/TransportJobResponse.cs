@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
 namespace BackOffice
 {
@@ -16,11 +13,11 @@ namespace BackOffice
         [DataMember]
         public string Distance { get; set; }
         [DataMember]
-        public string encomendaID { get; set; }
+        public string EncomendaId { get; set; }
         [DataMember]
-        public string fabrica { get; set; }
+        public string Fabrica { get; set; }
         [DataMember]
-        public string userID { get; set; }
+        public string UserId { get; set; }
         [DataMember]
         public string Status { get; set; }
     }

@@ -1,5 +1,4 @@
 ﻿using System.ServiceModel;
-using BackOffice.TransportadoraServiceReference;
 
 namespace BackOffice
 {
@@ -9,7 +8,7 @@ namespace BackOffice
     {
 
         [OperationContract]
-        string GetStatus(ObjectMakeCDResponse response);
+        string GetStatus(ObjectMakeCdResponse response);
 
         [OperationContract]
         string UpdateOrderTransportStatus(TransportJobResponse response);

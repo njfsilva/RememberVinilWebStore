@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 namespace Transportadora
 {
@@ -8,20 +7,20 @@ namespace Transportadora
     public class TransportJobRequest
     {
         [DataMember]
-        public int id { get; set; }
+        public int Id { get; set; }
         [DataMember]
         public string DeliveryAdress { get; set; }
         [DataMember]
         public string Status { get; set; }
         [DataMember]
-        public string WSCallback { get; set; }
+        public string WsCallback { get; set; }
         [DataMember]
         public string Distance { get; set; }
         [DataMember]
-        public string userID { get; set; }
+        public string UserId { get; set; }
         [DataMember]
-        public string encomendaID { get; set; }
+        public string EncomendaId { get; set; }
         [DataMember]
-        public string fabrica { get; set; }
+        public string Fabrica { get; set; }
     }
 }

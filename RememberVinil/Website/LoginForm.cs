@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 

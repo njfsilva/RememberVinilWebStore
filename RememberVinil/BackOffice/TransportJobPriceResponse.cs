@@ -7,14 +7,14 @@ namespace BackOffice
     public class TransportJobPriceResponse
     {
         [DataMember]
-        public string userID { get; set; }
+        public string UserId { get; set; }
         [DataMember]
-        public string encomendaID { get; set; }
+        public string EncomendaId { get; set; }
         [DataMember]
-        public string fabricante { get; set; }
+        public string Fabricante { get; set; }
         [DataMember]
         public double Price { get; set; }
         [DataMember]
-        public string refRequestPrice { get; set; }
+        public string RefRequestPrice { get; set; }
     }
 }

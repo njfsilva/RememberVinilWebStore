@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace BackOffice
 {
@@ -46,25 +46,25 @@ namespace BackOffice
             CallBackUrl = string.Empty;
         }
 
-        public string addOrder()
+        public string AddOrder()
         {
-            var o = new OrderStatus { orderID = ListaEncomendas.Count.ToString() };
+            var o = new OrderStatus { OrderId = ListaEncomendas.Count.ToString(CultureInfo.InvariantCulture) };
             ListaEncomendas.Add(o);
-            return o.orderID;
+            return o.OrderId;
         }
 
-        public void updateOrderStatus(string id, string status)
+        public void UpdateOrderStatus(string id, string status)
         {
-            var ord = ListaEncomendas.Find(o => o.orderID.Equals(id));
-            ord.status = status;
+            var ord = ListaEncomendas.Find(o => o.OrderId.Equals(id));
+            ord.Status = status;
         }
 
-        public string getLatestOrderStatus()
+        public string GetLatestOrderStatus()
         {
             string resultado = string.Empty;
             foreach (var item in ListaEncomendas)
             {
-                resultado += item.orderID + " está " + item.status;
+                resultado += item.OrderId + " está " + item.Status;
                 resultado += "*";
             }
             return resultado;
@@ -74,7 +74,7 @@ namespace BackOffice
 
     public class OrderStatus
     {
-        public string orderID { get; set; }
-        public string status { get; set; }
+        public string OrderId { get; set; }
+        public string Status { get; set; }
     }
 }

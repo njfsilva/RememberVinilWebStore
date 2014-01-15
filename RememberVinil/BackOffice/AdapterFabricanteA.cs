@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BackOffice.FabricanteAService;
+﻿using BackOffice.FabricanteAService;
 using System;
 
 namespace BackOffice
@@ -15,20 +14,20 @@ namespace BackOffice
 
         }
 
-        public FabricantePriceResponse getPrice(OrderInfo order)
+        public FabricantePriceResponse GetPrice(OrderInfo order)
         {
-            var request = new ObjectQuoteRequest();
-            request.encomendaID=order.encomendaid;
-            request.fabricante = "fabrica a";
-            request.userID = order.userID;
-            request.WSCallback = "qwerty";
-            var x = 0;
-            var arrayOfMusic = new Music[order.orderedTracks.Count];
-            foreach (var t in order.orderedTracks)
+            var request = new ObjectQuoteRequest
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = t.Price;
+                encomendaID = order.Encomendaid,
+                fabricante = "fabrica a",
+                userID = order.UserId,
+                WSCallback = "qwerty"
+            };
+            var x = 0;
+            var arrayOfMusic = new Music[order.OrderedTracks.Count];
+            foreach (var t in order.OrderedTracks)
+            {
+                var m = new Music {nome = t.TrackName, price = t.Price};
                 arrayOfMusic[x] = m;
                 x++;
             }
@@ -39,29 +38,29 @@ namespace BackOffice
         }
 
 
-        public ObjectMakeCDResponse setOrder(OrderInfo order)
+        public ObjectMakeCdResponse SetOrder(OrderInfo order)
         {
-            var request = new ObjectCDRequest();
-            request.WSCallback = "xxxxxxx";
-            request.DeliveryAdress = order.morada;
-            request.Distance = order.distance;
-            request.encomendaID = order.encomendaid;
-            request.fabrica = "fabrica a";
-            request.userid = Convert.ToInt32(order.userID);
-            var arrayOfMusic = new Music[order.orderedTracks.Count];
-            var x = 0;
-            foreach (var t in order.orderedTracks)
+            var request = new ObjectCDRequest
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = t.Price;
+                WSCallback = "xxxxxxx",
+                DeliveryAdress = order.Morada,
+                Distance = order.Distance,
+                encomendaID = order.Encomendaid,
+                fabrica = "fabrica a",
+                userid = Convert.ToInt32(order.UserId)
+            };
+            var arrayOfMusic = new Music[order.OrderedTracks.Count];
+            var x = 0;
+            foreach (var t in order.OrderedTracks)
+            {
+                var m = new Music {nome = t.TrackName, price = t.Price};
                 arrayOfMusic[x] = m;
                 x++;
             }
             request.ListaMusicas = arrayOfMusic;
             AFabricanteA.MakeCD(request);
 
-            return new ObjectMakeCDResponse();
+            return new ObjectMakeCdResponse();
         }
     }
 }

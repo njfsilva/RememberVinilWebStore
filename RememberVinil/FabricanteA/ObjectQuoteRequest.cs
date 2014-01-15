@@ -12,12 +12,12 @@ namespace FabricanteA
         [DataMember]
         public List<Music> ListaMusicas { get; set; }
         [DataMember]
-        public string WSCallback { get; set; }
+        public string WsCallback { get; set; }
         [DataMember]
-        public string userID { get; set; }
+        public string UserId { get; set; }
         [DataMember]
-        public string encomendaID { get; set; }
+        public string EncomendaId { get; set; }
         [DataMember]
-        public string fabricante { get; set; }
+        public string Fabricante { get; set; }
     }
 }

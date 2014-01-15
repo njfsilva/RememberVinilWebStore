@@ -7,10 +7,10 @@ namespace FabricanteB
     public interface IFabricanteBService
     {
         [OperationContract]
-        FabricantePriceResponse getQuote(ObjectQuoteRequest request);
+        FabricantePriceResponse GetQuote(ObjectQuoteRequest request);
 
         [OperationContract]
-        ObjectMakeCDResponse MakeCD(ObjectCDRequest request);
+        ObjectMakeCdResponse MakeCd(ObjectCDRequest request);
     }
 }
 

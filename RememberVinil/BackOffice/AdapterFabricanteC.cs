@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using BackOffice.FabricanteCService;
 
 namespace BackOffice
@@ -13,21 +12,21 @@ namespace BackOffice
             AFabricanteC = a;
         }
 
-        public FabricantePriceResponse getPrice(OrderInfo order)
+        public FabricantePriceResponse GetPrice(OrderInfo order)
         {
-            var request = new ObjectQuoteRequest();
-            request.encomendaID = order.encomendaid;
-            request.fabricante = "fabrica c";
-            request.userID = order.userID;
-            request.WSCallback = "qwerty";
-            var x = 0;
-            var arrayOfMusic = new Music[order.orderedTracks.Count];
-            foreach (var t in order.orderedTracks)
+            var request = new ObjectQuoteRequest
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = 0.99;
-                m.duracao = getMusicDuration(m.nome);
+                encomendaID = order.Encomendaid,
+                fabricante = "fabrica c",
+                userID = order.UserId,
+                WSCallback = "qwerty"
+            };
+            var x = 0;
+            var arrayOfMusic = new Music[order.OrderedTracks.Count];
+            foreach (var t in order.OrderedTracks)
+            {
+                var m = new Music {nome = t.TrackName, price = 0.99};
+                m.duracao = GetMusicDuration(m.nome);
                 arrayOfMusic[x] = m;
                 x++;
             }
@@ -37,7 +36,7 @@ namespace BackOffice
             return new FabricantePriceResponse();
         }
 
-        public double getMusicDuration(string musicName)
+        public double GetMusicDuration(string musicName)
         {
             var random = new Random();
             var minutes = random.NextDouble() * (5 - 3) + 3;
@@ -46,30 +45,30 @@ namespace BackOffice
         }
 
 
-        public ObjectMakeCDResponse setOrder(OrderInfo order)
+        public ObjectMakeCdResponse SetOrder(OrderInfo order)
         {
-            var request = new ObjectCDRequest();
-            request.WSCallback = "xxxxxxx";
-            request.DeliveryAdress = order.morada;
-            request.Distance = order.distance;
-            request.encomendaID = order.encomendaid;
-            request.fabrica = "fabrica a";
-            request.userid = Convert.ToInt32(order.userID);
-            var arrayOfMusic = new Music[order.orderedTracks.Count];
-            var x = 0;
-            foreach (var t in order.orderedTracks)
+            var request = new ObjectCDRequest
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = t.Price;
-                m.duracao = getMusicDuration(m.nome);
+                WSCallback = "xxxxxxx",
+                DeliveryAdress = order.Morada,
+                Distance = order.Distance,
+                encomendaID = order.Encomendaid,
+                fabrica = "fabrica a",
+                userid = Convert.ToInt32(order.UserId)
+            };
+            var arrayOfMusic = new Music[order.OrderedTracks.Count];
+            var x = 0;
+            foreach (var t in order.OrderedTracks)
+            {
+                var m = new Music {nome = t.TrackName, price = t.Price};
+                m.duracao = GetMusicDuration(m.nome);
                 arrayOfMusic[x] = m;
                 x++;
             }
             request.ListaMusicas = arrayOfMusic;
             
             AFabricanteC.MakeCd(request);
-            return new ObjectMakeCDResponse();
+            return new ObjectMakeCdResponse();
         }
     }
 }

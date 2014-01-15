@@ -5,7 +5,7 @@ namespace FabricanteB
     public class FabricanteBService : IFabricanteBService
     {
 
-        public FabricantePriceResponse getQuote(ObjectQuoteRequest request)
+        public FabricantePriceResponse GetQuote(ObjectQuoteRequest request)
         {
 
             var thread = new Thread(() =>
@@ -13,32 +13,34 @@ namespace FabricanteB
                 double total = 0;
                 foreach (var m in request.ListaMusicas)
                 {
-                    //total += m.price;
+                    //total += m.Price;
                     total += 1;
                 }
 
                 var client = new BackOfficeCallBackServiceClient();
 
-                var response = new BOCallBack.FabricantePriceResponse();
-                response.encomendaID = request.encomendaID;
-                response.fabricante = request.fabricante;
-                response.refRequestPrice = request.WSCallback;
-                response.Price = total;
-                response.userID = request.userID;
+                var response = new BOCallBack.FabricantePriceResponse
+                {
+                    encomendaID = request.encomendaID,
+                    fabricante = request.fabricante,
+                    refRequestPrice = request.WSCallback,
+                    Price = total,
+                    userID = request.userID
+                };
                 client.GetFabricantePrice(response);
             });
             thread.Start();
             return new FabricantePriceResponse();
         }
 
-        public ObjectMakeCDResponse MakeCD(ObjectCDRequest request)
+        public ObjectMakeCdResponse MakeCd(ObjectCDRequest request)
         {
             var thread = new Thread(() =>
             {
-                int newID = FabricaBDB.AddNewCDRequest(request);
+                int newId = FabricaBDB.AddNewCDRequest(request);
                 var client = new BackOfficeCallBackServiceClient();
 
-                var response = new BOCallBack.ObjectMakeCDResponse();
+                var response = new ObjectMakeCDResponse();
 
                 //response.id = newID;
                 //response.refRequestCD = request.WSCallback;
@@ -47,7 +49,7 @@ namespace FabricanteB
                 //client.GetStatus(response);
                 Thread.Sleep(2000);
 
-                response.id = newID;
+                response.id = newId;
                 response.refRequestCD = request.WSCallback;
                 response.userID = request.userid;
                 response.Status = "Pronto a levantar";
@@ -57,7 +59,7 @@ namespace FabricanteB
                 client.GetStatus(response);
             });
             thread.Start();
-            return new ObjectMakeCDResponse();
+            return new ObjectMakeCdResponse();
         }
     }
 }

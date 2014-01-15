@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
@@ -15,9 +17,9 @@ namespace BackOffice
     public class WebSiteService : IWebSiteService
     {
         public const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
-        public const string fabricaA = "praça do império, porto";
-        public const string fabricaB = "Jardim da Boavista, Porto";
-        public const string fabricaC = "Avenida do Brasil, Porto";
+        public const string FabricaA = "praça do império, porto";
+        public const string FabricaB = "Jardim da Boavista, Porto";
+        public const string FabricaC = "Avenida do Brasil, Porto";
 
 
         public User SessionLogin(string loginName)
@@ -39,11 +41,11 @@ namespace BackOffice
 
         public TracksDto GetArtistTopTracks(string artist)
         {
-            var outputs = new TracksDto();
-
-            outputs.ArtistName = artist;
-
-            outputs.TracksList = LastFmHelper.GetArtistTopTracks(InputHandler(artist));
+            var outputs = new TracksDto
+            {
+                ArtistName = artist,
+                TracksList = LastFmHelper.GetArtistTopTracks(InputHandler(artist))
+            };
 
             return outputs;
         }
@@ -75,16 +77,16 @@ namespace BackOffice
         {
             var thread = new Thread(() =>
             {
-                BackOfficeCallBackService.orderList.Add(order);
+                BackOfficeCallBackService.OrderList.Add(order);
 
                 //add to cdfactory
                 var inboxMessage = new CDFactory.SongsByOrder
                 {
-                    OrderId = BackOfficeCallBackService.orderList.IndexOf(order).ToString(),
+                    OrderId = BackOfficeCallBackService.OrderList.IndexOf(order).ToString(CultureInfo.InvariantCulture),
                     TrackList = new List<CDFactory.Track>()
                 };
 
-                foreach (var track in order.orderedTracks)
+                foreach (var track in order.OrderedTracks)
                 {
                     var newTrack = new CDFactory.Track
                     {
@@ -102,50 +104,56 @@ namespace BackOffice
 
                 //get quotes from fabricantes
                 IAdapterFabricantes adapterA = new AdapterFabricanteA(new FabricanteAServiceClient());
-                adapterA.getPrice(order);
+                adapterA.GetPrice(order);
                 IAdapterFabricantes adapterB = new AdapterFabricanteB(new FabricanteBServiceClient());
-                adapterB.getPrice(order);
+                adapterB.GetPrice(order);
                 IAdapterFabricantes adapterC = new AdapterFabricanteC(new FabricanteCServiceClient());
-                adapterC.getPrice(order);
+                adapterC.GetPrice(order);
 
                 //get quotes from transportadora
-                TransportadoraServiceClient transp = new TransportadoraServiceClient();
+                var transp = new TransportadoraServiceClient();
 
-                TransportJobPriceRequest requestA =new TransportJobPriceRequest();
-                requestA.DeliveryAdress = order.morada;
-                requestA.Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaA);
-                requestA.fabrica = "fabrica a";
-                requestA.userID = order.userID;
+                var requestA = new TransportJobPriceRequest
+                {
+                    DeliveryAdress = order.Morada,
+                    Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.Morada, FabricaA),
+                    fabrica = "fabrica a",
+                    userID = order.UserId
+                };
                 transp.TransportJobPrice(requestA);
 
-                TransportJobPriceRequest requestB = new TransportJobPriceRequest();
-                requestB.DeliveryAdress = order.morada;
-                requestB.Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaB);
-                requestB.fabrica = "fabrica b";
-                requestB.userID = order.userID;
+                var requestB = new TransportJobPriceRequest
+                {
+                    DeliveryAdress = order.Morada,
+                    Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.Morada, FabricaB),
+                    fabrica = "fabrica b",
+                    userID = order.UserId
+                };
                 transp.TransportJobPrice(requestB);
 
-                TransportJobPriceRequest requestC = new TransportJobPriceRequest();
-                requestC.DeliveryAdress = order.morada;
-                requestC.Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaC);
-                requestC.fabrica = "fabrica c";
-                requestC.userID = order.userID;
+                var requestC = new TransportJobPriceRequest
+                {
+                    DeliveryAdress = order.Morada,
+                    Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.Morada, FabricaC),
+                    fabrica = "fabrica c",
+                    userID = order.UserId
+                };
                 transp.TransportJobPrice(requestC);
 
                 //select fabricante and tell transportadora qhere to get cd and where to deliver
-                while (order.all3Received()==false)
+                while (order.All3Received()==false)
                 {
                     System.Console.WriteLine("Waiting for CallBacks to Select the best Manufacturer");
                     Thread.Sleep(1000);
                 }
 
                 //TransportJobRequest request = new TransportJobRequest();
-                switch (order.getbestdeal())
+                switch (order.Getbestdeal())
                 {
                     case("fabrica a"):
-                        order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaA);
-                        order.userID = "1";
-                        adapterA.setOrder(order);
+                        order.Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.Morada, FabricaA);
+                        order.UserId = UserDB.GetLoggedInUsers().First().UserId; // "1";
+                        adapterA.SetOrder(order);
                         //request.DeliveryAdress = order.morada;
                         //request.Distance= requestA.Distance;
                         //request.encomendaID = order.encomendaid;
@@ -154,9 +162,9 @@ namespace BackOffice
                         //transp.TransportJob(request);
                         break;
                     case ("fabrica b"):
-                        order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaC);
-                        adapterB.setOrder(order);
-                        order.userID = "1";
+                        order.Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.Morada, FabricaC);
+                        order.UserId = UserDB.GetLoggedInUsers().First().UserId; //"1";
+                        adapterB.SetOrder(order);
                         //request.DeliveryAdress = order.morada;
                         //request.Distance= requestA.Distance;
                         //request.encomendaID = order.encomendaid;
@@ -165,17 +173,16 @@ namespace BackOffice
                         //transp.TransportJob(request);
                         break;
                     case ("fabrica c"):
-                        order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaB);
-                        adapterC.setOrder(order);
-                        order.userID = "1";
+                        order.Distance = GeocodingHelper.GetDistanceBetweenPlaces(order.Morada, FabricaB);
+                        order.UserId = UserDB.GetLoggedInUsers().First().UserId; //"1";
+                        adapterC.SetOrder(order);
+                        
                         //request.DeliveryAdress = order.morada;
                         //request.Distance= requestA.Distance;
                         //request.encomendaID = order.encomendaid;
                         //request.fabrica="fabrica c";
                         //request.userID = order.userID;
                         //transp.TransportJob(request);
-                        break;
-                    default:
                         break;
                 }
             });
@@ -184,7 +191,7 @@ namespace BackOffice
 
             return new OrderStatus
             {
-                status = "Encomenda Recebida"
+                Status = "Encomenda Recebida"
             };
         }
 
@@ -194,13 +201,13 @@ namespace BackOffice
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public string getOrderStatus(string loginName)
+        public string GetOrderStatus(string loginName)
         {
             var user = UserDB.GetUserByUsername(loginName);
             //user.ListaEncomendas.Add(new BackOffice.Order() { orderID="1",status="check"});
             if (user!=null)
             {
-                return user.getLatestOrderStatus();
+                return user.GetLatestOrderStatus();
             }
             
             return string.Empty;

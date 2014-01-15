@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 namespace Transportadora
 {
@@ -14,11 +13,11 @@ namespace Transportadora
         [DataMember]
         public string Distance { get; set; }
         [DataMember]
-        public string encomendaID { get; set; }
+        public string EncomendaId { get; set; }
         [DataMember]
-        public string fabrica { get; set; }
+        public string Fabrica { get; set; }
         [DataMember]
-        public string userID { get; set; }
+        public string UserId { get; set; }
 
     }
 }

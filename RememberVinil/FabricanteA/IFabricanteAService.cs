@@ -7,9 +7,9 @@ namespace FabricanteA
     public interface IFabricanteAService
     {
         [OperationContract]
-        FabricantePriceResponse getQuote(ObjectQuoteRequest request);
+        FabricantePriceResponse GetQuote(ObjectQuoteRequest request);
 
         [OperationContract]
-        ObjectMakeCDResponse MakeCD(ObjectCDRequest request);
+        ObjectMakeCdResponse MakeCd(ObjectCDRequest request);
     }
 }

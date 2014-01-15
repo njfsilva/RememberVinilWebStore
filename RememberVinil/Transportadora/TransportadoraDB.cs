@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Transportadora
 {
-    internal static class TransportadoraDB
+    internal static class TransportadoraDb
     {
         static List<TransportJobRequest> DbTranposrtadora = new List<TransportJobRequest>();
 
 
         public static int AddNewTransportJob(TransportJobRequest request)
         {
-            request.id = DbTranposrtadora.Count + 1;
+            request.Id = DbTranposrtadora.Count + 1;
             DbTranposrtadora.Add(request);
 
-            return request.id;
+            return request.Id;
         }
 
 
@@ -22,25 +22,25 @@ namespace Transportadora
             return DbTranposrtadora;
         }
 
-        public static TransportJobRequest getRequest(int pos)
+        public static TransportJobRequest GetRequest(int pos)
         {
             try
             {
                 return DbTranposrtadora[pos];
-            }catch (Exception ex)
+            }catch (Exception)
             {
                 return null;
             }
         }
 
-        public static Boolean UpdateStatus(int pos, string Status)
+        public static Boolean UpdateStatus(int pos, string status)
         {
             try
             {
-                DbTranposrtadora[pos].Status = Status;
+                DbTranposrtadora[pos].Status = status;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

@@ -5,76 +5,72 @@ namespace BackOffice
 {
     public class OrderInfo
     {
-        public string userID { get; set; }
-        public string encomendaid { get; set; }
-        public string morada { get; set; }
-        public string distance { get; set; }
-        public List<Track> orderedTracks { get; set; }
-        public List<Order> pricesFabric= new List<Order>();
-        public List<Order> pricesTransp =new List<Order>();
+        public string UserId { get; set; }
+        public string Encomendaid { get; set; }
+        public string Morada { get; set; }
+        public string Distance { get; set; }
+        public List<Track> OrderedTracks { get; set; }
+        public List<Order> PricesFabric = new List<Order>();
+        public List<Order> PricesTransp = new List<Order>();
 
         public OrderInfo(string u, string id)
         {
-            userID = u;
-            encomendaid = id;
-            pricesTransp = new List<Order>();
-            pricesFabric = new List<Order>();
+            UserId = u;
+            Encomendaid = id;
+            PricesTransp = new List<Order>();
+            PricesFabric = new List<Order>();
         }
 
         public OrderInfo()
         {
-            pricesFabric = new List<Order>();
-            pricesTransp = new List<Order>();
+            PricesFabric = new List<Order>();
+            PricesTransp = new List<Order>();
         }
 
-        public int countpricesTransp()
+        public int CountpricesTransp()
         {
-            return pricesTransp.Count;
+            return PricesTransp.Count;
         }
 
-        public int countpricesFabric()
+        public int CountpricesFabric()
         {
-            return pricesFabric.Count;
+            return PricesFabric.Count;
         }
 
-        public Boolean all3Received()
+        public Boolean All3Received()
         {
-            if (pricesTransp.Count == 3 && pricesFabric != null && pricesFabric.Count == 3)
+            if (PricesTransp.Count == 3 && PricesFabric != null && PricesFabric.Count == 3)
                 return true;
             return false;
         }
 
-        public void addpriceTransp(string f, double p)
+        public void AddpriceTransp(string f, double p)
         {
-            var o = new Order();
-            o.fabrica = f;
-            o.price = p;
-            pricesTransp.Add(o);
+            var o = new Order {Fabrica = f, Price = p};
+            PricesTransp.Add(o);
         }
 
-        public void addpriceFabric(string f, double p)
+        public void AddpriceFabric(string f, double p)
         {
-            if (pricesFabric==null)
-                pricesFabric = new List<Order>();
-            var o = new Order();
-            o.fabrica = f;
-            o.price = p;
-            pricesFabric.Add(o);
+            if (PricesFabric==null)
+                PricesFabric = new List<Order>();
+            var o = new Order {Fabrica = f, Price = p};
+            PricesFabric.Add(o);
         }
 
-        public string getbestdeal()
+        public string Getbestdeal()
         {
-            double lowest = Int32.MaxValue;
+            var lowest = Double.MaxValue;
             var result= string.Empty;
-            foreach (var itemTransp in pricesTransp)
+            foreach (var itemTransp in PricesTransp)
             {
-                var fabrica = itemTransp.fabrica;
-                var pricetrans = itemTransp.price;
-                foreach (var itemFabric in pricesFabric)
+                var fabrica = itemTransp.Fabrica;
+                var pricetrans = itemTransp.Price;
+                foreach (var itemFabric in PricesFabric)
                 {
-                    if (itemFabric.fabrica == fabrica)
+                    if (itemFabric.Fabrica == fabrica)
                     {
-                        var total = pricetrans + itemFabric.price;
+                        var total = pricetrans + itemFabric.Price;
                         if (total < lowest)
                         {
                             lowest = total;
@@ -91,7 +87,7 @@ namespace BackOffice
 
     public class Order
     {
-        public string fabrica { get; set; }
-        public double price { get; set; } 
+        public string Fabrica { get; set; }
+        public double Price { get; set; } 
     }
 }

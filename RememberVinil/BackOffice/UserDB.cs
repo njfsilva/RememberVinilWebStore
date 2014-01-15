@@ -5,9 +5,9 @@ namespace BackOffice
 {
     internal static class UserDB
     {
-        static readonly List<User> UserDb = new List<User>();
+        static List<User> UserDb = new List<User>();
 
-        static readonly List<User> LoggedInUsers = new List<User>();
+        static List<User> LoggedInUsers = new List<User>();
 
         public static List<User> GetLoggedInUsers()
         {
