@@ -115,7 +115,7 @@ namespace Website
             var item = new ListViewItem(track);
             lvShoppingCart.Items.Add(item);
 
-            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty));
+            var songDouble = double.Parse(song.PriceFormatted.Replace("€", string.Empty)) / 100;
             var previousTotal = double.Parse(lblTotal.Text.Replace("€", string.Empty));
             var total = songDouble + previousTotal;
             lblTotal.Text = total + "€";

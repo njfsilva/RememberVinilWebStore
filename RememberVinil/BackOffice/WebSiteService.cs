@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
@@ -144,7 +145,7 @@ namespace BackOffice
                 {
                     case("fabrica a"):
                         order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaA);
-                        order.userID = "1";
+                        order.userID = UserDB.GetLoggedInUsers().First().UserId; // "1";
                         adapterA.setOrder(order);
                         //request.DeliveryAdress = order.morada;
                         //request.Distance= requestA.Distance;
@@ -155,8 +156,8 @@ namespace BackOffice
                         break;
                     case ("fabrica b"):
                         order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaC);
+                        order.userID = UserDB.GetLoggedInUsers().First().UserId;
                         adapterB.setOrder(order);
-                        order.userID = "1";
                         //request.DeliveryAdress = order.morada;
                         //request.Distance= requestA.Distance;
                         //request.encomendaID = order.encomendaid;
@@ -166,8 +167,8 @@ namespace BackOffice
                         break;
                     case ("fabrica c"):
                         order.distance = GeocodingHelper.GetDistanceBetweenPlaces(order.morada, fabricaB);
+                        order.userID = UserDB.GetLoggedInUsers().First().UserId;
                         adapterC.setOrder(order);
-                        order.userID = "1";
                         //request.DeliveryAdress = order.morada;
                         //request.Distance= requestA.Distance;
                         //request.encomendaID = order.encomendaid;
