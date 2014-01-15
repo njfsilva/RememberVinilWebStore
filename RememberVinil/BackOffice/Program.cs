@@ -3,15 +3,8 @@ using System.Messaging;
 using System.ServiceModel.Web;
 using System.Timers;
 using CDFactory;
-using System.Collections.Generic;
-using BackOffice.FabricanteAService;
-using BackOffice.FabricanteBService;
-using BackOffice.FabricanteCService;
-using BackOffice.TransportadoraServiceReference;
-using System.Threading;
 using Newtonsoft.Json;
 using RestSharp;
-using Website;
 using Timer = System.Timers.Timer;
 
 namespace BackOffice
@@ -24,9 +17,9 @@ namespace BackOffice
         static void Main()
         {
             //Create Users
-            UserDB.AddUser(new User("u1", "p1"));
-            UserDB.AddUser(new User("u2", "p2"));
-            UserDB.AddUser(new User("u3", "p3"));
+            UserDB.AddUser(new User("u1", "p1", "1"));
+            UserDB.AddUser(new User("u2", "p2","2"));
+            UserDB.AddUser(new User("u3", "p3", "3"));
 
             //Start BackOfficeService
             var backOfficeCallBackServiceHost = new WebServiceHost(typeof(BackOfficeCallBackService));
@@ -38,7 +31,7 @@ namespace BackOffice
 
             //Create timer to check messageQueue Outbox
             var myTimer = new Timer();
-            myTimer.Elapsed += new ElapsedEventHandler(LookForDownloadReady);
+            myTimer.Elapsed += LookForDownloadReady;
             myTimer.Interval = 5;
             myTimer.Enabled = true;
 
@@ -112,7 +105,7 @@ namespace BackOffice
 
         public static void LookForDownloadReady(object source, ElapsedEventArgs e)
         {
-            var errorMessage = string.Empty;
+            string errorMessage;
 
             var message = MessageQueueHelper.ReceiveMessage(OutboxQueuePath, 20, out errorMessage);
 
@@ -126,14 +119,14 @@ namespace BackOffice
         {
             var cdReady = (DownloadReady) msgToProcess.Body;
             
-            const string WebsiteNotification = "http://localhost:9010/WebsiteNotificationService";
-            RestClient client = new RestClient(WebsiteNotification);
+            const string websiteNotification = "http://localhost:9010/WebsiteNotificationService";
+            const string whatToGet = "/Notitication/";
 
-            var whatToGet = "/Notitication/";
+            var client = new RestClient(websiteNotification);
 
-            var request = new RestRequest("/Notitication/", Method.POST);
+            var request = new RestRequest(whatToGet, Method.POST);
 
-            var notification = new Notification()
+            var notification = new Notification
             {
                 DownloadReadyNotification = "O CD da ordem " +cdReady.OrderId + " esta pronto e localiz-se em: "+ cdReady.LinkToDownload
             };
@@ -141,7 +134,7 @@ namespace BackOffice
             var json = JsonConvert.SerializeObject(notification);
             request.AddParameter("text/json", json, ParameterType.RequestBody);
 
-            var response = client.Execute(request);
+            client.Execute(request);
 
             Console.WriteLine("Download ready for order {0}: {1}", cdReady.OrderId, cdReady.LinkToDownload);
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace BackOffice
 {
@@ -11,7 +12,7 @@ namespace BackOffice
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
-        public List<Order> ListaEncomendas = new List<Order>();
+        public List<OrderStatus> ListaEncomendas = new List<OrderStatus>();
 
         public string TransportadoraId { get; set; }
         //public string TransportadoraStatus { get; set; }
@@ -26,34 +27,44 @@ namespace BackOffice
         {
         }
 
-        public User(string username, string password)
+        //public User(string username, string password)
+        //{
+        //    Username = username;
+        //    Password = password;
+        //    System.Random rnd = new System.Random();
+        //    UserId = Convert.ToString(rnd.Next(1, 100)); 
+        //    HasPermissionToUseApplication = false;
+        //    CallBackUrl = string.Empty;
+        //}
+
+        public User(string username, string password, string uid)
         {
             Username = username;
             Password = password;
+            UserId = uid;
             HasPermissionToUseApplication = false;
             CallBackUrl = string.Empty;
         }
 
-
-        public string addOrder()
+        public string AddOrder()
         {
-            var o = new Order { orderID = ListaEncomendas.Count.ToString() };
+            var o = new OrderStatus { OrderId = ListaEncomendas.Count.ToString(CultureInfo.InvariantCulture) };
             ListaEncomendas.Add(o);
-            return o.orderID;
+            return o.OrderId;
         }
 
-        public void updateOrderStatus(string id, string status)
+        public void UpdateOrderStatus(string id, string status)
         {
-            var ord = ListaEncomendas.Find(o => o.orderID.Equals(id));
-            ord.status = status;
+            var ord = ListaEncomendas.Find(o => o.OrderId.Equals(id));
+            ord.Status = status;
         }
 
-        public string getLatestOrderStatus()
+        public string GetLatestOrderStatus()
         {
             string resultado = string.Empty;
             foreach (var item in ListaEncomendas)
             {
-                resultado += item.orderID + " está " + item.status;
+                resultado += item.OrderId + " está " + item.Status;
                 resultado += "*";
             }
             return resultado;
@@ -61,9 +72,9 @@ namespace BackOffice
 
     }
 
-    public class Order
+    public class OrderStatus
     {
-        public string orderID { get; set; }
-        public string status { get; set; }
+        public string OrderId { get; set; }
+        public string Status { get; set; }
     }
 }

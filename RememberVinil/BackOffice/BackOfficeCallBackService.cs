@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using BackOffice.TransportadoraServiceReference;
 using System.Threading;
 
@@ -8,72 +10,68 @@ namespace BackOffice
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BackOfficeCallBackService" in both code and config file together.
     public class BackOfficeCallBackService : IBackOfficeCallBackService
     {
-        public static List<OrderInfo> orderList = new List<OrderInfo>();
+        public static List<OrderInfo> OrderList = new List<OrderInfo>();
+        private static object Sync = new object();
 
-        public string GetStatus(ObjectMakeCDResponse response)//bad name: confirm order
+        public string GetStatus(ObjectMakeCdResponse response)//bad name: confirm order
         {
-            string UserID = response.userID.ToString();
-            var user =UserDB.GetUserByUserID(UserID);
-            var orderID=user.addOrder();
+            var userId = response.UserId.ToString(CultureInfo.InvariantCulture);
+            var user = UserDB.GetUserByUserID(userId);
+            var orderId = user != null ? user.AddOrder() : "0";
+
             var thread = new Thread(() =>
             {
                 var transportadora = new TransportadoraServiceClient();
-                var request = new TransportadoraServiceReference.TransportJobRequest();
-                request.DeliveryAdress = response.DeliveryAdress;
-                request.Distance = response.Distance;
-                request.encomendaID = orderID;
-                request.userID = UserID;
-                request.fabrica = response.fabrica;
+                var request = new TransportJobRequest
+                {
+                    DeliveryAdress = response.DeliveryAdress,
+                    Distance = response.Distance,
+                    encomendaID = orderId,
+                    userID = userId,
+                    fabrica = response.Fabrica
+                };
                 transportadora.TransportJob(request);
             });
+
             thread.Start();
+            
             return "ack";
         }
 
         public string UpdateOrderTransportStatus(TransportJobResponse response)
         {
-            string UserID = response.userID.ToString();
-            var user = UserDB.GetUserByUserID(UserID);
-            user.updateOrderStatus(response.encomendaID,response.Status);
-            //System.Console.WriteLine(response.Status);
+            var userId = response.UserId;
+            var user = UserDB.GetUserByUserID(userId);
+            user.UpdateOrderStatus(response.EncomendaId,response.Status);
+            System.Console.WriteLine(response.Status);
             return "ack";
         }
         
         public string GetTransporterPrice(TransportJobPriceResponse response)
         {
-            OrderInfo order=null;
-            System.Console.WriteLine(response.fabricante+" "+response.Price);
-            if (orderList.Count > 0)
+            lock (Sync)
             {
-                foreach (var item in orderList)
+                OrderInfo order = null;
+                System.Console.WriteLine(response.Fabricante + " " + response.Price);
+                if (OrderList.Count > 0)
                 {
-                    if (item.encomendaid == response.encomendaID)
+                    foreach (var item in OrderList)
                     {
-                        order = item;
-                        break;
+                        if (item.Encomendaid == response.EncomendaId)
+                        {
+                            order = item;
+                            break;
+                        }
                     }
                 }
-            }
-            if (order == null)
-            {
-                order = new OrderInfo {encomendaid = response.encomendaID, userID = response.userID};
-                order.addpriceTransp(response.fabricante, response.Price);
-            }
-            else
-            {
-                order.addpriceTransp(response.fabricante, response.Price);
-                if (order.all3Received())
+                if (order == null)
                 {
-                    var bestdeal = order.getbestdeal();
-                    orderList.Remove(order);
-
-                    System.Console.WriteLine(bestdeal);
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
+                    order = new OrderInfo(response.UserId, response.EncomendaId);
+                    order.AddpriceTransp(response.Fabricante, response.Price);
+                }
+                else
+                {
+                    order.AddpriceTransp(response.Fabricante, response.Price);
                 }
             }
             return "ack";
@@ -81,34 +79,17 @@ namespace BackOffice
 
         public string GetFabricantePrice(FabricantePriceResponse response)
         {
-            OrderInfo order = null;
-
-            foreach (var item in orderList)
+            lock (Sync)
             {
-                if (item.encomendaid == response.encomendaID)
+                var order = OrderList.FirstOrDefault(item => item.Encomendaid == response.encomendaID);
+                if (order == null)
                 {
-                    order = item;
-                    break;
+                    order = new OrderInfo(response.userID, response.encomendaID);
+                    order.AddpriceFabric(response.fabricante, response.Price);
                 }
-            }
-            if (order == null)
-            {
-                order = new OrderInfo {encomendaid = response.encomendaID, userID = response.userID};
-                order.addpriceFabric(response.fabricante, response.Price);
-            }
-            else
-            {
-                order.addpriceFabric(response.fabricante, response.Price);
-                if (order.all3Received())
+                else
                 {
-                    var bestdeal = order.getbestdeal();
-                    orderList.Remove(order);
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
-                    //send to website
+                    order.AddpriceFabric(response.fabricante, response.Price);
                 }
             }
             return "ack";

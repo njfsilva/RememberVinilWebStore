@@ -1,18 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using System.Runtime.Serialization;
 namespace BackOffice
 {
+    [Serializable]
+    [DataContract]
     public class TransportJobResponse
     {
+        [DataMember]
         public bool Sucess { get; set; }
+        [DataMember]
         public string DeliveryAdress { get; set; }
+        [DataMember]
         public string Distance { get; set; }
-        public string encomendaID { get; set; }
-        public string fabrica { get; set; }
-        public string userID { get; set; }
+        [DataMember]
+        public string EncomendaId { get; set; }
+        [DataMember]
+        public string Fabrica { get; set; }
+        [DataMember]
+        public string UserId { get; set; }
+        [DataMember]
         public string Status { get; set; }
     }
 }

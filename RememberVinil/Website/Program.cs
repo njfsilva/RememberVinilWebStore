@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceModel.Web;
 using System.Windows.Forms;
 
 namespace Website
@@ -14,8 +13,8 @@ namespace Website
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WebsiteMain());
-            //Application.Run(new LoginForm());
+            //Application.Run(new WebsiteMain());
+            Application.Run(new LoginForm());
         }
     }
 }

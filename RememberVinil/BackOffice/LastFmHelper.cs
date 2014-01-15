@@ -37,7 +37,7 @@ namespace BackOffice
                     select (string)track["name"];
 
 
-                return trackNames.Select(trackName => new Track()
+                return trackNames.Select(trackName => new Track
                 {
                     ArtisName = artistName, TrackName = trackName, Price = 0.99, PriceFormatted = "0.99€"
                 }).ToList();

@@ -9,6 +9,6 @@ namespace FabricanteC
         FabricantePriceResponse GetQuote(ObjectQuoteRequest request);
 
         [OperationContract]
-        ObjectMakeCDResponse MakeCd(ObjectCDRequest request);
+        ObjectMakeCdResponse MakeCd(ObjectCDRequest request);
     }
 }

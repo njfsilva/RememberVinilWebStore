@@ -16,9 +16,9 @@ namespace BackOffice
         [DataMember]
         public string PriceFormatted { get; set; }
 
-        public Track(string Nome, double preço)
+        public Track(string nome, double preço)
         {
-            TrackName = Nome;
+            TrackName = nome;
             Price = preço;
         }
         public Track()

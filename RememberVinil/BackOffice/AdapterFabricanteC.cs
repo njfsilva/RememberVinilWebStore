@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using BackOffice.FabricanteCService;
 
 namespace BackOffice
@@ -12,27 +11,32 @@ namespace BackOffice
         {
             AFabricanteC = a;
         }
-        
-        public ObjectQuoteRequest newQuoteRequest(List<Track> list)
+
+        public FabricantePriceResponse GetPrice(OrderInfo order)
         {
-            var request = new ObjectQuoteRequest();
-            request.WSCallback = "xxxxxxx";
-            var arrayOfMusic = new Music[list.Count];
+            var request = new ObjectQuoteRequest
+            {
+                encomendaID = order.Encomendaid,
+                fabricante = "fabrica c",
+                userID = order.UserId,
+                WSCallback = "qwerty"
+            };
             var x = 0;
-            foreach (var t in list)
-	        {
-		            var m = new Music();
-                    m.nome=t.TrackName;
-                    m.price=t.Price;
-                    m.duracao = getMusicDuration(m.nome);
-                    arrayOfMusic[x]=m;
-                    x++;
-	        }
+            var arrayOfMusic = new Music[order.OrderedTracks.Count];
+            foreach (var t in order.OrderedTracks)
+            {
+                var m = new Music {nome = t.TrackName, price = 0.99};
+                m.duracao = GetMusicDuration(m.nome);
+                arrayOfMusic[x] = m;
+                x++;
+            }
             request.ListaMusicas = arrayOfMusic;
-            return request;
+
+            AFabricanteC.GetQuote(request);
+            return new FabricantePriceResponse();
         }
 
-        public double getMusicDuration(string musicName)
+        public double GetMusicDuration(string musicName)
         {
             var random = new Random();
             var minutes = random.NextDouble() * (5 - 3) + 3;
@@ -40,32 +44,31 @@ namespace BackOffice
             return Math.Round(minutes, 2);
         }
 
-        public FabricantePriceResponse getPrice(List<Track> list)
-        {
-            AFabricanteC.GetQuote(newQuoteRequest(list));
-            return new FabricantePriceResponse();
-        }
 
-
-        public ObjectMakeCDResponse setOrder(List<Track> list)
+        public ObjectMakeCdResponse SetOrder(OrderInfo order)
         {
-            var request = new ObjectCDRequest();
-            request.WSCallback = "xxxxxxx";
-            var arrayOfMusic = new Music[list.Count];
-            var x = 0;
-            foreach (var t in list)
+            var request = new ObjectCDRequest
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = t.Price;
-                m.duracao = getMusicDuration(m.nome);
+                WSCallback = "xxxxxxx",
+                DeliveryAdress = order.Morada,
+                Distance = order.Distance,
+                encomendaID = order.Encomendaid,
+                fabrica = "fabrica a",
+                userid = Convert.ToInt32(order.UserId)
+            };
+            var arrayOfMusic = new Music[order.OrderedTracks.Count];
+            var x = 0;
+            foreach (var t in order.OrderedTracks)
+            {
+                var m = new Music {nome = t.TrackName, price = t.Price};
+                m.duracao = GetMusicDuration(m.nome);
                 arrayOfMusic[x] = m;
                 x++;
             }
             request.ListaMusicas = arrayOfMusic;
             
             AFabricanteC.MakeCd(request);
-            return new ObjectMakeCDResponse();
+            return new ObjectMakeCdResponse();
         }
     }
 }

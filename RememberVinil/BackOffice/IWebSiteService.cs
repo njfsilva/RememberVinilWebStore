@@ -29,11 +29,11 @@ namespace BackOffice
 
         //[OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/RequestOrder/", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        Order RequestOrder(OrderInfo order);
+        OrderStatus RequestOrder(OrderInfo order);
 
 
         [WebGet(UriTemplate = "/RequestUpdate/{loginName}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        string getOrderStatus(string loginName);
+        string GetOrderStatus(string loginName);
     }
 }

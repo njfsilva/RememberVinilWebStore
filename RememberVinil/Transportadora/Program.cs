@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ServiceModel;
-using System.Threading;
-using Transportadora.VinilBackoffice;
 
 namespace Transportadora
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var host = new ServiceHost(typeof(TransportadoraService));
             host.Open();

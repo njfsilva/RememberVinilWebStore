@@ -7,8 +7,7 @@ namespace Transportadora
     {
         public void PriceCalc(TransportJobPriceRequest request)
         {
-            double d = 0;
-            double result;
+            double d;
             try
             {
                 d = Convert.ToDouble(request.Distance);
@@ -17,15 +16,17 @@ namespace Transportadora
             {
                 d = 0;
             }
-            result = (d * 0.26 / 1000);
+            var result = (d * 0.26 / 1000);
             var client = new BackOfficeCallBackServiceClient();
 
-            var response = new VinilBackoffice.TransportJobPriceResponse();
-            response.encomendaID = request.encomendaID;
-            response.fabricante = request.fabrica;
-            response.refRequestPrice = request.WSCallback;
-            response.Price = result;
-            response.userID = request.userID;
+            var response = new VinilBackoffice.TransportJobPriceResponse
+            {
+                encomendaID = request.EncomendaId,
+                fabricante = request.Fabrica,
+                refRequestPrice = request.WsCallback,
+                Price = result,
+                userID = request.UserId
+            };
             client.GetTransporterPrice(response);
         }
     }

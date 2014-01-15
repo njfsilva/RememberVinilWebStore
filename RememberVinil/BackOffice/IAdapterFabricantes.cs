@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace BackOffice
+﻿namespace BackOffice
 {
     public interface IAdapterFabricantes
     {
-        FabricantePriceResponse getPrice(List<Track> list);
+        FabricantePriceResponse GetPrice(OrderInfo order);
 
-        ObjectMakeCDResponse setOrder(List<Track> list);
+        ObjectMakeCdResponse SetOrder(OrderInfo order);
     }
 }

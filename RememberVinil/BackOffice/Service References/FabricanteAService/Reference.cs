@@ -9,10 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace BackOffice.FabricanteAService {
-    using System.Runtime.Serialization;
-    using System;
-    
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ObjectQuoteRequest", Namespace="http://schemas.datacontract.org/2004/07/FabricanteA")]
@@ -320,6 +316,9 @@ namespace BackOffice.FabricanteAService {
         private string encomendaIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fabricaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -409,6 +408,19 @@ namespace BackOffice.FabricanteAService {
                 if ((object.ReferenceEquals(this.encomendaIDField, value) != true)) {
                     this.encomendaIDField = value;
                     this.RaisePropertyChanged("encomendaID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fabrica {
+            get {
+                return this.fabricaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fabricaField, value) != true)) {
+                    this.fabricaField = value;
+                    this.RaisePropertyChanged("fabrica");
                 }
             }
         }

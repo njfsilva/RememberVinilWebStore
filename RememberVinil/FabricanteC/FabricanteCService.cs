@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using FabricanteC.BOCallBack;
 
 namespace FabricanteC
@@ -10,16 +11,11 @@ namespace FabricanteC
 
             var thread = new Thread(() =>
             {
-                double total = 0;
-                foreach (var m in request.ListaMusicas)
-                {
-                    total += m.price;
-                    //total += 0.99;
-                }
+                var total = request.ListaMusicas.Sum(m => m.price);
 
                 var client = new BackOfficeCallBackServiceClient();
 
-                var response = new BOCallBack.TransportJobPriceResponse
+                var response = new BOCallBack.FabricantePriceResponse
                 {
                     encomendaID = request.encomendaID,
                     fabricante = request.fabricante,
@@ -27,20 +23,20 @@ namespace FabricanteC
                     Price = total,
                     userID = request.userID
                 };
-                client.GetTransporterPrice(response);
+                client.GetFabricantePrice(response);
             });
             thread.Start();
             return new FabricantePriceResponse();
         }
 
-        public ObjectMakeCDResponse MakeCd(ObjectCDRequest request)
+        public ObjectMakeCdResponse MakeCd(ObjectCDRequest request)
         {
             var thread = new Thread(() =>
             {
-                int newID = FabricaCDB.AddNewCDRequest(request);
+                var newId = FabricaCDB.AddNewCDRequest(request);
                 var client = new BackOfficeCallBackServiceClient();
 
-                var response = new BOCallBack.ObjectMakeCDResponse();
+                var response = new ObjectMakeCDResponse();
 
                 //response.id = newID;
                 //response.refRequestCD = request.WSCallback;
@@ -49,7 +45,7 @@ namespace FabricanteC
                 //client.GetStatus(response);
                 Thread.Sleep(2000);
 
-                response.id = newID;
+                response.id = newId;
                 response.refRequestCD = request.WSCallback;
                 response.userID = request.userid;
                 response.Status = "Pronto a levantar";
@@ -59,7 +55,7 @@ namespace FabricanteC
                 client.GetStatus(response);
             });
             thread.Start();
-            return new ObjectMakeCDResponse();
+            return new ObjectMakeCdResponse();
         }
     }
 }
