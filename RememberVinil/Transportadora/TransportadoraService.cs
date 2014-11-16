@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Transportadora.VinilBackoffice;
 
 namespace Transportadora
@@ -14,13 +13,15 @@ namespace Transportadora
             var thread = new Thread(() =>
             {
                 var client = new BackOfficeCallBackServiceClient();
-                var dados = new VinilBackoffice.TransportJobResponse();
-                dados.DeliveryAdress = request.DeliveryAdress;
-                dados.Distance = request.Distance;
-                dados.encomendaID = request.encomendaID;
-                dados.fabrica = request.fabrica;
-                dados.userID = request.userID;
-                dados.Status = "ja fui ao fabricante";
+                var dados = new VinilBackoffice.TransportJobResponse
+                {
+                    DeliveryAdress = request.DeliveryAdress,
+                    Distance = request.Distance,
+                    encomendaID = request.encomendaID,
+                    fabrica = request.fabrica,
+                    userID = request.userID,
+                    Status = "ja fui ao fabricante"
+                };
                 client.UpdateOrderTransportStatus(dados);
                 Thread.Sleep(2000);
                 dados.Status = "estou a caminho do cliente";
@@ -37,7 +38,7 @@ namespace Transportadora
         public TransportJobPriceRequest TransportJobPrice(TransportJobPriceRequest request)
         {
             var workerObject = new PriceCalculator();
-            var thread = new Thread(() => workerObject.PriceCalc(request));
+            var thread = new Thread(() => PriceCalculator.PriceCalc(request));
             thread.Start();
             return new TransportJobPriceRequest();
         }

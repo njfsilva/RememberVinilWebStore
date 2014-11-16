@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Website
 {
-    public class Notification
+    [Serializable]
+    public abstract class Notification
     {
-        public string CdReadyNotification { get; set; }
-        public string DownloadReadyNotification { get; set; }
-        public string OrderStatusNotification { get; set; }
+        protected Notification(string cdReadyNotification, string downloadReadyNotification, string orderStatusNotification)
+        {
+            OrderStatusNotification = orderStatusNotification;
+            DownloadReadyNotification = downloadReadyNotification;
+            CdReadyNotification = cdReadyNotification;
+        }
+
+        private string CdReadyNotification { get; set; }
+        private string DownloadReadyNotification { get; set; }
+        private string OrderStatusNotification { get; set; }
 
 
-        public List<string> GetAllNotifications()
+        public IEnumerable<string> GetAllNotifications()
         {
             var returnList = new List<string>();
 

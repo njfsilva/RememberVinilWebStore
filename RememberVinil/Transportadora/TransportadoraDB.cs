@@ -27,7 +27,7 @@ namespace Transportadora
             try
             {
                 return DbTranposrtadora[pos];
-            }catch (Exception ex)
+            }catch (Exception)
             {
                 return null;
             }
@@ -40,7 +40,7 @@ namespace Transportadora
                 DbTranposrtadora[pos].Status = Status;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

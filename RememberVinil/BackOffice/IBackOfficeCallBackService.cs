@@ -1,5 +1,4 @@
 ﻿using System.ServiceModel;
-using BackOffice.TransportadoraServiceReference;
 
 namespace BackOffice
 {

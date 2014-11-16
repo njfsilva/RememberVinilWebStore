@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using BackOffice.TransportadoraServiceReference;
 using System.Threading;
 
@@ -13,18 +15,21 @@ namespace BackOffice
 
         public string GetStatus(ObjectMakeCDResponse response)//bad name: confirm order
         {
-            string UserID = response.userID.ToString();
-            var user =UserDB.GetUserByUserID(UserID);
-            var orderID=user.addOrder();
+            var userId = response.userID.ToString(CultureInfo.InvariantCulture);
+            var user =UserDB.GetUserByUserID(userId);
+            var orderId = user.addOrder();
             var thread = new Thread(() =>
             {
                 var transportadora = new TransportadoraServiceClient();
-                var request = new TransportadoraServiceReference.TransportJobRequest();
-                request.DeliveryAdress = response.DeliveryAdress;
-                request.Distance = response.Distance;
-                request.encomendaID = orderID;
-                request.userID = UserID;
-                request.fabrica = response.fabrica;
+
+                var request = new TransportJobRequest
+                {
+                    DeliveryAdress = response.DeliveryAdress,
+                    Distance = response.Distance,
+                    encomendaID = orderId,
+                    userID = userId,
+                    fabrica = response.fabrica
+                };
                 transportadora.TransportJob(request);
             });
             thread.Start();
@@ -33,8 +38,8 @@ namespace BackOffice
 
         public string UpdateOrderTransportStatus(TransportJobResponse response)
         {
-            string UserID = response.userID.ToString();
-            var user = UserDB.GetUserByUserID(UserID);
+            string userId = response.userID;
+            var user = UserDB.GetUserByUserID(userId);
             user.updateOrderStatus(response.encomendaID,response.Status);
             System.Console.WriteLine(response.Status);
             return "ack";
@@ -74,15 +79,8 @@ namespace BackOffice
         {
             lock (_sync)
             {
-                OrderInfo order = null;
-                foreach (var item in orderList)
-                {
-                    if (item.encomendaid == response.encomendaID)
-                    {
-                        order = item;
-                        break;
-                    }
-                }
+                var order = orderList.FirstOrDefault(item => item.encomendaid == response.encomendaID);
+
                 if (order == null)
                 {
                     order = new OrderInfo(response.userID, response.encomendaID);

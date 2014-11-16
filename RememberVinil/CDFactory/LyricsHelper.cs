@@ -6,11 +6,11 @@ using RestSharp;
 
 namespace CDFactory
 {
-    public class LyricsHelper
+    public static class LyricsHelper
     {
         private static readonly RestClient Client = new RestClient(MusixMatchApi);
-        public const string Apikey = "d99c1b1f2051b32ac58469b0576dd207";
-        public const string MusixMatchApi = "http://api.musixmatch.com/ws/1.1/";
+        private const string Apikey = "d99c1b1f2051b32ac58469b0576dd207";
+        private const string MusixMatchApi = "http://api.musixmatch.com/ws/1.1/";
 
         public static string GetLyrics(string trackName, string artist)
         {
@@ -33,7 +33,7 @@ namespace CDFactory
 
                 return trackLyrics;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "Nao foi possivel obter a letra desta musica";
             }

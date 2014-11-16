@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using FabricanteC.BOCallBack;
 
 namespace FabricanteC
@@ -10,12 +11,7 @@ namespace FabricanteC
 
             var thread = new Thread(() =>
             {
-                double total = 0;
-                foreach (var m in request.ListaMusicas)
-                {
-                    total += m.price;
-                    //total += 0.99;
-                }
+                var total = request.ListaMusicas.Sum(m => m.price);
 
                 var client = new BackOfficeCallBackServiceClient();
 
@@ -37,19 +33,14 @@ namespace FabricanteC
         {
             var thread = new Thread(() =>
             {
-                int newID = FabricaCDB.AddNewCDRequest(request);
+                var newId = FabricaCDB.AddNewCDRequest(request);
                 var client = new BackOfficeCallBackServiceClient();
 
                 var response = new BOCallBack.ObjectMakeCDResponse();
 
-                //response.id = newID;
-                //response.refRequestCD = request.WSCallback;
-                //response.userID = request.userid;
-                //response.Status = "recebida a encomenda";
-                //client.GetStatus(response);
                 Thread.Sleep(2000);
 
-                response.id = newID;
+                response.id = newId;
                 response.refRequestCD = request.WSCallback;
                 response.userID = request.userid;
                 response.Status = "Pronto a levantar";

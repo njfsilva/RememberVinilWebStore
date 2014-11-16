@@ -37,17 +37,13 @@ namespace BackOffice
 
         public void addpriceTransp(string f, double p)
         {
-            var o = new order();
-            o.fabrica = f;
-            o.price = p;
+            var o = new order {fabrica = f, price = p};
             pricesTransp.Add(o);
         }
 
         public void addpriceFabric(string f, double p)
         {
-            var o = new order();
-            o.fabrica = f;
-            o.price = p;
+            var o = new order {fabrica = f, price = p};
             pricesFabric.Add(o);
         }
 

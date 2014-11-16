@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Messaging;
-using System.Timers;
 using System.Collections.Generic;
 using System.IO;
 using Ionic.Zip;
@@ -10,12 +9,12 @@ using Timer = System.Timers.Timer;
 
 namespace CDFactory
 {
-    class Program
+    static class Program
     {
         const string InboxQueuePath = ".\\Private$\\CDFactoryInbox";
         const string OutboxQueuePath = ".\\Private$\\CDFactoryOutBox";
 
-        static void Main(string[] args)
+        static void Main()
         {
             //Creates Queues
             MessageQueueHelper.CreateQueue(InboxQueuePath);
@@ -27,13 +26,13 @@ namespace CDFactory
 
             //// Create a timer to look for work
             var myTimer = new Timer();
-            myTimer.Elapsed += new ElapsedEventHandler(LookForWork);
+            myTimer.Elapsed += LookForWork;
             myTimer.Interval = 1;
             myTimer.Enabled = true;
 
             Console.ReadLine();
         }
-
+        /*
         public static void AddToMsmq()
         {
             //teste
@@ -69,10 +68,10 @@ namespace CDFactory
 
             MessageQueueHelper.SendMessage(InboxQueuePath, songsByorder, "Test Message");
         }
-
-        public static void LookForWork(object sender, EventArgs e)
+        */
+        private static void LookForWork(object sender, EventArgs e)
         {
-            var errorMessage = string.Empty;
+            string errorMessage;
 
             var message = MessageQueueHelper.ReceiveMessage(InboxQueuePath, 1000, out errorMessage);
 
@@ -82,7 +81,7 @@ namespace CDFactory
             }
         }
 
-        public static void DoWork(Message messageToProcess)
+        private static void DoWork(Message messageToProcess)
         {
 
             var songsByOrder = (SongsByOrder)messageToProcess.Body;
@@ -102,9 +101,10 @@ namespace CDFactory
                 File.Create(mp3File).Dispose();
                 File.Create(lyricsFile).Dispose();
 
-                var lyrics = new List<string>();
-
-                lyrics.Add(LyricsHelper.GetLyrics(song.TrackName, song.ArtisName));
+                var lyrics = new List<string>
+                {
+                    LyricsHelper.GetLyrics(song.TrackName, song.ArtisName)
+                };
 
                 File.WriteAllLines(lyricsFile, lyrics);
 

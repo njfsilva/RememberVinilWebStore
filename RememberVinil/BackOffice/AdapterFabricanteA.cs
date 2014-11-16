@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using BackOffice.FabricanteAService;
 using System;
 
@@ -17,18 +17,19 @@ namespace BackOffice
 
         public FabricantePriceResponse getPrice(OrderInfo order)
         {
-            var request = new ObjectQuoteRequest();
-            request.encomendaID=order.encomendaid;
-            request.fabricante = "fabrica a";
-            request.userID = order.userID;
-            request.WSCallback = "qwerty";
+            var request = new ObjectQuoteRequest
+            {
+                encomendaID = order.encomendaid,
+                fabricante = "fabrica a",
+                userID = order.userID,
+                WSCallback = "qwerty"
+            };
+
             var x = 0;
             var arrayOfMusic = new Music[order.orderedTracks.Count];
-            foreach (var t in order.orderedTracks)
+
+            foreach (var m in order.orderedTracks.Select(t => new Music {nome = t.TrackName, price = t.Price}))
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = t.Price;
                 arrayOfMusic[x] = m;
                 x++;
             }
@@ -41,20 +42,20 @@ namespace BackOffice
 
         public ObjectMakeCDResponse setOrder(OrderInfo order)
         {
-            var request = new ObjectCDRequest();
-            request.WSCallback = "xxxxxxx";
-            request.DeliveryAdress = order.morada;
-            request.Distance = order.distance;
-            request.encomendaID = order.encomendaid;
-            request.fabrica = "fabrica a";
-            request.userid = Convert.ToInt32(order.userID);
+            var request = new ObjectCDRequest
+            {
+                WSCallback = "xxxxxxx",
+                DeliveryAdress = order.morada,
+                Distance = order.distance,
+                encomendaID = order.encomendaid,
+                fabrica = "fabrica a",
+                userid = Convert.ToInt32(order.userID)
+            };
             var arrayOfMusic = new Music[order.orderedTracks.Count];
             var x = 0;
-            foreach (var t in order.orderedTracks)
+
+            foreach (var m in order.orderedTracks.Select(t => new Music {nome = t.TrackName, price = t.Price}))
             {
-                var m = new Music();
-                m.nome = t.TrackName;
-                m.price = t.Price;
                 arrayOfMusic[x] = m;
                 x++;
             }

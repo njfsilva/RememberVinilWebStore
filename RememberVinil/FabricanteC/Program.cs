@@ -3,9 +3,9 @@ using System.ServiceModel;
 
 namespace FabricanteC
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var host = new ServiceHost(typeof(FabricanteCService));
             host.Open();

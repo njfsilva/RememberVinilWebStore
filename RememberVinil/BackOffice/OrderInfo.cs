@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BackOffice
 {
@@ -46,9 +47,7 @@ namespace BackOffice
 
         public void addpriceTransp(string f, double p)
         {
-            var o = new Order();
-            o.fabrica = f;
-            o.price = p;
+            var o = new Order {fabrica = f, price = p};
             pricesTransp.Add(o);
         }
 
@@ -56,9 +55,7 @@ namespace BackOffice
         {
             if (pricesFabric==null)
                 pricesFabric = new List<Order>();
-            var o = new Order();
-            o.fabrica = f;
-            o.price = p;
+            var o = new Order {fabrica = f, price = p};
             pricesFabric.Add(o);
         }
 
@@ -70,18 +67,15 @@ namespace BackOffice
             {
                 var fabrica = itemTransp.fabrica;
                 var pricetrans = itemTransp.price;
-                foreach (var itemFabric in pricesFabric)
+
+                foreach (var total in from itemFabric in pricesFabric where itemFabric.fabrica == fabrica select pricetrans + itemFabric.price)
                 {
-                    if (itemFabric.fabrica == fabrica)
+                    if (total < lowest)
                     {
-                        var total = pricetrans + itemFabric.price;
-                        if (total < lowest)
-                        {
-                            lowest = total;
-                            result = fabrica;
-                        }
-                        break;
+                        lowest = total;
+                        result = fabrica;
                     }
+                    break;
                 }
                
             }
